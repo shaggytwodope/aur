@@ -1,0 +1,13 @@
+# pack-refs with: peeled fully-peeled 
+c3d13814eb3dbdc323c81ac6b6937e3e5a58f90b refs/heads/ibackend
+6b0c72b9b6cee99ff17813f6b8f9564140eb28b2 refs/heads/master
+dcb50f64cd09a455d998c009432093c8d4530b89 refs/heads/unittests
+8b044ca6a9926f3405b3928626697f66f24d2ee1 refs/heads/vlmc-0.1.1
+7e2c072881e6cae120dfa3fe6a3494b830c1cc24 refs/tags/0.0.1_Feature_Freeze
+^802248041e2e5d2c38b8755722dc6f47406e5a67
+428c70abfc217c82d052c3809d885f0f0c509c4a refs/tags/0.1.0
+^58b567997a6254360650091b95f0920c67689e5b
+ae2db8adc86e12ca495bb024781e5bd8e807ae9e refs/tags/0.1.1
+^929e0c6e046b4b7e7972ddaccd15cf14b1698ef3
+4b4052ecb4b0fb3d9b6fe67b9a5b8b11e64b9276 refs/tags/0.2.0-ff
+^dcfd4af3c4f5a3640e4f7629d9d8065445cefa60

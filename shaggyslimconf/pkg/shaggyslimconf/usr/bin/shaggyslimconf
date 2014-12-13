@@ -1,0 +1,134 @@
+#!/usr/bin/python2
+from gi.repository import Gtk
+import os, re, pwd, grp, gettext
+
+class Handler:
+    def onDeleteWindow(self, *args):
+        if builder.get_object('saveButton').get_sensitive() == True:
+            dialog = Gtk.MessageDialog(None, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.YES_NO, gettext.gettext("You have unsaved changes. Exit anyway?"))
+            response = dialog.run()
+            dialog.destroy()
+            if response == Gtk.ResponseType.NO:
+                return None
+        Gtk.main_quit(*args)
+    
+    def saveSettings(self, *args):
+        builder.get_object('saveButton').set_sensitive(False)
+        default_user = builder.get_object("users").get_active_text()
+        if default_user != '':
+            rpl_default_user = 'default_user        '+default_user
+        else:
+            rpl_default_user = 'default_user        '
+        
+        auto_login = builder.get_object('auto_login').get_active()
+        if auto_login == True:
+            auto_login = 'yes'
+        else:
+            auto_login = 'no'
+        rpl_auto_login = 'auto_login          '+auto_login
+        
+#        rpl_sessions = 'sessions            '+builder.get_object("sessions").get_text()
+        
+        rpl_current_theme = 'current_theme       '+builder.get_object("themes").get_active_text()
+        
+        slimconf = "/etc/slim.conf"
+        file = open(slimconf,'r')
+        o = ''
+        for line in file.readlines():
+			o += line
+			if line.startswith("#default_user "):
+				default_user = line.strip()
+			elif line.startswith("default_user "):
+				default_user = line.strip()
+
+			if line.startswith("#auto_login "):
+				auto_login = line.strip()
+			elif line.startswith("auto_login "):
+				auto_login = line.strip()
+
+			if line.startswith("sessions "):
+				sessions = line.strip()
+
+			if line.startswith("current_theme "):
+				current_theme = line.strip()
+        o = o.replace(default_user,rpl_default_user)
+        o = o.replace(auto_login,rpl_auto_login)
+        o = o.replace(sessions,rpl_sessions)
+        o = o.replace(current_theme,rpl_current_theme)
+        file.close()
+
+        file = open(slimconf,'w')
+        file.write(o)
+        file.close()
+    
+    def enableSave(self, *args):
+        builder.get_object('saveButton').set_sensitive(True)
+    
+    def verifyDefaultUser(self, *args):
+        default_user = builder.get_object("users").get_active_text()
+        if default_user == '':
+            builder.get_object('auto_login').set_active(False)
+            builder.get_object('auto_login').set_sensitive(False)
+        else:
+            builder.get_object('auto_login').set_sensitive(True)
+
+builder = Gtk.Builder()
+builder.add_from_file("/usr/share/shaggyslimconf/glade/shaggyslimconf-ui.glade")
+
+
+if os.getuid() == 0:
+    default_user = ''
+    auto_login = ''
+    slimconf = "/etc/slim.conf"
+    file = open(slimconf,'r')
+    for line in file.readlines():
+        if line.startswith("default_user "):
+            s = re.sub(r'\s+', ' ', line)
+            default_user = s.split(' ')
+            default_user = default_user[1]
+        if line.startswith("sessions "):
+            s = re.sub(r'\s+', ' ', line)
+            sessions = s.split(' ')
+            sessions = sessions[1]
+        if line.startswith("current_theme "):
+            s = re.sub(r'\s+', ' ', line)
+            theme = s.split(' ')
+            current_theme = theme[1]
+        if line.startswith("auto_login "):
+            s = re.sub(r'\s+', ' ', line)
+            auto_login = s.split(' ')
+            auto_login = auto_login[1]
+    file.close()
+
+    users = ['']
+    for p in pwd.getpwall():
+        if p[2] >= 1000 and p[0] != 'nobody':
+            users.append(p[0])
+    for user in users:
+        builder.get_object("users").append_text(user)
+
+    if default_user != '':
+        pos = users.index(default_user)
+        builder.get_object("users").set_active(pos)
+    else:
+        builder.get_object("users").set_active(0)
+        builder.get_object('auto_login').set_sensitive(False)
+
+    builder.get_object("auto_login").set_active(False)
+    if default_user != '' and auto_login == 'yes':
+        builder.get_object("auto_login").set_active(True)
+
+#    builder.get_object("session").set_text(sessions)
+
+    themes = os.listdir('/usr/share/slim/themes')
+    for theme in themes:
+        builder.get_object("themes").append_text(theme)
+    pos = themes.index(current_theme)
+    builder.get_object("themes").set_active(pos)
+    window = builder.get_object("SLiMConfig")
+else:
+    window = builder.get_object("notRoot")
+
+builder.connect_signals(Handler())
+window.show_all()
+Gtk.main()

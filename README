@@ -1,0 +1,9 @@
+= AUR Stash =
+
+Basicly a stash for PKGBUILD files. 
+
+
+
+
+
+Running yaourt -G name in this dir will pull a pkgbuild automaticly.

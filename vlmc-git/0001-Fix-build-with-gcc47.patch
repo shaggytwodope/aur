@@ -1,0 +1,39 @@
+From 9bcbe9483b1e6902ed1bdd67ea0a6dc9f3a4678d Mon Sep 17 00:00:00 2001
+From: Nicolas Chauvet <kwizart@gmail.com>
+Date: Sun, 8 Apr 2012 17:55:50 +0200
+Subject: [PATCH] Fix build with gcc47
+
+---
+ src/Project/WorkspaceWorker.cpp |    2 ++
+ src/vlmc.h                      |    2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/src/Project/WorkspaceWorker.cpp b/src/Project/WorkspaceWorker.cpp
+index 377b87c..d615e05 100644
+--- a/src/Project/WorkspaceWorker.cpp
++++ b/src/Project/WorkspaceWorker.cpp
+@@ -20,6 +20,8 @@
+  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
+  *****************************************************************************/
+ 
++#include <unistd.h> // link
++
+ #include "WorkspaceWorker.h"
+ 
+ #include "Media.h"
+diff --git a/src/vlmc.h b/src/vlmc.h
+index 7f6cb4b..6f0489c 100644
+--- a/src/vlmc.h
++++ b/src/vlmc.h
+@@ -24,6 +24,8 @@
+ #ifndef VLMC_H
+ #define VLMC_H
+ 
++#include <unistd.h> // sleep
++
+ #include <QtGlobal>
+ 
+ #ifdef Q_OS_WIN
+-- 
+1.7.9.3
+

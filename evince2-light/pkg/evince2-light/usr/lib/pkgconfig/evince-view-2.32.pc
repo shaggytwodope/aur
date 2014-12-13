@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/evince/2.32
+
+Name: Evince View
+Description: GNOME document viewer view library
+Version: 2.32.0
+Requires: evince-document-2.32 = 2.32.0 gthread-2.0
+Libs: -L${libdir} -levview
+Cflags: -I${includedir}
