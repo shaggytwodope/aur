@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AnypaperWallpapersetter</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="anypaper Reference Manual">
+<link rel="up" href="ch01.html" title="anyPaper Classes">
+<link rel="prev" href="ch01.html" title="anyPaper Classes">
+<link rel="next" href="anypaper-anypaper-preview.html" title="AnypaperPreview">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">anypaper Reference Manual</th>
+<td><a accesskey="n" href="anypaper-anypaper-preview.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#anypaper-anypaper-wallpapersetter.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#anypaper-anypaper-wallpapersetter.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#anypaper-anypaper-wallpapersetter.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="anypaper-anypaper-wallpapersetter"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="anypaper-anypaper-wallpapersetter.top_of_page"></a>AnypaperWallpapersetter</span></h2>
+<p>AnypaperWallpapersetter — creates the wallpapersetter file and detects the wallpapersetter installed</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="anypaper-anypaper-wallpapersetter.stability-level"></a><h2>Stability Level</h2>
+Stable, unless otherwise indicated
+</div>
+<div class="refsynopsisdiv">
+<a name="anypaper-anypaper-wallpapersetter.synopsis"></a><h2>Synopsis</h2>
+<a name="AnypaperWallpapersetter"></a><pre class="synopsis">
+#include &lt;anypaper_wallpapersetter.h&gt;
+
+                    <a class="link" href="anypaper-anypaper-wallpapersetter.html#AnypaperWallpapersetterPrivate" title="AnypaperWallpapersetterPrivate">AnypaperWallpapersetterPrivate</a>;
+struct              <a class="link" href="anypaper-anypaper-wallpapersetter.html#AnypaperWallpapersetter-struct" title="struct AnypaperWallpapersetter">AnypaperWallpapersetter</a>;
+<span class="returnvalue">void</span>                <a class="link" href="anypaper-anypaper-wallpapersetter.html#anypaper-wallpapersetter-detect" title="anypaper_wallpapersetter_detect ()">anypaper_wallpapersetter_detect</a>     (<em class="parameter"><code><a class="link" href="anypaper-anypaper-wallpapersetter.html#AnypaperWallpapersetter"><span class="type">AnypaperWallpapersetter</span></a> *wallpapersetter</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *filename</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="anypaper-anypaper-wallpapersetter.html#anypaper-wallpapersetter-file" title="anypaper_wallpapersetter_file ()">anypaper_wallpapersetter_file</a>       (<em class="parameter"><code><span class="type">gchar</span> *wallpapersetterFile</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="anypaper-anypaper-wallpapersetter.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----AnypaperWallpapersetter
+</pre>
+</div>
+<div class="refsect1">
+<a name="anypaper-anypaper-wallpapersetter.description"></a><h2>Description</h2>
+<p>
+This application class creates the wallpapersetter file and detects the wallpapersetter installed
+</p>
+<p>
+This application class detects the wallpapersetter listed in wallpapersetter file installed and stores this information in two lists, one for the wallpapersetter found and the other for the command (normally the fullscreen command). This class also creates the wallpapersetterfile that contains definitions for known wallpapersetters and the command used to set the wallpaper.
+</p>
+</div>
+<div class="refsect1">
+<a name="anypaper-anypaper-wallpapersetter.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="AnypaperWallpapersetterPrivate"></a><h3>AnypaperWallpapersetterPrivate</h3>
+<pre class="programlisting">typedef struct _AnypaperWallpapersetterPrivate AnypaperWallpapersetterPrivate;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="AnypaperWallpapersetter-struct"></a><h3>struct AnypaperWallpapersetter</h3>
+<pre class="programlisting">struct AnypaperWallpapersetter {
+	GList *wallpapersetter;
+	GList *command;
+};
+</pre>
+<p>
+Contains a list of wallpapersetter found and a list of commands used for them
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><span class="type">GList</span> *<em class="structfield"><code><a name="AnypaperWallpapersetter-struct.wallpapersetter"></a>wallpapersetter</code></em>;</span></p></td>
+<td>contains a list of wallpapersetter found</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">GList</span> *<em class="structfield"><code><a name="AnypaperWallpapersetter-struct.command"></a>command</code></em>;</span></p></td>
+<td>contains a list of commands used for the wallpapersetter found</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="anypaper-wallpapersetter-detect"></a><h3>anypaper_wallpapersetter_detect ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                anypaper_wallpapersetter_detect     (<em class="parameter"><code><a class="link" href="anypaper-anypaper-wallpapersetter.html#AnypaperWallpapersetter"><span class="type">AnypaperWallpapersetter</span></a> *wallpapersetter</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *filename</code></em>);</pre>
+<p>
+Generate a list of found wallpapersetters and other for the associated commands.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>wallpapersetter</code></em> :</span></p></td>
+<td>a <a class="link" href="anypaper-anypaper-wallpapersetter.html#AnypaperWallpapersetter"><span class="type">AnypaperWallpapersetter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td>file that contains the wallpapersetters command definition</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="anypaper-wallpapersetter-file"></a><h3>anypaper_wallpapersetter_file ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                anypaper_wallpapersetter_file       (<em class="parameter"><code><span class="type">gchar</span> *wallpapersetterFile</code></em>);</pre>
+<p>
+Generate a file with names of wallpapersetter and the associated commands.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>wallpapersetterFile</code></em> :</span></p></td>
+<td>filename to store the wallpapersetters command definition</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

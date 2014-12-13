@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AnypaperParameters</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="anypaper Reference Manual">
+<link rel="up" href="ch01.html" title="anyPaper Classes">
+<link rel="prev" href="anypaper-anypaper-preview.html" title="AnypaperPreview">
+<link rel="next" href="anypaper-anypaper-image.html" title="AnypaperImage">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="anypaper-anypaper-preview.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">anypaper Reference Manual</th>
+<td><a accesskey="n" href="anypaper-anypaper-image.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#anypaper-anypaper-parameters.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#anypaper-anypaper-parameters.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#anypaper-anypaper-parameters.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="anypaper-anypaper-parameters"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="anypaper-anypaper-parameters.top_of_page"></a>AnypaperParameters</span></h2>
+<p>AnypaperParameters — manipulates the parameters used in anyPaper</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="anypaper-anypaper-parameters.stability-level"></a><h2>Stability Level</h2>
+Stable, unless otherwise indicated
+</div>
+<div class="refsynopsisdiv">
+<a name="anypaper-anypaper-parameters.synopsis"></a><h2>Synopsis</h2>
+<a name="AnypaperParameters"></a><pre class="synopsis">
+#include &lt;anypaper_parameters.h&gt;
+
+                    <a class="link" href="anypaper-anypaper-parameters.html#AnypaperParametersPrivate" title="AnypaperParametersPrivate">AnypaperParametersPrivate</a>;
+struct              <a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters-struct" title="struct AnypaperParameters">AnypaperParameters</a>;
+<span class="returnvalue">void</span>                <a class="link" href="anypaper-anypaper-parameters.html#anypaper-parameters-position-test" title="anypaper_parameters_position_test ()">anypaper_parameters_position_test</a>   (<em class="parameter"><code><a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a> *parameters</code></em>,
+                                                         <em class="parameter"><code><span class="type">gint</span> rangex</code></em>,
+                                                         <em class="parameter"><code><span class="type">gint</span> rangey</code></em>,
+                                                         <em class="parameter"><code><span class="type">gint</span> positionx</code></em>,
+                                                         <em class="parameter"><code><span class="type">gint</span> positiony</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="anypaper-anypaper-parameters.html#anypaper-parameters-load" title="anypaper_parameters_load ()">anypaper_parameters_load</a>            (<em class="parameter"><code><a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a> *parameters</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *filename</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="anypaper-anypaper-parameters.html#anypaper-parameters-write" title="anypaper_parameters_write ()">anypaper_parameters_write</a>           (<em class="parameter"><code><a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a> *parameters</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *lastWallpaperFile</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *rcFile</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="anypaper-anypaper-parameters.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----AnypaperParameters
+</pre>
+</div>
+<div class="refsect1">
+<a name="anypaper-anypaper-parameters.description"></a><h2>Description</h2>
+<p>
+This application class manipulates the parameters used in anyPaper, also loads and saves configuration files
+</p>
+</div>
+<div class="refsect1">
+<a name="anypaper-anypaper-parameters.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="AnypaperParametersPrivate"></a><h3>AnypaperParametersPrivate</h3>
+<pre class="programlisting">typedef struct _AnypaperParametersPrivate AnypaperParametersPrivate;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="AnypaperParameters-struct"></a><h3>struct AnypaperParameters</h3>
+<pre class="programlisting">struct AnypaperParameters {
+	gchar		*file;
+	gint		style;
+	gint		positionx;
+	gint		positiony;
+	gdouble		scalex;
+	gdouble		scaley;
+	gint		width;
+	gint		height;
+	gchar		*background;
+	gchar		*command;
+	gchar		*defaultfile;
+	GdkInterpType interpolation;
+	gint		jpegQuality;
+	gint		pngCompression;
+};
+</pre>
+<p>
+Contains the parameters used to build the images created by anyPaper
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><span class="type">gchar</span> *<em class="structfield"><code><a name="AnypaperParameters-struct.file"></a>file</code></em>;</span></p></td>
+<td>filemane of source image</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gint</span> <em class="structfield"><code><a name="AnypaperParameters-struct.style"></a>style</code></em>;</span></p></td>
+<td>selected style</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gint</span> <em class="structfield"><code><a name="AnypaperParameters-struct.positionx"></a>positionx</code></em>;</span></p></td>
+<td>position of image in x direction</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gint</span> <em class="structfield"><code><a name="AnypaperParameters-struct.positiony"></a>positiony</code></em>;</span></p></td>
+<td>position of image in y direction</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gdouble</span> <em class="structfield"><code><a name="AnypaperParameters-struct.scalex"></a>scalex</code></em>;</span></p></td>
+<td>scale factor in x direction</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gdouble</span> <em class="structfield"><code><a name="AnypaperParameters-struct.scaley"></a>scaley</code></em>;</span></p></td>
+<td>scale factor in y direction</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gint</span> <em class="structfield"><code><a name="AnypaperParameters-struct.width"></a>width</code></em>;</span></p></td>
+<td>width of image</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gint</span> <em class="structfield"><code><a name="AnypaperParameters-struct.height"></a>height</code></em>;</span></p></td>
+<td>height of image</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gchar</span> *<em class="structfield"><code><a name="AnypaperParameters-struct.background"></a>background</code></em>;</span></p></td>
+<td>background color</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gchar</span> *<em class="structfield"><code><a name="AnypaperParameters-struct.command"></a>command</code></em>;</span></p></td>
+<td>command line used for setting the wallpaper</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gchar</span> *<em class="structfield"><code><a name="AnypaperParameters-struct.defaultfile"></a>defaultfile</code></em>;</span></p></td>
+<td>default file for saving the built wallpaper</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">GdkInterpType</span> <em class="structfield"><code><a name="AnypaperParameters-struct.interpolation"></a>interpolation</code></em>;</span></p></td>
+<td>type of interpolation used</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gint</span> <em class="structfield"><code><a name="AnypaperParameters-struct.jpegQuality"></a>jpegQuality</code></em>;</span></p></td>
+<td>quality parameter for JPEG files</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="type">gint</span> <em class="structfield"><code><a name="AnypaperParameters-struct.pngCompression"></a>pngCompression</code></em>;</span></p></td>
+<td>compression parameter for PNG files</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="anypaper-parameters-position-test"></a><h3>anypaper_parameters_position_test ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                anypaper_parameters_position_test   (<em class="parameter"><code><a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a> *parameters</code></em>,
+                                                         <em class="parameter"><code><span class="type">gint</span> rangex</code></em>,
+                                                         <em class="parameter"><code><span class="type">gint</span> rangey</code></em>,
+                                                         <em class="parameter"><code><span class="type">gint</span> positionx</code></em>,
+                                                         <em class="parameter"><code><span class="type">gint</span> positiony</code></em>);</pre>
+<p>
+Sets the new position values if they are valid.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
+<td>a <a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>rangex</code></em> :</span></p></td>
+<td>half of the displacement allowed in x direction</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>rangey</code></em> :</span></p></td>
+<td>half of the displacement allowed in y direction</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>positionx</code></em> :</span></p></td>
+<td>the selected position on x position</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>positiony</code></em> :</span></p></td>
+<td>the selected position on x position</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="anypaper-parameters-load"></a><h3>anypaper_parameters_load ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                anypaper_parameters_load            (<em class="parameter"><code><a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a> *parameters</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *filename</code></em>);</pre>
+<p>
+Sets the values of parameters on file in <a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
+<td>a <a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td>name of file with the parameters to be loaded</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="anypaper-parameters-write"></a><h3>anypaper_parameters_write ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                anypaper_parameters_write           (<em class="parameter"><code><a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a> *parameters</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *lastWallpaperFile</code></em>,
+                                                         <em class="parameter"><code><span class="type">gchar</span> *rcFile</code></em>);</pre>
+<p>
+Saves the values of parameters in <a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a> on file.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
+<td>a <a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>lastWallpaperFile</code></em> :</span></p></td>
+<td>name of file to be written with the lastwallpaper parameters in <a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>rcFile</code></em> :</span></p></td>
+<td>name of file to be written with the resource parameters in <a class="link" href="anypaper-anypaper-parameters.html#AnypaperParameters"><span class="type">AnypaperParameters</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>
