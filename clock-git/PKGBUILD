@@ -4,7 +4,7 @@
 pkgname=clock-git
 pkgver=20120504
 pkgrel=1
-pkgdesc="displays time on terminal in diffrent ways"
+pkgdesc="Displays time on terminal in diffrent ways."
 arch=('x86_64' 'i686')
 url="https://github.com/mogria/clock.git"
 source=("git+git://github.com/mogria/clock.git")
@@ -19,8 +19,7 @@ build() {
 }
 
 package() {
-  cd $_gitname/src
-
+  cd $srcdir/$_gitname/src
   install -Dm755 uhr "$pkgdir/usr/bin/uhr"
 }
 
