@@ -1,0 +1,3 @@
+oauth2
+urwid
+tweepy >2.2,<3

@@ -1,0 +1,10 @@
+#!/bin/python2
+# EASY-INSTALL-ENTRY-SCRIPT: 'turses==0.2.23','console_scripts','turses'
+__requires__ = 'turses==0.2.23'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('turses==0.2.23', 'console_scripts', 'turses')()
+    )
