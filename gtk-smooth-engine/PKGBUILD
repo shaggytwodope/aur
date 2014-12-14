@@ -12,6 +12,7 @@ arch=(i686 x86_64)
 url="http://sourceforge.net/projects/smooth-engine"
 license=('LGPL')
 depends=('gtk-engines' 'gdk-pixbuf')
+makedepends=('pkg-config')
 options=('!libtool')
 source=(http://downloads.sourceforge.net/smooth-engine/${pkgname}-${pkgver}.tar.gz \
         http://downloads.sourceforge.net/smooth-engine/smooth-themes-$_spkgver.tar.gz
