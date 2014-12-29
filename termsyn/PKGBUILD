@@ -1,0 +1,25 @@
+# Maintainer: stlarch  stlarchie@gmail.com
+
+pkgname=termsyn
+pkgver=1.8.7
+pkgrel=1
+pkgdesc="Clean, monospaced bitmap font based on Terminus and Tamsyn."
+arch=('any')
+url="http://sourceforge.net/projects/termsyn"
+license=('GPLv2')
+depends=('fontconfig' 'xorg-fonts-encodings' 'xorg-font-utils')
+install=termsyn.install
+source=("http://sourceforge.net/projects/termsyn/files/$pkgname-$pkgver.tar.gz")
+
+package () {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  install -d "$pkgdir/usr/share/fonts/local"
+  install -d "$pkgdir/usr/share/kbd/consolefonts"
+  install -d "$pkgdir/usr/share/doc/$pkgname"
+
+  install -m644 *.pcf "$pkgdir/usr/share/fonts/local"
+  install -m644 *.psfu "$pkgdir/usr/share/kbd/consolefonts"
+  install -m644 README.termsyn "$pkgdir/usr/share/doc/$pkgname"
+}
+md5sums=('e870a0952bc1c5137a216e03095fe2db')
