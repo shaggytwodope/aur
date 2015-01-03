@@ -1,0 +1,19 @@
+# pack-refs with: peeled fully-peeled 
+03ac7169c1d38efb33730ca7adb4bd4e8602ae12 refs/heads/agnosticpush
+b721ff6bb62121c6c5fae70212e30df725cfaeb5 refs/heads/fs<->URLS
+6beddf85a527ed7f33a18752c6d13e569be90a62 refs/heads/master
+eff6fa4cd52caad8f031f57bcc36a04fbd3a1df9 refs/heads/raceMitigation
+188dcd0300a21c789e87a56a238638cb01dcca7b refs/heads/stats
+16201967d6a52e2ff635e84e6a274f2dd50c5f0b refs/pull/1/head
+65d690b2f6bd22f014b439f91cfd977d0ea3cd86 refs/pull/13/head
+a9538461ae2e746625d9f84e04d7d41a20475205 refs/pull/16/head
+0471cf89b87baa4160bcc27ca2c8f21b10da3f28 refs/pull/17/head
+03ac7169c1d38efb33730ca7adb4bd4e8602ae12 refs/pull/4/head
+058356ee6b00cffc5db63af273f2699f80bc8392 refs/pull/6/head
+b721ff6bb62121c6c5fae70212e30df725cfaeb5 refs/pull/8/head
+ff0d342900a9a15912e7d7d75a87d1f5276ac16b refs/tags/v0.0.1
+^d7bda6df59b42b90654d5513386b08517e092dbe
+9b5e13842807e22e58b99b1529f8b31e3c51561d refs/tags/v0.0.2
+^9c6b4128bf4bc25c356024ef6121088be3fd5eea
+26400701047f810eea8ceb4a17377530c99a981f refs/tags/v0.0.3
+^b721ff6bb62121c6c5fae70212e30df725cfaeb5
