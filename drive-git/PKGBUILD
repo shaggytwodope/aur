@@ -1,0 +1,46 @@
+# Maintainer: John Jenkins <twodopeshaggy@gmail.com>
+_gitname="drive"
+pkgname=drive-git
+epoch=1
+pkgver=0.122.8671fef
+pkgrel=1
+pkgdesc="Pull or push Google Drive files"
+arch=('x86_64' 'i686')
+url="http://github.com/odeke-em/drive"
+license=('Apache')
+makedepends=('go' 'git')
+options=('!strip' '!emptydirs')
+source=("git+git://github.com/odeke-em/$_gitname")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_gitname}"
+  echo "0.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+ mkdir -p go
+ export GOPATH="$srcdir/go"
+ go get github.com/odeke-em/drive
+ go get github.com/odeke-em/drive/config
+ go get github.com/rakyll/command
+}
+
+
+
+build() {
+  export GOPATH="$srcdir/go"
+  cd "$_gitname/cmd/drive"
+
+  msg2 'Building drive'
+  go build -o "$_gitname" main.go
+
+}
+
+package() {
+  cd "$_gitname/cmd/drive"
+
+  install -Dm755 "$_gitname" "$pkgdir/usr/bin/$_gitname"
+
+}
+# vim:set ts=2 sw=2 et:
