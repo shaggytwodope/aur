@@ -1,0 +1,10 @@
+#!/bin/python2
+# EASY-INSTALL-ENTRY-SCRIPT: 'AlienFeed==0.3.1','console_scripts','alienfeed'
+__requires__ = 'AlienFeed==0.3.1'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('AlienFeed==0.3.1', 'console_scripts', 'alienfeed')()
+    )
