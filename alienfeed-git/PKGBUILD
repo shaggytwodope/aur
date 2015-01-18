@@ -21,15 +21,13 @@ pkgver() {
 
 build(){
 
-cd $_pkgname
-
+ cd $_pkgname
  sed -i "s|env python|env python2|" $srcdir/$_pkgname/alienfeed/alien.py
-
 }
 
 package() {
   cd $_pkgname
-
-python2 setup.py install --root="$pkgdir" --optimize=1
-
+    python2 setup.py install --root="$pkgdir" --optimize=1
+    install -vDm644 alienfeed.bash-completion "$pkgdir/usr/share/bash-completion/completions/alienfeed"
+    install -vDm644 alienfeed.1 "$pkgdir/usr/man/man1/alienfeed.1"
 }
