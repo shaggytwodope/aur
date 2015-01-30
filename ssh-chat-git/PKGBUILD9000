@@ -1,0 +1,25 @@
+# Maintainer: John "ShaggyTwoDope" Jenkins <twodopeshaggy at gmail dot com>
+pkgname=ssh-chat-git
+pkgver=0.2.3
+pkgrel=1
+pkgdesc="Terminal Image Renderer"
+arch=('i686' 'x86_64')
+url=https://github.com/shazow/ssh-chat
+license=(GPL3)
+makedepends=('go')
+source=("git+git://github.com/shazow/ssh-chat")
+sha256sums=("SKIP")
+
+
+build() {
+	export GOPATH="${srcdir}/godir"
+	mkdir -p "$GOPATH"
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	install -D tir "${pkgdir}/usr/bin/tir"
+}
+
