@@ -28,8 +28,9 @@ noextract=($(basename ${source[0]}))
 package() {
 	cd "$srcdir"
 	7z -y e $(basename ${source[0]})
-	7z -y e 131 Data1.cab
+	7z -y e AdbeRdrUpd11009.msp
+	7z -y e PCW_CAB_RDR11009
 	mkdir -p $pkgdir/usr/share/{fonts/OTF,licenses/$pkgname}
-	7z -y -o"$pkgdir/usr/share/fonts/OTF" -ir\!*.otf e Data1.cab
+	7z -y -o"$pkgdir/usr/share/fonts/OTF" -ir\!*.otf e PCW_CAB_RDR11009
 	install -m 0644 LICENSE $pkgdir/usr/share/licenses/$pkgname/
 }
