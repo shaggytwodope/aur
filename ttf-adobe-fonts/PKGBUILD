@@ -9,7 +9,7 @@
 
 pkgname=ttf-adobe-fonts
 pkgver=11.0.09
-pkgrel=1
+pkgrel=2
 arch=('any')
 pkgdesc="Fonts from Adobe Acrobat Reader X including Myriad Pro, Myriad CAD, Minion Pro, Courier Std and Adobe Pi Std"
 url="http://www.adobe.com/products/reader.html"
