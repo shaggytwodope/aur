@@ -1,0 +1,342 @@
+/**
+ * @file liferea.css  Liferea rendering stylesheet
+ *
+ * Copyright (C) 2004-2010 Lars Linder <lars.lindner@gmail.com>
+ * Copyright (C) 2004 delusional <delusional@dx13.co.uk>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+/* 
+
+   Font Definitions: 
+   =================
+
+   No style definition should set absolute font sizes,
+   font families or line heigth and spacing. This is to allow a GNOME
+   preference controlled default font size. 
+   
+   Color Definitions:
+   ==================
+   
+   To allow using GTK theme colors the following key words 
+   will be replaced with the corresponding GTK theme color values:
+   
+   GTK-COLOR-FG
+   GTK-COLOR-BG
+   GTK-COLOR-LIGHT
+   GTK-COLOR-DARK
+   GTK-COLOR-MID
+   GTK-COLOR-BASE
+   GTK-COLOR-TEXT
+   GTK-COLOR-NORMAL-LINK
+   GTK-COLOR-VISITED-LINK
+ */
+
+body {
+	background: #GTK-COLOR-BASE;
+	color: #GTK-COLOR-TEXT;
+	padding:0;
+	margin:0;
+}
+
+blockquote {
+        border-left: 2px solid #GTK-COLOR-DARK;
+        background: #GTK-COLOR-BG;
+        padding: 5px;
+        font-style: italic;
+        margin: 5px 20px;
+	clear:both;
+}
+
+a {
+	color: #GTK-COLOR-NORMAL-LINK;
+}
+
+a:visited {
+	color: #GTK-COLOR-VISITED-LINK;
+}
+
+dd {
+	padding-left: 30px;
+}
+
+img {
+	border:0;
+	margin:2px;
+}
+
+img.gravatar {
+	/* gravatars have align="left" so we need proper margin */
+	margin-right:12px;
+}
+
+#map img {
+	/* OpenStreeMap map tiles must have no border */
+	border:0px;
+	margin:0px;
+}
+
+/* styles for the item description (currently also used for
+   the feed description) */
+table.itemhead, table.feedhead {
+	margin:0;
+	width:100%;
+	border:0;
+	border-bottom: 1px solid #GTK-COLOR-DARK;
+	clear:both;
+	color:#GTK-COLOR-TEXT;
+}
+
+.itemhead, .feedhead {
+	background-color: #GTK-COLOR-MID;
+}
+
+table.itemhead * td {
+	padding: 2px;
+	padding-top: 4px;
+}
+
+table.itemhead * a.itemhead {
+	text-decoration:none;
+	color:#GTK-COLOR-TEXT;
+	font-weight:bold;
+}
+
+td.headleft {
+	text-align:right;
+}
+
+td.headright {
+	padding:2px 5px;
+}
+
+table.headmeta {
+	background:#GTK-COLOR-BG;
+	width:100%;
+	border:0;
+	border-bottom:#GTK-COLOR-MID solid 1px;
+	margin:0;
+}
+
+table.headmeta td {
+	padding:1px 6px 1px 12px;
+	font-size:0.8em;
+}
+
+.hidden {
+	visibility:hidden;
+	display:none;
+}
+
+.itemmenu {
+	margin:0;
+	padding:0;
+}
+
+.itemmenu a {
+	text-decoration:none;
+	color:#GTK-COLOR-TEXT;
+}
+
+.itemmenu a:hover {
+
+}
+
+.itemmenu * span {
+	font-size:1em;
+	font-family:sans-serif;
+	padding:0;
+	margin:0;
+	position:relative; 
+	top:-3px;
+}
+
+.itemmenu * img {
+	padding:0;
+	margin:0;
+	height:16px;
+	position:relative; 
+	top:1px;
+}
+
+.author, .categories, .source {
+        padding:0;
+	margin-left:0;
+        margin-right:12px;
+}
+
+.date {
+	white-space:nowrap;
+	text-align:right;
+	padding-right:5px;
+}
+
+div.content {
+	padding:0px 6px 0px 12px;
+}
+
+div.comment {
+	border:1px solid #GTK-COLOR-DARK;
+	margin-bottom:5px;
+}
+
+div.comment_body {
+	padding-left:6px;
+	padding-right:6px;
+}
+
+div.comment_title {
+	padding-left:6px;
+	padding-right:6px;
+	font-weight:bold;
+	background:#GTK-COLOR-BG;
+}
+
+a.favicon {
+	text-decoration:none;
+}
+
+a.favicon img {
+	width:16px;
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+/* styles to realize shading of new items in condensed mode */
+.itemshaded { background:#ffe; color:black; padding:1px; margin:0; }
+
+.itemunshaded { padding:1px; margin:0; }
+
+.summaryshaded, .summaryunshaded { 
+	padding:0px 6px; 
+	margin:0;
+}
+
+.summaryshaded a {
+	display:block;
+	background:#ffe;
+	color:black;
+	text-decoration:none;
+	padding:1px 0px;
+	font-weight:bold;
+}
+
+.summaryunshaded a {
+	display:block;
+	color:#GTK-COLOR-TEXT;
+	text-decoration:none;
+	padding:1px 0px;
+}
+
+.summarytime {
+	padding-right:15px;
+	white-space:nowrap;
+	color:#999;
+}
+
+hr.summary {
+	border:0;
+	padding:0;
+	margin:2px;
+	border-bottom:1px dashed #ddd;
+}
+
+/* style for the HTTP error box at the beginning
+   of the feed description and for item comment feeds */
+#errors, #commentFeedError {
+	width:100%;
+	border:0;
+	border-bottom:1px solid black;
+	margin:0;
+	background:#ffa;
+}
+
+#commentFeedError {
+	border:1px solid black;
+}
+
+#parseError, #filterError, #updateError {
+	padding:2px;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+div.xmlparseroutput {
+	margin:10px 0px 10px 15px;
+	padding:5px;
+	border:2px solid #GTK-COLOR-DARK;
+	background:#GTK-COLOR-LIGHT;
+}
+
+span.details, span.detaillink {
+	visibility:hidden;
+	display:none;
+}
+
+span.details {
+	padding:5px;
+	margin:15px;
+}
+
+span.showmore {
+	text-decoration:underline;
+	color:blue;
+	cursor:pointer;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+ins {
+	text-decoration: underline;
+}
+
+/* namespace specific styles */
+div.blogchanneltitle {
+	padding-left:10px;
+	padding-right:10px;
+	background-color:#GTK-COLOR-DARK;
+	color:#GTK-COLOR-TEXT;
+}
+
+.slash {
+	background:#60A080;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.slashSection, .slashDepartment {
+	padding-right:2px;
+	color:black;
+}
+
+.slashValue {
+	padding-right:6px;
+	color:white;
+	font-weight:bold;
+}
+
+div.photoheader {
+	margin:10px 0;
+	padding-left:10px;
+	padding-right:10px;
+	background-color:#GTK-COLOR-DARK;
+	color:#GTK-COLOR-TEXT;
+}
+
+

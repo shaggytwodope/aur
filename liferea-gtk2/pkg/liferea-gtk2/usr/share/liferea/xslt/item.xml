@@ -1,0 +1,1068 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+
+<xsl:output version="1.0" method="xml" indent="yes"/>
+
+
+<xsl:param name="pixmapsDir"/>
+<xsl:param name="baseUrl"/>
+<xsl:param name="summary"/>	
+<xsl:param name="single"/>	
+<xsl:param name="txtDirection"/>	
+<xsl:param name="appDirection"/>	
+
+<xsl:template match="/itemset">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+</head>
+<xsl:element name="body">  
+
+<xsl:if test="item/attributes/attribute[ @name = 'point' ]">
+   <xsl:attribute name="onload">load()</xsl:attribute>
+</xsl:if>
+
+
+<div href="{$baseUrl}">
+
+<xsl:for-each select="item">
+  <xsl:choose>
+    <xsl:when test="$summary = '1'">
+      <xsl:call-template name="item_summary"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="item"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:for-each>
+
+</div> 
+
+</xsl:element>
+</html>
+
+</xsl:template>
+
+
+
+
+<xsl:template name="item">
+
+
+<div href="{/itemset/feed/feedSource}">
+
+
+
+<xsl:variable name="onMouseOver">
+   <xsl:text disable-output-escaping='yes'>doShow('</xsl:text>
+   <xsl:value-of select="sourceId"/>-<xsl:value-of select="nr"/>
+   <xsl:text disable-output-escaping='yes'>');</xsl:text>
+</xsl:variable>
+
+
+
+<div onmouseover="{$onMouseOver}" onmouseout="stopShow();">
+
+
+<table dir="{$txtDirection}" class="itemhead" cellspacing="0" cellpadding="0">
+
+<tr>
+  <td valign="middle" class="headleft">
+    
+    
+    <xsl:variable name="favicon">
+      <xsl:choose>
+        <xsl:when test="not(sourceFavicon)">
+          <xsl:value-of select="/itemset/feed/favicon"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="sourceFavicon"/>
+        </xsl:otherwise>
+      </xsl:choose>   
+    </xsl:variable>
+    
+    <a href="{/itemset/feed/attributes/attribute[ @name = 'homepage' ]}" class="favicon">
+      <img src="{$favicon}"/>
+    </a>
+  </td>
+  <td width="100%" valign="middle" class="headright">
+    
+    <a href="{source}" class="itemhead">
+      <xsl:value-of select="title"/>
+      
+      <xsl:if test="title = ''">
+         <xsl:value-of select="timestr"/> 
+      </xsl:if>
+    </a>
+  </td>
+</tr>
+</table>
+
+
+<table dir="{$appDirection}" class='headmeta' cellspacing="0" cellpadding="0">
+
+<xsl:if test="attributes/attribute[ @name = 'slash' ]">
+<tr>
+ <td valign="top" class='slash'> 
+   <xsl:apply-templates select="attributes/attribute[ @name = 'slash']"/>
+ </td>
+</tr> 
+</xsl:if>
+
+<xsl:if test="attributes/attribute[ @name = 'realSourceUrl' ]">
+<tr>
+ <td valign="top" class='source'> 
+     <span>Source</span>
+     <span xml:lang="ar">المصدر</span>
+     <span xml:lang="ast">Fonte</span>
+     <span xml:lang="be@latin">Krynica</span>
+     <span xml:lang="ca">Font</span>
+     <span xml:lang="cs">Zdroj</span>
+     <span xml:lang="da">Kilde</span>
+     <span xml:lang="de">Quelle</span>
+     <span xml:lang="el">Πηγή</span>
+     <span xml:lang="es">Fuente</span>
+     <span xml:lang="eu">Iturburua</span>
+     <span xml:lang="fi">Lähde</span>
+     <span xml:lang="fr">Source</span>
+     <span xml:lang="gl">Fonte</span>
+     <span xml:lang="he">מקור</span>
+     <span xml:lang="hu">Forrás</span>
+     <span xml:lang="it">Fonte</span>
+     <span xml:lang="ja">ソース</span>
+     <span xml:lang="lt">Šaltinis</span>
+     <span xml:lang="lv">Avots</span>
+     <span xml:lang="nl">Bron</span>
+     <span xml:lang="pl">Źródło</span>
+     <span xml:lang="pt">Fonte</span>
+     <span xml:lang="pt_BR">Fonte</span>
+     <span xml:lang="ro">Sursă</span>
+     <span xml:lang="ru">Источник</span>
+     <span xml:lang="sk">Zdroj</span>
+     <span xml:lang="sq">Burim</span>
+     <span xml:lang="sv">Källa</span>
+     <span xml:lang="tr">Kaynak</span>
+     <span xml:lang="uk">Джерело</span>
+     <span xml:lang="vi">Nguồn</span>
+     <span xml:lang="zh_CN">来源</span>
+     <b><span class='source'>
+       <a href="{attributes/attribute[ @name = 'realSourceUrl' ]}">
+         <xsl:value-of select="attributes/attribute[ @name = 'realSourceTitle' ]"/>
+       </a>
+     </span></b>
+ </td>
+</tr>
+</xsl:if>
+
+
+<xsl:if test="$summary = '1'">
+<tr>
+ <td valign="top" class='source'> 
+     <span>Feed</span>
+     <span xml:lang="ar">تلقيمة</span>
+     <span xml:lang="ast">Canal</span>
+     <span xml:lang="be@latin">Kanał</span>
+     <span xml:lang="bg">Емисия</span>
+     <span xml:lang="ca">Canal</span>
+     <span xml:lang="cs">Kanál</span>
+     <span xml:lang="da">Nyhedskilde</span>
+     <span xml:lang="de">Abonnement</span>
+     <span xml:lang="el">Ροή</span>
+     <span xml:lang="es">Canal</span>
+     <span xml:lang="eu">Iturria</span>
+     <span xml:lang="fi">Syöte</span>
+     <span xml:lang="fr">Flux</span>
+     <span xml:lang="gl">Fonte</span>
+     <span xml:lang="he">ערוץ</span>
+     <span xml:lang="hu">Hírforrás</span>
+     <span xml:lang="it">Notiziario</span>
+     <span xml:lang="ja">配信元</span>
+     <span xml:lang="ko">피드</span>
+     <span xml:lang="lt">Naujienų kanalas</span>
+     <span xml:lang="lv">Plūsma</span>
+     <span xml:lang="mk">Вест</span>
+     <span xml:lang="nl">Feed</span>
+     <span xml:lang="pl">Subskrypcja</span>
+     <span xml:lang="pt">Fonte</span>
+     <span xml:lang="pt_BR">Fontes de Notícias</span>
+     <span xml:lang="ro">Flux</span>
+     <span xml:lang="ru">Лента</span>
+     <span xml:lang="sk">Kanál</span>
+     <span xml:lang="sq">Prurje</span>
+     <span xml:lang="sv">Kanal</span>
+     <span xml:lang="tr">Haber</span>
+     <span xml:lang="uk">Подача</span>
+     <span xml:lang="vi">Feed</span>
+     <span xml:lang="zh_CN">Feed</span>
+     <span xml:lang="zh_TW">饋流</span>
+     <b><span class='source'>
+       <a href="{/itemset/feed/attributes/attribute[ @name = 'homepage' ]}">
+         <xsl:value-of select="/itemset/feed/feedTitle"/>
+       </a>
+     </span></b>
+ </td>
+</tr>
+</xsl:if>
+
+<xsl:if test="attributes/attribute[ @name = 'category' ]">
+<tr>
+ <td valign="top" class='categories'>
+     <span>Filed under</span>
+     <span xml:lang="ar">وُضِع تحت</span>
+     <span xml:lang="ast">Archiváu en</span>
+     <span xml:lang="be@latin">Vykładziena na</span>
+     <span xml:lang="ca">Arxivat a</span>
+     <span xml:lang="cs">Zařazeno do</span>
+     <span xml:lang="da">Arkiveret under</span>
+     <span xml:lang="de">Unter</span>
+     <span xml:lang="el">Αρχειοθετημένο στο</span>
+     <span xml:lang="es">Archivado en</span>
+     <span xml:lang="eu">Hemen artxibatua</span>
+     <span xml:lang="fi">Avainsanat</span>
+     <span xml:lang="fr">Classé sous</span>
+     <span xml:lang="gl">Arquivado en</span>
+     <span xml:lang="he">תויק תחת</span>
+     <span xml:lang="hu">Beküldve</span>
+     <span xml:lang="it">Archiviato sotto</span>
+     <span xml:lang="ja">カテゴリ:</span>
+     <span xml:lang="lt">Etiketės:</span>
+     <span xml:lang="lv">Saglabāts zem</span>
+     <span xml:lang="nl">Opgeslagen onder</span>
+     <span xml:lang="pl">Zaszeregowano w</span>
+     <span xml:lang="pt">Arquivado sob</span>
+     <span xml:lang="pt_BR">Arquivado sob</span>
+     <span xml:lang="ro">Clasat sub</span>
+     <span xml:lang="ru">Опубликовано в</span>
+     <span xml:lang="sk">Zaradené pod</span>
+     <span xml:lang="sq">Skeduar te:</span>
+     <span xml:lang="sv">Arkiverad under</span>
+     <span xml:lang="tr">Dosyalandığı yer</span>
+     <span xml:lang="uk">Додано до теки</span>
+     <span xml:lang="vi">Được lọc dưới</span>
+     <span xml:lang="zh_CN">分类：</span>
+     <b><span class='categories'>
+       <xsl:for-each select="attributes/attribute[ @name = 'category' ]">
+         <xsl:if test="position() != 1">, </xsl:if>
+         <xsl:value-of select="." disable-output-escaping='yes'/>
+       </xsl:for-each>
+     </span></b>
+ </td>
+</tr>
+</xsl:if>
+
+<xsl:if test="attributes/attribute[ @name = 'author' ]">
+ <tr>
+   <td valign="top" class='author'>
+     <span>Author</span>
+     <span xml:lang="ar">المؤلّف</span>
+     <span xml:lang="ast">Autor</span>
+     <span xml:lang="be@latin">Aŭtar</span>
+     <span xml:lang="ca">Autor</span>
+     <span xml:lang="cs">Autor</span>
+     <span xml:lang="da">Forfatter</span>
+     <span xml:lang="de">Autor</span>
+     <span xml:lang="el">Συγγραφέας</span>
+     <span xml:lang="es">Autor</span>
+     <span xml:lang="eu">Egilea</span>
+     <span xml:lang="fi">Tekijä</span>
+     <span xml:lang="fr">Auteur</span>
+     <span xml:lang="gl">Autor</span>
+     <span xml:lang="he">מחבר</span>
+     <span xml:lang="hu">Szerző</span>
+     <span xml:lang="it">Autore</span>
+     <span xml:lang="ja">作者</span>
+     <span xml:lang="lt">Autorius</span>
+     <span xml:lang="lv">Autors</span>
+     <span xml:lang="nl">Auteur</span>
+     <span xml:lang="pl">Autor</span>
+     <span xml:lang="pt">Autor</span>
+     <span xml:lang="pt_BR">Autor</span>
+     <span xml:lang="ro">Autor</span>
+     <span xml:lang="ru">Автор</span>
+     <span xml:lang="sk">Autor</span>
+     <span xml:lang="sq">Autor</span>
+     <span xml:lang="sv">Författare</span>
+     <span xml:lang="tr">Yazar</span>
+     <span xml:lang="uk">Автор</span>
+     <span xml:lang="vi">Tác giả</span>
+     <span xml:lang="zh_CN">作者</span>
+     <b><span class='author'>
+       <xsl:value-of select="attributes/attribute[ @name = 'author' ]" disable-output-escaping='yes'/>
+     </span></b>
+   </td>
+ </tr>
+</xsl:if>  
+
+<xsl:if test="attributes/attribute[ @name = 'sharedby' ]">
+ <tr>
+   <td valign="top" class='sharedby'>
+     <span>Shared by</span>
+     <span xml:lang="ar">شارَكهُ</span>
+     <span xml:lang="ast">Compartíu por</span>
+     <span xml:lang="ca">Compartit per</span>
+     <span xml:lang="cs">Sdíleno </span>
+     <span xml:lang="da">Delt af</span>
+     <span xml:lang="de">Empfohlen von</span>
+     <span xml:lang="es">Compartido por</span>
+     <span xml:lang="eu">Honek elkarbanatua</span>
+     <span xml:lang="fi">Jaettu:</span>
+     <span xml:lang="fr">Partagé par</span>
+     <span xml:lang="gl">Compartido por</span>
+     <span xml:lang="he">מומלץ על ידי</span>
+     <span xml:lang="hu">Megosztotta</span>
+     <span xml:lang="it">Condiviso da</span>
+     <span xml:lang="ja">共有</span>
+     <span xml:lang="lt">Pasidalino</span>
+     <span xml:lang="lv">Dalījās</span>
+     <span xml:lang="nl">Gedeeld met</span>
+     <span xml:lang="pl">Współdzielone przez</span>
+     <span xml:lang="pt">Partilhado por</span>
+     <span xml:lang="pt_BR">Compartilhado por</span>
+     <span xml:lang="ro">Partajat de</span>
+     <span xml:lang="ru">Опубликовано</span>
+     <span xml:lang="sk">Zdielané cez</span>
+     <span xml:lang="sq">Ndarë nga</span>
+     <span xml:lang="sv">Delad av</span>
+     <span xml:lang="uk">Спільно використовується</span>
+     <span xml:lang="vi">Chia sẻ bởi</span>
+     <span xml:lang="zh_CN">分享：</span>
+     <b><span class='sharedby'>
+       <xsl:value-of select="attributes/attribute[ @name = 'sharedby' ]" disable-output-escaping='yes'/>
+     </span></b>
+   </td>
+ </tr>
+</xsl:if>  
+
+
+<xsl:for-each select="attributes/attribute[ @name = 'via' ]">
+<tr>
+ <td valign="top" class='source'> 
+     <span>Via</span>
+     <span xml:lang="ar">عبر</span>
+     <span xml:lang="ast">Vía</span>
+     <span xml:lang="be@latin">Ad</span>
+     <span xml:lang="ca">A través de</span>
+     <span xml:lang="cs">Přes</span>
+     <span xml:lang="da">Via</span>
+     <span xml:lang="de">Via</span>
+     <span xml:lang="es">Vía</span>
+     <span xml:lang="eu">Honen bitartez</span>
+     <span xml:lang="fi">Kautta</span>
+     <span xml:lang="fr">Via</span>
+     <span xml:lang="gl">Vía</span>
+     <span xml:lang="he">דרך</span>
+     <span xml:lang="hu">Forrás:</span>
+     <span xml:lang="it">Tramite</span>
+     <span xml:lang="ja">経由</span>
+     <span xml:lang="lt">per</span>
+     <span xml:lang="lv">Caur</span>
+     <span xml:lang="nl">Via</span>
+     <span xml:lang="pl">Poprzez</span>
+     <span xml:lang="pt">Via</span>
+     <span xml:lang="pt_BR">Via</span>
+     <span xml:lang="ro">Via</span>
+     <span xml:lang="ru">Через</span>
+     <span xml:lang="sk">Cez</span>
+     <span xml:lang="sq">Përmes</span>
+     <span xml:lang="sv">Via</span>
+     <span xml:lang="uk">Проміжні</span>
+     <span xml:lang="vi">Thông qua</span>
+     <span xml:lang="zh_CN">通过</span>
+     <b><span class='source'>
+       <a href="{.}">
+         <xsl:value-of select="."/>
+       </a>
+     </span></b>
+ </td>
+</tr>
+</xsl:for-each>
+<xsl:for-each select="attributes/attribute[ @name = 'related' ]">
+<tr>
+ <td valign="top" class='source'> 
+     <span>Related</span>
+     <span xml:lang="ar">متعلق</span>
+     <span xml:lang="ast">Rellacionáu</span>
+     <span xml:lang="be@latin">Padobnyja</span>
+     <span xml:lang="ca">Relacionats</span>
+     <span xml:lang="cs">Související</span>
+     <span xml:lang="da">Forbundne</span>
+     <span xml:lang="de">Verwandt</span>
+     <span xml:lang="es">Relacionado</span>
+     <span xml:lang="eu">Erlazionatua</span>
+     <span xml:lang="fi">Suhteessa kohteeseen</span>
+     <span xml:lang="fr">Lié</span>
+     <span xml:lang="gl">Relacionado</span>
+     <span xml:lang="he">קשורים</span>
+     <span xml:lang="hu">Kapcsolódó</span>
+     <span xml:lang="it">Correlato</span>
+     <span xml:lang="ja">関連</span>
+     <span xml:lang="lt">Susiję</span>
+     <span xml:lang="lv">Saistīts</span>
+     <span xml:lang="nl">Verwant</span>
+     <span xml:lang="pl">Pokrewne</span>
+     <span xml:lang="pt">Relacionado</span>
+     <span xml:lang="pt_BR">Relacionados</span>
+     <span xml:lang="ro">Asociat</span>
+     <span xml:lang="ru">Сопутствующий</span>
+     <span xml:lang="sk">Príbuzné</span>
+     <span xml:lang="sq">Relatuar</span>
+     <span xml:lang="sv">Relaterade</span>
+     <span xml:lang="uk">Пов’язано з</span>
+     <span xml:lang="vi">Quan hệ</span>
+     <span xml:lang="zh_CN">相关</span>
+     <b><span class='source'>
+       <a href="{.}">
+         <xsl:value-of select="."/>
+       </a>
+     </span></b>
+ </td>
+</tr>
+</xsl:for-each>
+
+
+<xsl:for-each select="duplicates/duplicateNode">
+<tr>
+ <td valign="top" class='source'> 
+     <span>Also posted in</span>
+     <span xml:lang="ar">منشورة أيضا في</span>
+     <span xml:lang="ast">Tamién escritu en</span>
+     <span xml:lang="be@latin">Taksama napisana ŭ</span>
+     <span xml:lang="ca">Publicat també a</span>
+     <span xml:lang="cs">Také zasláno do</span>
+     <span xml:lang="da">Også sendt til</span>
+     <span xml:lang="de">Auch in</span>
+     <span xml:lang="el">Καταχωρήθηκε και στο</span>
+     <span xml:lang="es">Publicada también en</span>
+     <span xml:lang="eu">Hemen argitaratua ere</span>
+     <span xml:lang="fi">Myös lähetetty kohteessa</span>
+     <span xml:lang="fr">Aussi posté dans</span>
+     <span xml:lang="gl">Tamén publicado en</span>
+     <span xml:lang="he">בנוסף פורסם אצל:</span>
+     <span xml:lang="hu">Beküldve továbbá</span>
+     <span xml:lang="it">Inserito anche in</span>
+     <span xml:lang="ja">別の投稿先</span>
+     <span xml:lang="lt">Taip pat paskelbė</span>
+     <span xml:lang="lv">Ievietots arī</span>
+     <span xml:lang="nl">Ook gepubliceerd in</span>
+     <span xml:lang="pl">Opublikowane również w</span>
+     <span xml:lang="pt">Também publicado em</span>
+     <span xml:lang="pt_BR">Também publicado em</span>
+     <span xml:lang="ro">Postat și în</span>
+     <span xml:lang="ru">Также размещён в</span>
+     <span xml:lang="sk">Tiež poslané v</span>
+     <span xml:lang="sq">Postuar edhe te</span>
+     <span xml:lang="sv">Även postad i</span>
+     <span xml:lang="tr">Tekrarlanan yer</span>
+     <span xml:lang="uk">Також оприлюднено у</span>
+     <span xml:lang="vi">Đồng thời post tại</span>
+     <span xml:lang="zh_CN">还发表在：</span>
+     <b><span class='source'>
+         <xsl:value-of select="."/>
+     </span></b>
+ </td>
+</tr>
+</xsl:for-each>
+
+<xsl:if test="attributes/attribute[ @name = 'creator' ]">
+ <tr>
+   <td valign="top" class='creator'>
+     <span>Creator</span>
+     <span xml:lang="ar">المنشيء</span>
+     <span xml:lang="ast">Creador</span>
+     <span xml:lang="be@latin">Stvaralnik</span>
+     <span xml:lang="ca">Creador</span>
+     <span xml:lang="cs">Tvůrce</span>
+     <span xml:lang="da">Forfatter</span>
+     <span xml:lang="de">Ersteller</span>
+     <span xml:lang="el">Δημιουργός</span>
+     <span xml:lang="es">Creador</span>
+     <span xml:lang="eu">Sortzailea</span>
+     <span xml:lang="fi">Kirjoittaja</span>
+     <span xml:lang="fr">Créateur</span>
+     <span xml:lang="gl">Creador</span>
+     <span xml:lang="he">יוצר</span>
+     <span xml:lang="hu">Létrehozó</span>
+     <span xml:lang="it">Creatore</span>
+     <span xml:lang="ja">作者</span>
+     <span xml:lang="lt">Sukūrė</span>
+     <span xml:lang="lv">Veidotājs</span>
+     <span xml:lang="nl">Producent</span>
+     <span xml:lang="pl">Twórca</span>
+     <span xml:lang="pt">Criador</span>
+     <span xml:lang="pt_BR">Criador</span>
+     <span xml:lang="ro">Realizat de</span>
+     <span xml:lang="ru">Создатель</span>
+     <span xml:lang="sk">Tvorca</span>
+     <span xml:lang="sq">Krijues</span>
+     <span xml:lang="sv">Skapare</span>
+     <span xml:lang="tr">Oluşturan</span>
+     <span xml:lang="uk">Створено у</span>
+     <span xml:lang="vi">Người tạo</span>
+     <span xml:lang="zh_CN">创作者</span>
+     <b><span class='creator'>
+       <xsl:value-of select="attributes/attribute[ @name = 'creator' ]" disable-output-escaping='yes'/>
+     </span></b>
+   </td>
+ </tr>
+</xsl:if>  
+
+</table> 
+
+
+<xsl:variable name="hiddenMenu">
+   <xsl:if test="$single = 0">hidden</xsl:if>
+</xsl:variable>
+
+<table id="{sourceId}-{nr}" dir="{$appDirection}" class="headmeta {$hiddenMenu}" cellspacing="0" cellpadding="0">
+<tr>
+ <td class='itemmenu'> 
+
+  
+
+  
+  <a href="liferea-flag://{sourceId}-{sourceNr}" class="flag">
+    <xsl:variable name="png">
+      <xsl:if test="mark = '0'">grayflag.png</xsl:if>
+      <xsl:if test="mark = '1'">flag.png</xsl:if>
+    </xsl:variable>
+    <img src="{$pixmapsDir}{$png}" class="flagbtn" border="0"/>
+    <span>flag</span>
+    <span xml:lang="ar">شارة</span>
+    <span xml:lang="ast">etiqueta</span>
+    <span xml:lang="be@latin">ściah</span>
+    <span xml:lang="ca">senyalador</span>
+    <span xml:lang="cs">označení</span>
+    <span xml:lang="da">flag</span>
+    <span xml:lang="de">Markieren</span>
+    <span xml:lang="el">σημαία</span>
+    <span xml:lang="es">marcar</span>
+    <span xml:lang="eu">bandera</span>
+    <span xml:lang="fi">lippu</span>
+    <span xml:lang="fr">marqueur</span>
+    <span xml:lang="gl">marcar</span>
+    <span xml:lang="he">דגל</span>
+    <span xml:lang="hu">megjelölés</span>
+    <span xml:lang="it">contrassegno</span>
+    <span xml:lang="ja">フラグ</span>
+    <span xml:lang="lt">svarbus</span>
+    <span xml:lang="lv">atzīme</span>
+    <span xml:lang="nl">vlag</span>
+    <span xml:lang="pl">flaga</span>
+    <span xml:lang="pt">marcar</span>
+    <span xml:lang="pt_BR">sinalizar</span>
+    <span xml:lang="ro">marcaj</span>
+    <span xml:lang="ru">важно</span>
+    <span xml:lang="sk">emblém</span>
+    <span xml:lang="sq">flamurkë</span>
+    <span xml:lang="sv">flagga</span>
+    <span xml:lang="tr">işaret</span>
+    <span xml:lang="uk">прапорець</span>
+    <span xml:lang="vi">cờ</span>
+    <span xml:lang="zh_CN">标志</span>
+  </a>
+   
+  
+  
+
+  
+  <a href="liferea-bookmark://{sourceId}-{nr}" class="bookmark">
+    <img src="{$pixmapsDir}bookmark.png" class="bookmarkbtn" border="0"/>
+    <span>bookmark</span>
+    <span xml:lang="ar">علامة</span>
+    <span xml:lang="ast">marcador</span>
+    <span xml:lang="be@latin">zakładka</span>
+    <span xml:lang="ca">adreça d'interès</span>
+    <span xml:lang="cs">záložka</span>
+    <span xml:lang="da">bogmærke</span>
+    <span xml:lang="de">Lesezeichen</span>
+    <span xml:lang="el">σελιδοδείκτης</span>
+    <span xml:lang="es">marcador</span>
+    <span xml:lang="eu">laster-marka</span>
+    <span xml:lang="fi">kirjanmerkki</span>
+    <span xml:lang="fr">marque-page</span>
+    <span xml:lang="gl">marcador</span>
+    <span xml:lang="he">סימנייה</span>
+    <span xml:lang="hu">könyvjelző</span>
+    <span xml:lang="it">segnalibro</span>
+    <span xml:lang="ja">ブックマーク</span>
+    <span xml:lang="lt">įrašyti į adresyną</span>
+    <span xml:lang="lv">grāmatzīme</span>
+    <span xml:lang="nl">bookmark</span>
+    <span xml:lang="pl">zakładka</span>
+    <span xml:lang="pt">marcador</span>
+    <span xml:lang="pt_BR">favorito</span>
+    <span xml:lang="ro">favorit</span>
+    <span xml:lang="ru">закладка</span>
+    <span xml:lang="sk">záložka</span>
+    <span xml:lang="sq">faqerojtës</span>
+    <span xml:lang="sv">bokmärke</span>
+    <span xml:lang="tr">yer imi</span>
+    <span xml:lang="uk">закладка</span>
+    <span xml:lang="vi">dấu trang</span>
+    <span xml:lang="zh_CN">书签</span>
+  </a>
+
+  
+  <xsl:if test="attributes/attribute[ @name = 'commentsUri' ]">
+    <a href="{attributes/attribute[ @name = 'commentsUri' ]}" class="comments">
+      <img src="{$pixmapsDir}comments.png" class="commentsbtn" border="0"/>
+      <span>comments</span>
+      <span xml:lang="ar">تعليقات</span>
+      <span xml:lang="ast">comentarios</span>
+      <span xml:lang="be@latin">kamentary</span>
+      <span xml:lang="bg">коментари</span>
+      <span xml:lang="ca">comentaris</span>
+      <span xml:lang="cs">komentáře</span>
+      <span xml:lang="da">bemærkninger</span>
+      <span xml:lang="de">Kommentare</span>
+      <span xml:lang="el">σχόλια</span>
+      <span xml:lang="es">comentarios</span>
+      <span xml:lang="eu">iruzkinak</span>
+      <span xml:lang="fi">kommentit</span>
+      <span xml:lang="fr">commentaires</span>
+      <span xml:lang="gl">comentarios</span>
+      <span xml:lang="he">תגובות</span>
+      <span xml:lang="hu">hozzászólás</span>
+      <span xml:lang="it">commenti</span>
+      <span xml:lang="ja">コメント</span>
+      <span xml:lang="ko">덧말</span>
+      <span xml:lang="lt">komentarai</span>
+      <span xml:lang="lv">komentāri</span>
+      <span xml:lang="mk">коментари</span>
+      <span xml:lang="nl">commentaar</span>
+      <span xml:lang="pl">komentarze</span>
+      <span xml:lang="pt">comentários</span>
+      <span xml:lang="pt_BR">comentários</span>
+      <span xml:lang="ro">comentarii</span>
+      <span xml:lang="ru">комментарии</span>
+      <span xml:lang="sk">komentáre</span>
+      <span xml:lang="sq">komente</span>
+      <span xml:lang="sv">kommentarer</span>
+      <span xml:lang="tr">yorumlar</span>
+      <span xml:lang="uk">коментарі</span>
+      <span xml:lang="vi">ghi chú</span>
+      <span xml:lang="zh_CN">评论</span>
+      <span xml:lang="zh_TW">說明</span>
+    </a>
+  </xsl:if>
+
+ </td>
+</tr>
+</table> 
+
+<xsl:variable name="shading">
+  <xsl:if test="readStatus = '0'">itemshaded</xsl:if>
+  <xsl:if test="readStatus != '0'">itemunshaded</xsl:if>
+</xsl:variable>
+
+<div class="{$shading}">
+<div class='content'>
+  
+  <xsl:if test="attributes/attribute[ @name = 'point' ]">
+  	<p style="width:400px;height:200px;float:right; border: 1px solid #000;" id="mapdiv"/>
+  </xsl:if>
+  
+  
+  <xsl:if test="attributes/attribute[ @name = 'point' ]">  
+	  <script src="http://www.openlayers.org/api/OpenLayers.js"/>
+	  <script type="text/javascript">
+		  <![CDATA[var lat=]]><xsl:value-of select="substring-before(attributes/attribute[ @name = 'point' ],' ')"/><![CDATA[
+		  var lon=]]><xsl:value-of select="substring-after(attributes/attribute[ @name = 'point' ],' ')"/>
+		  var zoom=9
+
+		  var map;
+        	  function load() {
+			map = new OpenLayers.Map("mapdiv");
+			map.addLayer(new OpenLayers.Layer.OSM());
+			var lonLat = new OpenLayers.LonLat(lon,lat)
+			.transform(
+				new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+				map.getProjectionObject() // to Spherical Mercator Projection
+			);
+			var markers = new OpenLayers.Layer.Markers("Markers");
+			map.addLayer(markers);
+			markers.addMarker(new OpenLayers.Marker(lonLat));
+			map.setCenter (lonLat, zoom);
+        	  }
+	  </script>
+  </xsl:if>
+
+  
+  <p dir="{$txtDirection}">
+    
+    <xsl:if test="attributes/attribute[ @name = 'gravatar' ]">
+       <img src="{attributes/attribute[ @name = 'gravatar' ]}" class='gravatar' align='left'/>
+    </xsl:if>
+    
+    
+    <xsl:value-of select="description" disable-output-escaping='yes'/>
+  </p>
+  
+  
+  <xsl:if test="attributes/attribute[ @name = 'photo' ]">
+     <xsl:element name="img">
+        <xsl:attribute name="src">
+	   <xsl:call-template name="substring-after-last">
+	     <xsl:with-param select="attributes/attribute[ @name = 'photo' ]" name="input"/>
+	     <xsl:with-param select="','" name="substr"/>
+	   </xsl:call-template>
+        </xsl:attribute>
+     </xsl:element>
+  </xsl:if>
+  
+  
+  <xsl:if test="attributes/attribute[ @name = 'commentFeedUri' ] and not(./commentsSuppressed) and $single = 1"> 
+     <p>     
+     <xsl:choose>
+        <xsl:when test="count(comments/item) = 0">
+           <b><span>No comments yet.</span>
+           <span xml:lang="ar">لا تعليقات حتى الآن.</span>
+           <span xml:lang="ast">Entá nun hai comentarios.</span>
+           <span xml:lang="be@latin">Jašče niama kamentaroŭ.</span>
+           <span xml:lang="ca">Encara no hi ha cap comentari.</span>
+           <span xml:lang="cs">Zatím žádné komentáře.</span>
+           <span xml:lang="da">Endnu ingen bemærkninger.</span>
+           <span xml:lang="de">Keine Kommentare bisher.</span>
+           <span xml:lang="el">Δεν υπάρχουν σχόλια.</span>
+           <span xml:lang="es">Aún no hay comentarios.</span>
+           <span xml:lang="eu">Ez du iruzkinik oraingoz.</span>
+           <span xml:lang="fi">Ei vielä kommentteja.</span>
+           <span xml:lang="fr">Pas encore de commentaires.</span>
+           <span xml:lang="gl">Aínda sen comentarios.</span>
+           <span xml:lang="he">אין עדיין תגובות.‮</span>
+           <span xml:lang="hu">Még nincs hozzászólás.</span>
+           <span xml:lang="it">Ancora nessun commento.</span>
+           <span xml:lang="ja">コメントなし</span>
+           <span xml:lang="lt">Dar niekas nekomentavo.</span>
+           <span xml:lang="lv">Vēl nav komentāru.</span>
+           <span xml:lang="nl">Commentaar ontbreekt nog.</span>
+           <span xml:lang="pl">Nie ma jeszcze komentarzy.</span>
+           <span xml:lang="pt">Ainda sem comentários.</span>
+           <span xml:lang="pt_BR">Sem comentários.</span>
+           <span xml:lang="ro">Nici un comentariu până acum.</span>
+           <span xml:lang="ru">Комментариев пока нет.</span>
+           <span xml:lang="sk">Doteraz žiadne komentáre.</span>
+           <span xml:lang="sq">Ende pa komente.</span>
+           <span xml:lang="sv">Inga kommentarer än.</span>
+           <span xml:lang="tr">Henüz yorum yok</span>
+           <span xml:lang="uk">Коментарів ще немає.</span>
+           <span xml:lang="vi">Vẫn chưa có ghi chú nào.</span>
+           <span xml:lang="zh_CN">尚无评论。</span></b>
+        </xsl:when>
+        <xsl:otherwise>
+	   <b><span>Comments</span>
+	   <span xml:lang="ar">التعليقات</span>
+	   <span xml:lang="ast">Comentarios</span>
+	   <span xml:lang="be@latin">Kamentary</span>
+	   <span xml:lang="ca">Comentaris</span>
+	   <span xml:lang="cs">Komentáře</span>
+	   <span xml:lang="da">Bemærkninger</span>
+	   <span xml:lang="de">Kommentare</span>
+	   <span xml:lang="el">Σχόλια</span>
+	   <span xml:lang="es">Comentarios</span>
+	   <span xml:lang="eu">Iruzkinak</span>
+	   <span xml:lang="fi">Kommentit</span>
+	   <span xml:lang="fr">Commentaires</span>
+	   <span xml:lang="gl">Comentarios</span>
+	   <span xml:lang="he">תגובות‮</span>
+	   <span xml:lang="hu">Hozzászólások</span>
+	   <span xml:lang="it">Commenti</span>
+	   <span xml:lang="ja">コメント</span>
+	   <span xml:lang="lt">Komentarai</span>
+	   <span xml:lang="lv">Komentāri</span>
+	   <span xml:lang="nl">Commentaren</span>
+	   <span xml:lang="pl">Komentarze</span>
+	   <span xml:lang="pt">Comentários</span>
+	   <span xml:lang="pt_BR">comentários</span>
+	   <span xml:lang="ro">Comentarii</span>
+	   <span xml:lang="ru">Комментарии</span>
+	   <span xml:lang="sk">Komentáre</span>
+	   <span xml:lang="sq">Komente</span>
+	   <span xml:lang="sv">Kommentarer</span>
+	   <span xml:lang="tr">Yorumlar</span>
+	   <span xml:lang="uk">Коментарі</span>
+	   <span xml:lang="vi">Ghi chú</span>
+	   <span xml:lang="zh_CN">评论</span></b>
+	</xsl:otherwise>
+     </xsl:choose>
+  
+     
+     <xsl:choose>
+        <xsl:when test="comments/updateState = 'updating'">
+           (<span>
+	      <span>Updating...</span>
+	      <span xml:lang="ar">يجري تحديث...</span>
+	      <span xml:lang="ast">Anovando...</span>
+	      <span xml:lang="be@latin">Aktualizacyja...</span>
+	      <span xml:lang="ca">S'està actualitzant...</span>
+	      <span xml:lang="cs">Aktualizuje se…</span>
+	      <span xml:lang="da">Opdaterer...</span>
+	      <span xml:lang="de">Aktualisiere...</span>
+	      <span xml:lang="el">Ενημέρωση...</span>
+	      <span xml:lang="es">Actualizando...</span>
+	      <span xml:lang="eu">Eguneratzen...</span>
+	      <span xml:lang="fi">Päivitetään...</span>
+	      <span xml:lang="fr">Mise à jour...</span>
+	      <span xml:lang="gl">Actualizando...</span>
+	      <span xml:lang="he">מעדכן כעת…</span>
+	      <span xml:lang="hu">Frissítés…</span>
+	      <span xml:lang="it">Aggiornamento...</span>
+	      <span xml:lang="ja">更新中...</span>
+	      <span xml:lang="lt">Atnaujinama...</span>
+	      <span xml:lang="lv">Atjaunina...</span>
+	      <span xml:lang="nl">Bijwerken...</span>
+	      <span xml:lang="pl">Uaktualniam...</span>
+	      <span xml:lang="pt">A Actualizar...</span>
+	      <span xml:lang="pt_BR">Atualizando...</span>
+	      <span xml:lang="ro">În curs de actualizare...</span>
+	      <span xml:lang="ru">Обновление...</span>
+	      <span xml:lang="sk">Aktualizuje sa...</span>
+	      <span xml:lang="sq">Po përditësohet...</span>
+	      <span xml:lang="sv">Uppdaterar...</span>
+	      <span xml:lang="tr">Güncelleniyor...</span>
+	      <span xml:lang="uk">Оновлення…</span>
+	      <span xml:lang="vi">Đang cập nhật...</span>
+	      <span xml:lang="zh_CN">正在更新...</span>
+	    </span>)
+	</xsl:when>
+        <xsl:otherwise>
+           (<a href="liferea-refresh-comments://{sourceId}-{sourceNr}">
+              <span>Refresh</span>
+              <span xml:lang="ar">حدِّث</span>
+              <span xml:lang="ast">Anovar</span>
+              <span xml:lang="be@latin">Aktualizuj</span>
+              <span xml:lang="ca">Actualitza</span>
+              <span xml:lang="cs">Aktualizovat</span>
+              <span xml:lang="da">Opdater</span>
+              <span xml:lang="de">Aktualisieren</span>
+              <span xml:lang="el">Ανανέωση</span>
+              <span xml:lang="es">Actualizar</span>
+              <span xml:lang="eu">Freskatu</span>
+              <span xml:lang="fi">Verestä</span>
+              <span xml:lang="fr">Rafraîchir</span>
+              <span xml:lang="gl">Actualizar</span>
+              <span xml:lang="he">רענן</span>
+              <span xml:lang="hu">Frissítés</span>
+              <span xml:lang="it">Ricarica</span>
+              <span xml:lang="ja">更新</span>
+              <span xml:lang="lt">Atnaujinti</span>
+              <span xml:lang="lv">Atsvaidzināt</span>
+              <span xml:lang="nl">Verversen</span>
+              <span xml:lang="pl">Odśwież</span>
+              <span xml:lang="pt">Actualizar</span>
+              <span xml:lang="pt_BR">Atualizar</span>
+              <span xml:lang="ro">Actualizează</span>
+              <span xml:lang="ru">Обновить</span>
+              <span xml:lang="sk">Obnoviť</span>
+              <span xml:lang="sq">Rifreskoje</span>
+              <span xml:lang="sv">Uppdatera</span>
+              <span xml:lang="tr">Yenile</span>
+              <span xml:lang="uk">Оновити</span>
+              <span xml:lang="vi">Làm mới lại</span>
+              <span xml:lang="zh_CN">刷新</span>
+           </a>)
+        </xsl:otherwise>
+     </xsl:choose>
+     
+     </p>
+     
+     
+     <xsl:if test="comments/updateError">
+        <p>
+	   <div id="errors">
+	      <div id="updateError">
+	         <xsl:value-of select="comments/updateError"/>
+	      </div>
+	   </div>
+	</p>
+     </xsl:if>
+     
+     <p>     
+        <xsl:apply-templates select="comments/item">
+           <xsl:sort select="time"/>
+        </xsl:apply-templates>
+     </p>    
+  </xsl:if>
+</div>
+</div> 
+</div> 
+
+</div> 
+
+
+<xsl:if test="attributes/attribute[ @name = 'point' ]">  
+	<script src="http://www.openlayers.org/api/OpenLayers.js"/>
+	<script type="text/javascript">
+		  <![CDATA[var lat=]]><xsl:value-of select="substring-before(attributes/attribute[ @name = 'point' ],' ')"/><![CDATA[
+		  var lon=]]><xsl:value-of select="substring-after(attributes/attribute[ @name = 'point' ],' ')"/>
+		  var zoom=9
+
+
+		  var map;
+        	  function load() {
+			map = new OpenLayers.Map("mapdiv");
+			map.addLayer(new OpenLayers.Layer.OSM());
+			var lonLat = new OpenLayers.LonLat(lon,lat)
+			.transform(
+				new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+				map.getProjectionObject() // to Spherical Mercator Projection
+			);
+			var markers = new OpenLayers.Layer.Markers("Markers");
+			map.addLayer(markers);
+			markers.addMarker(new OpenLayers.Marker(lonLat));
+			map.setCenter (lonLat, zoom);
+        	  }
+	</script>
+</xsl:if>
+
+</xsl:template>
+
+
+
+
+<xsl:template match="attributes/attribute[ @name = 'slash']">
+  <span class="slashSection"><span>Section</span>
+  <span xml:lang="ar">القسم</span>
+  <span xml:lang="ast">Seición</span>
+  <span xml:lang="be@latin">Raździeł</span>
+  <span xml:lang="ca">Secció</span>
+  <span xml:lang="cs">Sekce</span>
+  <span xml:lang="da">Afsnit</span>
+  <span xml:lang="de">Sektion</span>
+  <span xml:lang="el">Τομέας</span>
+  <span xml:lang="es">Sección</span>
+  <span xml:lang="eu">Sekzioa</span>
+  <span xml:lang="fi">Lohko</span>
+  <span xml:lang="fr">Section</span>
+  <span xml:lang="gl">Sección</span>
+  <span xml:lang="he">סעיף</span>
+  <span xml:lang="hu">Szakasz</span>
+  <span xml:lang="it">Sezione</span>
+  <span xml:lang="ja">セクション</span>
+  <span xml:lang="lt">Sekcija</span>
+  <span xml:lang="lv">Sadaļa</span>
+  <span xml:lang="nl">Sectie</span>
+  <span xml:lang="pl">Sekcja</span>
+  <span xml:lang="pt">Secção</span>
+  <span xml:lang="pt_BR">Seção</span>
+  <span xml:lang="ro">Secțiune</span>
+  <span xml:lang="ru">Раздел</span>
+  <span xml:lang="sk">Sekcia</span>
+  <span xml:lang="sq">Ndarje</span>
+  <span xml:lang="sv">Avsnitt</span>
+  <span xml:lang="tr">Kısım</span>
+  <span xml:lang="uk">Розділ</span>
+  <span xml:lang="vi">Phần</span>
+  <span xml:lang="zh_CN">章节</span></span>
+  <span class="slashValue"><xsl:value-of select="substring-before(., ',')"/></span>
+  <span class="slashDepartment"><span>Department</span>
+  <span xml:lang="ar">المصلحة</span>
+  <span xml:lang="ast">Departamentu</span>
+  <span xml:lang="be@latin">Addzieł</span>
+  <span xml:lang="ca">Departament</span>
+  <span xml:lang="cs">Oddělení</span>
+  <span xml:lang="da">Afdeling</span>
+  <span xml:lang="de">Department</span>
+  <span xml:lang="el">Τμήμα</span>
+  <span xml:lang="es">Departamento</span>
+  <span xml:lang="eu">Saila</span>
+  <span xml:lang="fi">Osasto</span>
+  <span xml:lang="fr">Département</span>
+  <span xml:lang="gl">Departamento</span>
+  <span xml:lang="he">מחלקה</span>
+  <span xml:lang="hu">Részleg</span>
+  <span xml:lang="it">Reparto</span>
+  <span xml:lang="ja">部門</span>
+  <span xml:lang="lt">Padalinys</span>
+  <span xml:lang="lv">Nodaļa</span>
+  <span xml:lang="nl">Afdeling</span>
+  <span xml:lang="pl">Wydział</span>
+  <span xml:lang="pt">Departamento</span>
+  <span xml:lang="pt_BR">Departamento</span>
+  <span xml:lang="ro">Departament</span>
+  <span xml:lang="ru">Отдел</span>
+  <span xml:lang="sk">Odelenie</span>
+  <span xml:lang="sq">Degë</span>
+  <span xml:lang="sv">Avdelning</span>
+  <span xml:lang="tr">Bölüm</span>
+  <span xml:lang="uk">Відділ</span>
+  <span xml:lang="vi">Phòng ban</span>
+  <span xml:lang="zh_CN">部门</span></span>
+  <span class="slashValue"><xsl:value-of select="substring-after(., ',')"/></span>
+</xsl:template>
+
+
+
+
+<xsl:template match="comments/item">
+   <div class="comment">
+      <div class="comment_title"><xsl:value-of select="title"/></div>
+      <div class="comment_body"><xsl:value-of select="description" disable-output-escaping='yes'/></div>
+   </div>
+</xsl:template>
+
+
+
+
+<xsl:template name="item_summary">
+
+<xsl:variable name="summaryShading">
+   <xsl:choose>
+      <xsl:when test="readStatus = '0'">summaryshaded</xsl:when>
+      <xsl:otherwise>summaryunshaded</xsl:otherwise>
+   </xsl:choose>
+</xsl:variable>
+    
+<div class="{$summaryShading}">
+  <table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" class="summarytime">
+      <xsl:value-of select="timestr"/>
+    </td>
+    <td width="100%">
+      
+      <a href="{source}">
+        <xsl:value-of select="title"/>
+      </a>
+
+      
+      <xsl:if test="description">
+        <br/><br/>
+        <xsl:value-of select="description" disable-output-escaping='yes'/>
+      </xsl:if>
+
+    </td>
+  </tr>
+  </table>
+    
+  <hr class='summary'/>
+
+</div>
+</xsl:template>
+
+
+
+
+<xsl:template name="substring-after-last">
+    <xsl:param name="input"/>
+    <xsl:param name="substr"/>
+    
+    
+    <xsl:variable select="substring-after($input,$substr)" name="temp"/>
+    
+    <xsl:choose>
+      
+      <xsl:when test="$substr and contains($temp,$substr)">
+        <xsl:call-template name="substring-after-last">
+          <xsl:with-param select="$temp" name="input"/>
+          <xsl:with-param select="$substr" name="substr"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$temp"/>
+      </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+</xsl:stylesheet>

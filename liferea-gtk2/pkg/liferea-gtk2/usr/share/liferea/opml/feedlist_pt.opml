@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<opml version="1.0">
+<head>
+    <title>Lista de Fontes</title>
+
+<!-- Many thanks to the folks from PlanetGeek.org for their suggestions -->
+
+</head>
+<body>
+<outline text="Exemplos de Fontes">
+	<outline text="Genéricos">
+		<outline text="Bitaites" htmlUrl="http://www.bitaites.org" xmlUrl="http://bitaites.org/feed" />
+		<outline text="Jonasnuts" htmlUrl="http://jonasnuts.com/" xmlUrl="http://jonasnuts.blogs.sapo.pt/data/rss" />
+		<outline text="Os Velhos dos Marretas" htmlUrl="http://osvelhotesdosmarretas.com/" xmlUrl="http://osvelhotesdosmarretas.com/feeds/posts/default" />
+		<outline text="Que Treta!" htmlUrl="http://ktreta.blogspot.com/" xmlUrl="http://ktreta.blogspot.com/feeds/posts/default" />
+	</outline>
+	<outline text="Planetas">
+		<outline text="Planeta DebianPT" htmlUrl="http://planet.debianpt.org/" xmlUrl="http://planet.debianpt.org/atom.xml" />
+		<outline text="Planeta Geek" htmlUrl="http://planetgeek.org/" xmlUrl="http://www.planetgeek.org/rss20.xml" />
+        </outline>
+	<outline text="Tecnologia">
+		<outline text="PCManias" htmlUrl="http://www.pcmanias.com/" xmlUrl="http://www.pcmanias.com/feed/" />
+		<outline text="Gadgets Portugal" htmlUrl="http://gadgets.clix.pt/" xmlUrl="http://feeds.feedburner.com/gadgets-portugal" />
+	</outline>
+        <!-- lets keep this English block in sync over all feed lists! -->
+        <outline text="internacional">
+		<outline text="News">		<!-- translate this title for localized feed list -->
+			<outline text="Ars Technica" htmlUrl="http://arstechnica.com" xmlUrl="http://feeds.arstechnica.com/arstechnica/index"/>
+			<outline text="Slashdot" htmlUrl="http://slashdot.org"  xmlUrl="http://slashdot.org/slashdot.rss" />
+			<outline text="BBC" htmlUrl="http://newsrss.bbc.co.uk/" xmlUrl="http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"/>
+			<outline text="Science" htmlUrl="http://www.sciencenews.org" xmlUrl="http://www.sciencenews.org/view/feed/type/news/name/news.rss"/>
+		</outline>
+		<outline text="Open Source">		<!-- translate this title for localized feed list -->
+			<outline text="Liferea Blog" htmlUrl="http://lzone.de/liferea/blog/" xmlUrl="http://feeds.feedburner.com/LifereaBlog" />
+			<outline text="Planet GNOME" htmlUrl="http://planet.gnome.org/" xmlUrl="http://planet.gnome.org/atom.xml" />	
+		</outline>
+		<outline text="Podcasts &amp; Music">		<!-- translate this title for localized feed list -->
+			<outline text="EscapePod" htmlUrl="http://escapepod.org" xmlUrl="http://escapepod.org/podcast.xml"/>
+			<outline text="Free Music Archive" htmlUrl="http://freemusicarchive.org/" xmlUrl="http://freemusicarchive.org/recent.atom"/>
+			<outline text="Gorilla vs. Bear" htmlUrl="http://www.gorillavsbear.net" xmlUrl="http://www.gorillavsbear.net/category/mp3/feed/"/>
+		</outline>
+		<outline text="Comics">
+			<outline text="xkcd" htmlUrl="http://xkcd.com/" xmlUrl="http://xkcd.com/atom.xml"/>
+		</outline>
+	</outline>
+	<!-- end of default block -->
+
+        <outline text="Não Lidos" title="Não Lidos" description="Notícias ainda não lidas" type="vfolder" htmlUrl="" xmlUrl="vfolder">
+            <outline type="rule" text="Estado de leitura" rule="unread" value="" additive="true"/>
+        </outline>
+        <outline text="Importante" title="Importante" description="Importante" type="vfolder" htmlUrl="" xmlUrl="vfolder">
+            <outline type="rule" text="Sinalizador de estado" rule="flagged" value="" additive="true"/>
+        </outline>
+    </outline>
+  </body>
+</opml>

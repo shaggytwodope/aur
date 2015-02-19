@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+
+<xsl:output version="1.0" method="xml" indent="yes"/>
+
+<xsl:param name="appDirection"/>	
+<xsl:param name="txtDirection"/>	
+
+<xsl:template match="/node">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+##STYLE_INSERT##
+</head>
+<body>
+
+<table dir="{$appDirection}" class="feedhead" cellspacing="0">
+<tr>
+  <td valign="middle" class="headleft">
+    <b><span>Source:</span>
+    <span xml:lang="ar">المصدر:</span>
+    <span xml:lang="ast">Orixe:</span>
+    <span xml:lang="be@latin">Krynica:</span>
+    <span xml:lang="bg">Изходен код:</span>
+    <span xml:lang="ca">Font:</span>
+    <span xml:lang="cs">Zdroj:</span>
+    <span xml:lang="da">Kilde:</span>
+    <span xml:lang="de">Quelle:</span>
+    <span xml:lang="el">Πηγή:</span>
+    <span xml:lang="es">Origen:</span>
+    <span xml:lang="eu">Iturburua:</span>
+    <span xml:lang="fi">Lähde:</span>
+    <span xml:lang="fr">Source :</span>
+    <span xml:lang="gl">Orixe:</span>
+    <span xml:lang="he">מקור:</span>
+    <span xml:lang="hu">Forrás:</span>
+    <span xml:lang="it">Fonte:</span>
+    <span xml:lang="ja">ソース:</span>
+    <span xml:lang="ko">소스:</span>
+    <span xml:lang="lt">Šaltinis:</span>
+    <span xml:lang="lv">Avots:</span>
+    <span xml:lang="mk">Извор:</span>
+    <span xml:lang="nl">Bron:</span>
+    <span xml:lang="pl">Źródło:</span>
+    <span xml:lang="pt">Fontes:</span>
+    <span xml:lang="pt_BR">Fontes:</span>
+    <span xml:lang="ro">Sursă:</span>
+    <span xml:lang="ru">Источник:</span>
+    <span xml:lang="sk">Zdroj:</span>
+    <span xml:lang="sq">Burim:</span>
+    <span xml:lang="sv">Källa:</span>
+    <span xml:lang="tr">Kaynak:</span>
+    <span xml:lang="uk">Джерело:</span>
+    <span xml:lang="vi">Nguồn:</span>
+    <span xml:lang="zh_CN">来源：</span>
+    <span xml:lang="zh_TW">來源:</span></b>
+  </td>
+  <td width="100%" valign="middle" class="headright">
+     <b><xsl:value-of select="title"/></b>
+  </td>
+</tr>
+</table>
+
+<div class='content'>
+  <p>
+   <b><xsl:value-of select="children"/></b>
+   <span>children with</span>
+   <span xml:lang="ar">أبناء مع</span>
+   <span xml:lang="ast">fíos con</span>
+   <span xml:lang="be@latin">dzieci z</span>
+   <span xml:lang="ca">fill amb</span>
+   <span xml:lang="cs">s podsložkami</span>
+   <span xml:lang="da">underkilder med</span>
+   <span xml:lang="de">Unterknoten mit</span>
+   <span xml:lang="el">θυγατρικές ροές με</span>
+   <span xml:lang="es">hijos con</span>
+   <span xml:lang="eu">umea honekin</span>
+   <span xml:lang="fi">lapsisolmu kohteelle</span>
+   <span xml:lang="fr">enfants avec</span>
+   <span xml:lang="gl">fillos con</span>
+   <span xml:lang="he">ערוצים עם</span>
+   <span xml:lang="hu">gyermek</span>
+   <span xml:lang="it">articoli con</span>
+   <span xml:lang="ja">children with</span>
+   <span xml:lang="lt">vaikas su</span>
+   <span xml:lang="lv">bērni ar</span>
+   <span xml:lang="nl">afgeleide van</span>
+   <span xml:lang="pl">elementów zawierających</span>
+   <span xml:lang="pt">filhos com</span>
+   <span xml:lang="pt_BR">crianças com</span>
+   <span xml:lang="ro">copil cu</span>
+   <span xml:lang="ru">дети с</span>
+   <span xml:lang="sk">dieťa s</span>
+   <span xml:lang="sq">pjella me</span>
+   <span xml:lang="sv">barn med</span>
+   <span xml:lang="tr">çocukla</span>
+   <span xml:lang="uk">дочірня з</span>
+   <span xml:lang="vi">có con</span> 
+   <b><xsl:value-of select="unreadCount"/></b>
+   <span>unread headlines</span>
+   <span xml:lang="ar">رؤوس العناوين لم تقرأ</span>
+   <span xml:lang="ast">titulares non lleíos</span>
+   <span xml:lang="be@latin">niečytanyja zahałoŭki</span>
+   <span xml:lang="ca">titulars sense llegir</span>
+   <span xml:lang="cs">nepřečtené články</span>
+   <span xml:lang="da">ulæste overskrifter</span>
+   <span xml:lang="de">ungelesene Schlagzeilen</span>
+   <span xml:lang="el">μη αναγνωσμένοι τίτλοι</span>
+   <span xml:lang="es">titulares no leídos</span>
+   <span xml:lang="eu">irakurri gabeko goiburuak</span>
+   <span xml:lang="fi">lukemattomat otsakerivit</span>
+   <span xml:lang="fr">titres non lus</span>
+   <span xml:lang="gl">titulares non lidos</span>
+   <span xml:lang="he">כותרות שלא נקראו</span>
+   <span xml:lang="hu">olvasatlan hírrel</span>
+   <span xml:lang="it">testate non lette</span>
+   <span xml:lang="ja">未読のヘッドライン</span>
+   <span xml:lang="lt">neskaitytos antraštės</span>
+   <span xml:lang="lv">nelasīti virsraksti</span>
+   <span xml:lang="nl">koppen als ongelezen markeren</span>
+   <span xml:lang="pl">nieprzeczytanych nagłówków</span>
+   <span xml:lang="pt">títulos não lidos</span>
+   <span xml:lang="pt_BR">manchetes não lidas</span>
+   <span xml:lang="ro">titluri necitite</span>
+   <span xml:lang="ru">непрочитанных заголовков</span>
+   <span xml:lang="sk">neprečítané články</span>
+   <span xml:lang="sq">tituj të palexuar</span>
+   <span xml:lang="sv">olästa rubriker</span>
+   <span xml:lang="tr">okunmamış haber başlığı</span>
+   <span xml:lang="uk">непрочитані заголовки</span>
+   <span xml:lang="vi">những tiêu đề chưa đọc</span>
+   <span xml:lang="zh_CN">标记未读</span> 
+  </p>
+</div>
+
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

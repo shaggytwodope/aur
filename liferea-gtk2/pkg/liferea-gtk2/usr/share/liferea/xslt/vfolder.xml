@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+
+<xsl:output version="1.0" method="xml" indent="yes"/>
+
+<xsl:param name="appDirection"/>	
+<xsl:param name="txtDirection"/>	
+
+<xsl:template match="/node">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+##STYLE_INSERT##
+</head>
+<body>
+
+<table dir="{$appDirection}" class="feedhead" cellspacing="0">
+<tr>
+  <td valign="middle" class="headleft">
+    <b><span>Search Folder:</span>
+    <span xml:lang="ar">مجلّد بحث:</span>
+    <span xml:lang="ast">Carpeta de Gueta:</span>
+    <span xml:lang="be@latin">Kataloh pošuku:</span>
+    <span xml:lang="ca">Carpeta de cerca:</span>
+    <span xml:lang="cs">Složka hledání:</span>
+    <span xml:lang="da">Søgemappe:</span>
+    <span xml:lang="de">Suchordner:</span>
+    <span xml:lang="el">Φάκελος αναζήτησης:</span>
+    <span xml:lang="es">Carpeta de búsqueda:</span>
+    <span xml:lang="eu">Bilaketaren karpeta:</span>
+    <span xml:lang="fi">Etsintäkansio:</span>
+    <span xml:lang="fr">Dossier de recherche :</span>
+    <span xml:lang="gl">Cartafol de busca:</span>
+    <span xml:lang="he"><p dir="rtl">תיקיית חיפוש:</p></span>
+    <span xml:lang="hu">Keresőmappa:</span>
+    <span xml:lang="it">Cartella ricerca:</span>
+    <span xml:lang="ja">検索するフォルダ:</span>
+    <span xml:lang="lt">Paieškos aplankas:</span>
+    <span xml:lang="lv">Meklēšanas mape:</span>
+    <span xml:lang="nl">Zoeken in map:</span>
+    <span xml:lang="pl">Znajdź w katalogu:</span>
+    <span xml:lang="pt">Pasta de Procura:</span>
+    <span xml:lang="pt_BR">Pasta Virtual:</span>
+    <span xml:lang="ro">Dosare căutare:</span>
+    <span xml:lang="ru">Поисковая папка:</span>
+    <span xml:lang="sk">Priečinok hľadania:</span>
+    <span xml:lang="sq">Dosje Kërkimesh:</span>
+    <span xml:lang="sv">Sökmapp:</span>
+    <span xml:lang="tr">Arama Klasörü:</span>
+    <span xml:lang="uk">Тека пошуку:</span>
+    <span xml:lang="vi">Thư mục tìm kiếm:</span>
+    <span xml:lang="zh_CN">搜索目录：</span></b>
+  </td>
+  <td width="100%" valign="middle" class="headright">
+     <b><xsl:value-of select="title"/></b>
+  </td>
+</tr>
+</table>
+
+<div class='content'>
+  <p>
+   <b><xsl:value-of select="unreadCount"/></b>
+   <span>unread headlines</span>
+   <span xml:lang="ar">رؤوس العناوين لم تقرأ</span>
+   <span xml:lang="ast">titulares non lleíos</span>
+   <span xml:lang="be@latin">niečytanyja zahałoŭki</span>
+   <span xml:lang="ca">titulars sense llegir</span>
+   <span xml:lang="cs">nepřečtené články</span>
+   <span xml:lang="da">ulæste overskrifter</span>
+   <span xml:lang="de">ungelesene Schlagzeilen</span>
+   <span xml:lang="el">μη αναγνωσμένοι τίτλοι</span>
+   <span xml:lang="es">titulares no leídos</span>
+   <span xml:lang="eu">irakurri gabeko goiburuak</span>
+   <span xml:lang="fi">lukemattomat otsakerivit</span>
+   <span xml:lang="fr">titres non lus</span>
+   <span xml:lang="gl">titulares non lidos</span>
+   <span xml:lang="he">כותרות שלא נקראו</span>
+   <span xml:lang="hu">olvasatlan hírrel</span>
+   <span xml:lang="it">testate non lette</span>
+   <span xml:lang="ja">未読のヘッドライン</span>
+   <span xml:lang="lt">neskaitytos antraštės</span>
+   <span xml:lang="lv">nelasīti virsraksti</span>
+   <span xml:lang="nl">koppen als ongelezen markeren</span>
+   <span xml:lang="pl">nieprzeczytanych nagłówków</span>
+   <span xml:lang="pt">títulos não lidos</span>
+   <span xml:lang="pt_BR">manchetes não lidas</span>
+   <span xml:lang="ro">titluri necitite</span>
+   <span xml:lang="ru">непрочитанных заголовков</span>
+   <span xml:lang="sk">neprečítané články</span>
+   <span xml:lang="sq">tituj të palexuar</span>
+   <span xml:lang="sv">olästa rubriker</span>
+   <span xml:lang="tr">okunmamış haber başlığı</span>
+   <span xml:lang="uk">непрочитані заголовки</span>
+   <span xml:lang="vi">những tiêu đề chưa đọc</span>
+   <span xml:lang="zh_CN">标记未读</span> 
+  </p>
+</div>
+
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

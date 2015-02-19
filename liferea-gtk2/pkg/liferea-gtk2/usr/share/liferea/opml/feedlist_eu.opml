@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<opml version="1.0">
+  <head>
+    <title>Iturri lehenetsiak</title>
+  </head>
+  <body>
+    <outline text="Euskarazko jarioak">
+            <outline text="Software Librea">
+                <outline text="Librezale" htmlUrl="http://librezale.org" xmlUrl="http://librezale.org/feed/" />
+            </outline>
+            <outline text="Egunkariak">
+                <outline text="Berria" htmlUrl="http://www.berria.info" xmlUrl="http://www.berria.info/rss/ediziojarraia.xml" />
+                <outline text="Kazeta.info" htmlUrl="http://www.kazeta.info" xmlUrl="http://www.kazeta.info/rss.php" />
+                <outline text="Sustatu" htmlUrl="http://www.sustatu.com" xmlUrl="http://www.sustatu.com/rdf" />
+            </outline>
+    </outline>
+
+	<!-- lets keep this default English block in sync over all feed lists! -->
+	<outline text="Nazioarteko jarioak">		<!-- translate this title for localized feed list -->
+		<outline text="Berriak">
+			<outline text="Ars Technica" htmlUrl="http://arstechnica.com" xmlUrl="http://feeds.arstechnica.com/arstechnica/index"/>
+			<outline text="Slashdot" htmlUrl="http://slashdot.org"  xmlUrl="http://slashdot.org/slashdot.rss" />
+			<outline text="BBC" htmlUrl="http://newsrss.bbc.co.uk/" xmlUrl="http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"/>
+			<outline text="Science" htmlUrl="http://www.sciencenews.org" xmlUrl="http://www.sciencenews.org/view/feed/type/news/name/news.rss"/>
+		</outline>
+		<outline text="Software librea">		<!-- translate this title for localized feed list -->
+			<outline text="Liferea Blog" htmlUrl="http://lzone.de/liferea/blog/" xmlUrl="http://feeds.feedburner.com/LifereaBlog" />
+			<outline text="Planet GNOME" htmlUrl="http://planet.gnome.org/" xmlUrl="http://planet.gnome.org/atom.xml" />	
+		</outline>
+		<outline text="Podcast eta musika">		<!-- translate this title for localized feed list -->
+			<outline text="EscapePod" htmlUrl="http://escapepod.org" xmlUrl="http://escapepod.org/podcast.xml"/>
+			<outline text="Free Music Archive" htmlUrl="http://freemusicarchive.org/" xmlUrl="http://freemusicarchive.org/recent.atom"/>
+			<outline text="Gorilla vs. Bear" htmlUrl="http://www.gorillavsbear.net" xmlUrl="http://www.gorillavsbear.net/category/mp3/feed/"/>
+		</outline>
+		<outline text="Comics">
+			<outline text="xkcd" htmlUrl="http://xkcd.com/" xmlUrl="http://xkcd.com/atom.xml"/>
+		</outline>
+	</outline>
+	<!-- end of default block -->
+
+     <outline text="Irakurri gabeak" title="Irakurri gabeak" description="Irakurri gabeak" type="vfolder" htmlUrl="" xmlUrl="vfolder">
+      <outline type="rule" text="Irakurketen egoera" rule="unread" value="" additive="true"/>
+    </outline>
+    <outline text="Banderekin" title="Banderekin" description="Banderekin" type="vfolder" htmlUrl="" xmlUrl="vfolder">
+      <outline type="rule" text="Banderen egoera" rule="flagged" value="" additive="true"/>
+    </outline>
+  </body>
+</opml>

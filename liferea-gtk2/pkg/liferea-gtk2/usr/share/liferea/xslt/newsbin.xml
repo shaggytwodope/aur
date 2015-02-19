@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+
+<xsl:output version="1.0" method="xml" indent="yes"/>
+
+<xsl:param name="appDirection"/>	
+<xsl:param name="txtDirection"/>	
+
+<xsl:preserve-space elements="//*"/>
+
+<xsl:template match="/feed">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+##STYLE_INSERT##
+</head>
+<body>
+
+
+<table dir="{$appDirection}" class="feedhead" cellspacing="0">
+<tr>
+  <td valign="middle" class="headleft">
+    <b><span>News Bin:</span>
+    <span xml:lang="ar">سلّة أخبار:</span>
+    <span xml:lang="ast">Bandexa de noticies:</span>
+    <span xml:lang="be@latin">Koš navinaŭ:</span>
+    <span xml:lang="ca">Contenidor de notícies:</span>
+    <span xml:lang="cs">Rubrika:</span>
+    <span xml:lang="da">Nyhedsbakke:</span>
+    <span xml:lang="de">Sammelordner:</span>
+    <span xml:lang="el">Φάκελος αποκομμάτων:</span>
+    <span xml:lang="es">Bandeja de noticias:</span>
+    <span xml:lang="eu">Albisteen erretilua:</span>
+    <span xml:lang="fi">Uusi kori:</span>
+    <span xml:lang="fr">Boîte à nouvelles :</span>
+    <span xml:lang="gl">Bandexa de novas:</span>
+    <span xml:lang="he"><p dir="rtl">סל איסוף:</p></span>
+    <span xml:lang="hu">Hírgyűjtő:</span>
+    <span xml:lang="it">Archivio notizie:</span>
+    <span xml:lang="ja">NewsBin:</span>
+    <span xml:lang="lv">Ziņu grozs:</span>
+    <span xml:lang="nl">Nieuwsbak:</span>
+    <span xml:lang="pl">Kosz:</span>
+    <span xml:lang="pt">Recipiente de Notícias:</span>
+    <span xml:lang="pt_BR">Recipiente de Notícias:</span>
+    <span xml:lang="ro">Colecție știri:</span>
+    <span xml:lang="ru">Ящик новостей:</span>
+    <span xml:lang="sk">Archív:</span>
+    <span xml:lang="sq">Kosh Lajmesh:</span>
+    <span xml:lang="sv">Nyhetskorg:</span>
+    <span xml:lang="tr">Haber Sepeti:</span>
+    <span xml:lang="uk">Кошик новин:</span>
+    <span xml:lang="vi">Thùng rác tin tức:</span></b>
+  </td>
+  <td width="100%" valign="middle" class="headright">
+     <xsl:value-of select="feedTitle"/>
+  </td>
+</tr>
+</table>
+
+<div class='content'>
+<p>
+<span>Add items to this news bin by selecting "Copy to News Bin" from the item list context menu.</span>
+<span xml:lang="ar">أضِف عناصر لسلّة الأخبار هذه باختيار "انسخ لسلّة الأخبار" من قائمة سياق لائحة العناصر.</span>
+<span xml:lang="ast">Amestar elementos a esti contenedor de noticies seleicionáu «Copiar al contenedor de noticies» dende la llista d'elementos nel menú de contestu.</span>
+<span xml:lang="be@latin">Dadaj elementy da hetaha košu z navinami, abraŭšy "Skapijuj u koš navinaŭ" u kantekstnym menu dla śpisu elementaŭ.</span>
+<span xml:lang="ca">Podeu afegir elements a aquest contenidor de notícies si seleccioneu «Copia al contenidor de notícies» del menú contextual de la llista d'elements.</span>
+<span xml:lang="cs">Přidejte články do této rubriky výběrem „Kopírovat do rubriky“ z kontextové nabídky seznamu kanálů.</span>
+<span xml:lang="da">Tilføj punkter til denne nyhedsbakke ved at vælge »Kopier til nyhedsbakke« fra kontekstmenuen til punktlisten.</span>
+<span xml:lang="de">Mit der "Kopieren nach" Menüoption in der Schlagzeilenliste können Schlagzeilen diesem Sammelordner hinzugefügt werden.</span>
+<span xml:lang="el">Προσθέστε άρθρα στο φάκελο αποκομμάτων, επιλέγοντας "Αντιγραφή σε φάκελο αποκομμάτων" από το μενού της λίστας τίτλων.</span>
+<span xml:lang="es">Añada artículos a esta bandeja de noticias eligiendo «Copiar a bandeja» del menú contextual de la lista de artículos.</span>
+<span xml:lang="eu">Gehitu elementuak albiste honen erretiluan "Kopiatu berrien erretiluan" hautatuz (testuinguruko  menuko elementu-zerrendan)</span>
+<span xml:lang="fi">Lisää kohteita tähän uutiskoriin valitsemalla ”Kopioi uutiskoriin” asiayhteysvalikon luetteloriviltä.</span>
+<span xml:lang="fr">Ajoutez des éléments à cette boîte à nouvelles en sélectionnant « Copier dans la boîte à nouvelles » à partir du menu contextuel de la liste des éléments.</span>
+<span xml:lang="gl">Engadir artigos a esta bandexa de novas seleccionando «Copiar a bandexa de novas» da lista de artigos do menú contextual.</span>
+<span xml:lang="he"><p dir="rtl">כדי להוסיף פריטים אל סל איסוף זה, יש לבחור "העתק אל סל איסוף" מתוך רשימת הפריטים בתפריט ההקשר.</p></span>
+<span xml:lang="hu">Adjon elemeket a hírgyűjtőhöz a helyi menü „Másolás hírgyűjtőbe” pontjával.</span>
+<span xml:lang="it">Aggiungi articoli a questo archivio notizie selezionando «Copia in archivio notizie» dal menù contestuale dell'elenco.</span>
+<span xml:lang="ja">トピックの一覧のコンテキスト・メニューで選択したものをこの NewsBin に追加します</span>
+<span xml:lang="lv">Pievienot vienumus šajā ziņu grozā, izvēloties “Kopēt uz ziņu grozu” no vienumu saraksta konteksta izvēlnes.</span>
+<span xml:lang="nl">Voeg items aan de nieuwsbak toe met "Kopieer naar nieuwsbak" uit het snelmenu.</span>
+<span xml:lang="pl">Dodaj wiadomości do kosza wybierając z menu kontekstowego "Skopiuj do Kosza".</span>
+<span xml:lang="pt">Adicione itens a este recipiente de notícias seleccionando "Copiar para o Recipiente de Notícias" da lista de itens no menu de contexto.</span>
+<span xml:lang="pt_BR">Adicione itens a este recipiente de notícias selecionando "Copiar para o Recipiente de Notícias" da lista de itens no menu de contexto.</span>
+<span xml:lang="ro">Adăugați elemente la această colecție de știri prin alegerea opțiunii „Copiază în colecție de știri” din meniul contextual.</span>
+<span xml:lang="ru">Добавьте записи в этот ящик новостей, выбрав «Копировать в ящик новостей» в контекстном меню списка записей.</span>
+<span xml:lang="sk">Pridať články do tohto archívu vybraním položky "Kopírovať do archívu" so zoznamu kontextovej ponuky.</span>
+<span xml:lang="sq">Shtoni, te ky kosh lajmesh, zëra duke përzgjedhur "Kopjoje te Kosh Lajmesh" prej menuje konteksti liste zërash.</span>
+<span xml:lang="sv">Lägg till artiklar till den här nyhetskorgen genom att välja "Kopiera till nyhetskorg" från artikellistans sammanhangsmeny.</span>
+<span xml:lang="tr">Öğenin durum menüsünde "Haber Sepetine Kopyala" seçeneğini seçerek  haber sepetine öğe ekle.</span>
+<span xml:lang="uk">Додайте пункти до цього кошика новин за допомогою пункту «Копіювати до кошика новин» контекстного меню пункту списку.</span>
+<span xml:lang="vi">Thêm các mục vào thùng rác tin tức này bằng cách chọn "Sao chép vào Thùng rác Tin tức" từ trình đơn ngữ cảnh danh sách mục tin.</span>
+</p>
+</div>
+
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

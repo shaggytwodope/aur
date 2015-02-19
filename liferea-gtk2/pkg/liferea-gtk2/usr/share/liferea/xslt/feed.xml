@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+
+<xsl:output version="1.0" method="xml" indent="yes"/>
+
+<xsl:param name="appDirection"/>	
+<xsl:param name="txtDirection"/>	
+
+<xsl:preserve-space elements="//*"/>
+
+<xsl:template match="/feed">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+##STYLE_INSERT##
+</head>
+<body>
+
+
+<xsl:if test="parseError or filterError or updateError or httpError or feedDiscontinued = '1'">
+<div id='errors'>
+
+<xsl:if test="feedDiscontinued = '1'">
+  <div id='updateError'>
+     <span>This feed is discontinued. It's no longer available. Liferea won't update it anymore but you can still access the cached headlines.</span>
+     <span xml:lang="ar">توقّفت هذه التلقيمة. لم تعد متوفّرة. لن يستطيع لايفريا التحديث بعد الآن لكن يظل بإمكانك الوصول إلى العناوين الرئيسية المخبّأة.</span>
+     <span xml:lang="ast">Esta canal foi abandonada y ya nun tá algamable. Liferea nun va anovala pero puedes siguir accediendo a los sos artículos atroxaos.</span>
+     <span xml:lang="be@latin">Hety kanał skončyŭ pracu. Ciapier jon niedastupny. Liferea nia budzie jaho aktualizoŭvać, ale ty možaš čytać zahałoŭki z padručnaj pamiaci.</span>
+     <span xml:lang="bg">Тази емисия не е продължена. Вече не е налична. Liferea няма да я актуализира, но все още можете да преглеждате старите заглавия от кеша.</span>
+     <span xml:lang="ca">Aquest canal ja no es manté i no està disponible. El Liferea ja no l'actualitzarà més, però encara podeu accedir als titulars que hi ha a la memòria cau.</span>
+     <span xml:lang="cs">Tento kanál je přerušen a již není dostupný. Liferea ho již nebude aktualizovat, ale jeho články jsou stále přístupné v paměti.</span>
+     <span xml:lang="da">Denne nyhedskilde er afbrudt. Den er ikke længere tilgængelig. Liferea vil ikke længere opdatere den, men du kan stadig tilgå de gemte overskrifter.</span>
+     <span xml:lang="de">Dieses Abonnement wurde eingestellt. Es ist nicht länger verfügbar. Liferea wird es nicht mehr aktualisieren. Die alten Schlagzeilen sind jedoch weiter verfügbar.</span>
+     <span xml:lang="el">Αυτή η ροή έχει διακόψει τη λειτουργία της. Δεν είναι πλέον διαθέσιμη. Το Liferea θα πάψει να την ενημερώνει, αλλά θα συνεχίσετε να έχετε πρόσβαση στους αποθηκευμένους τίτλους.</span>
+     <span xml:lang="es">Este canal fue abandonado y ya no está disponible. Liferea no la actualizará pero puede seguir accediendo a los artículos almacenados.</span>
+     <span xml:lang="eu">Iturri hau etenda dago. Ez da gehiago erabilgarri egongo. Liferea-k ezingo du eguneratu gehiago, hala ere cachean dauden goiburuak irakur ditzakezu.</span>
+     <span xml:lang="fi">Tämä syöte on lakkautettu, ja ei enää saatavilla. Liferea ei enää päivitä sitä, mutta voit yhä lukea välimuistissa olevia otsikoita.</span>
+     <span xml:lang="fr">Ce flux a cessé d'exister. Il n'est plus disponible. Liferea ne le mettra plus à jour, mais vous pouvez toujours accéder aux titres situés dans le cache.</span>
+     <span xml:lang="gl">Esta fonte foi suspendida e non está dispoñíbel. Liferea non a actualizará máis pero poderá acceder aos titulares gardados na caché.</span>
+     <span xml:lang="he">ערוץ זה הופסק, ואיננו זמין יותר. Liferea לא יעדכן אותו בעתיד, אולם עדיין ביכולתך לגשת אל הכותרות המוטמנות.</span>
+     <span xml:lang="hu">Ez a hírforrás megszűnt, többé nem érhető el. A Liferea nem frissíti a továbbiakban, de továbbra is elérhetőek lesznek a gyorsítótárazott címek.</span>
+     <span xml:lang="it">Questo notiziario è abbandonato. Non è più disponibile. Non verrà più aggiornato ma si potrà ancora accedere alle testate nella cache.</span>
+     <span xml:lang="ja">この配信元は停止しているので、利用できません。今後 Liferea が更新することはありませんが、キャッシュに保存したヘッドラインにアクセスすることは可能です。</span>
+     <span xml:lang="ko">이 피드는 연속적이지 않습니다. 더 이상 사용할 수 없습니다. Liferea는 더이상 그것을 새로 고치지 않지만, 캐시된 머릿글은 읽을 수 있습니다.</span>
+     <span xml:lang="lt">Šis naujienų kanalas sustabdė savo veiklą. Jis nebeprieinamas. „Liferea“ nebegali jo atnaujinti, tačiau tebegalite pasiekti jau įkeltuosius straipsnius.</span>
+     <span xml:lang="lv">Šī plūsma ir pārtraukta un vairs nav pieejama. Liferea to vairs neatjauninās, bet jūs vēl aizvien varat piekļūt saglabātajiem virsrakstiem.</span>
+     <span xml:lang="mk">Овие вести веќе нема да се ажурираат, но се уште можете да ги гледате кешираните наслови.</span>
+     <span xml:lang="nl">Deze feed is gestopt en niet langer beschikbaar. Liferea zal hem niet meer bijwerken, maar de opgeslagen koppen zijn nog wel te bekijken.</span>
+     <span xml:lang="pl">Subskrypcja ta została zamknięta i nie jest już dostępna. Liferea nie będzie jej uaktualniać ale masz nadal dostęp do zachowanych nagłówków.</span>
+     <span xml:lang="pt">Esta fonte foi interrompida, e não se encontra disponível. O Liferea não a actualizará mais, mas poderá ainda aceder aos títulos em cache.</span>
+     <span xml:lang="pt_BR">Esta fonte de notícias foi interrompida, e não está mais disponível. Liferea não a atualizará mais, mas você poderá ainda acessar as manchetes no cache.</span>
+     <span xml:lang="ro">Fluxul a fost întrerupt. Nu mai este disponibil. Liferea nu îl va mai actualiza dar puteți accesa titlurile din cache.</span>
+     <span xml:lang="ru">Эта лента более не доступна. Liferea не может обновить её, однако, вы можете читать сохранённые сообщения.</span>
+     <span xml:lang="sk">Tento kanál je zrušený. Nie je dostupný. Liferea ho nabudúce nebude aktualizovať ale môžete stále pristupovať k uloženým článkom.</span>
+     <span xml:lang="sq">Kjo prurje është ndërprerë. Nuk mund të kihet më. Liferea s'do ta përditësojë më, por ende mund të hapni titujt e ruajtur në fshehtinë.</span>
+     <span xml:lang="sv">Denna kanal är avslutad. Den är inte längre tillgänglig. Liferea kommer inte att uppdatera den mer, men du kan fortfarande få tillgång till de lagrade rubrikerna.</span>
+     <span xml:lang="tr">Bu haber kaynağı durdurulmuş. Artık geçerli değil. Liferea bunu artık güncellemeyecek ama siz bellekteki haber başlıklarına hâlâ ulaşabilirsiniz.</span>
+     <span xml:lang="uk">Супровід цієї подачі припинено. Тепер вона є недоступною. Liferea більше не оновлюватиме подачі, але ви зможете читати кешовані заголовки подачі.</span>
+     <span xml:lang="vi">Feed này không còn được kết nối nữa. Nó không sẵn dùng. Liferea sau này không thể cập nhật thêm nữa nhưng bạn vẫn có thể truy cập các đề mục đã được nhớ tạm. </span>
+     <span xml:lang="zh_CN">此 Feed 已失效。Liferea 将不会更新它，但是您可以继续读取暂存标题。</span>
+     <span xml:lang="zh_TW">此饋流已失效，將不再更新。Liferea 將不會更新它，但是您可以繼續讀取暫存標題。</span>
+  </div>
+</xsl:if>
+
+<xsl:if test="updateError">
+  <div id='updateError'>
+    <xsl:value-of select="updateError"/>
+  </div>
+</xsl:if>
+
+<xsl:if test="httpError">
+  <div id='httpError'>
+    <span>The last update of this subscription failed!<br/><b>HTTP error code <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="ar">فشل التحديث الأخير لهذا الاشتراك!<br/><b>رمز خطأ HTTP<xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="be@latin">Apošniaja aktualizacyja hetaj padpiski była niepaśpiachovaj!<br/><b>Kod pamyłki HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="ca">Ha fallat l'última actualització d'aquesta subscripció<br/><b>Codi d'error HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="cs">Poslední aktualizace tohoto odběru selhala!<br/><b>Chybový kód HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="da">Den sidste opdatering af dette abonnement mislykkedes!<br/><b>HTTP-fejlkode <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="de">Das letzte Aktualisieren dieses Abonnements schlug fehl!<br/><b>HTTP-Fehlercode <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="el">Απέτυχε η τελευταία ενημέρωση αυτής της συνδρομής! <br/><b>Κωδικός σφάλματος HTTP <xsl:value-of select="httpErrorCode"/>:<xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="eu">Harpidetza honen azken eguneraketak huts egin du!<br/> <b>HTTP errorearen kodea <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="fi">Tämän julkaisun viimeinen päivitys epäonnistui!<br /><b>HTTP-virhekoodi <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="fr">La dernière mise à jour de cet abonnement a échoué !<br/><b>Code d'erreur HTTP <xsl:value-of select="httpErrorCode"/> : <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="gl">A última actualización desta subscrición fallou!<br/><b>Código de erro HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="he"><div style="direction:rtl">העדכון האחרון של מינוי זה נכשל!<br/><b>HTTP error code <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></div></span>
+    <span xml:lang="hu">Nem sikerült a híreket frissíteni.<br/><b><xsl:value-of select="httpErrorCode"/>. HTTP hibakód: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="it">L'ultimo aggiornamento di questo abbonamento non è riuscito.<br/><b>Codice di errore HTTP: <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="ja">この購読の最後の更新に失敗しました！<br/><b>HTTP のエラー・コード <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="lt">Nepavyko atnaujinti atnaujinti naujienų kanalo informacijos!<br/><b>HTTP klaidos kodas <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="lv">Neizdevās atjaunināt šo abonementu!<br/><b>HTTP kļūdas kods <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="nl">De laatste update van dit abonnement is mislukt!<br/><b>HTTP-foutcode <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="pl">Ostatnia aktualizacja tej subskrypcji nie powiodła się!<br/><b>Kod błędu HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="pt">A última actualização desta subscrição falhou!<br/><b>Código de erro HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="pt_BR">A última atualização desta assinatura falhou!<br/><b>Código de erro HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="ro">Ultima actualizare a acestui abonament a eșuat!<br/><b>Codul de eroare HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="ru">Последнее обновление этой подписки завершилось неудачей!<br/><b>код ошибки HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="sk">Posledná aktualizácia tohto prihlásenia zlyhala!<br/><b>HTTP kód chyby <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="sq">Përditësimi i fundit i këtij pajtimi dështoi!<br/><b>Kod gabimi HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="sv">Senaste uppdateringen av prenumerationen misslyckades!<br/><b>HTTP-felkod <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="tr">Bu aboneligin son güncellemesi başarısız oldu!<br/><b>HTTP hata kodu <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="uk">Остання спроба оновлення цієї підписки зазнала невдачі!<br/><b>Код помилки HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>
+    <span xml:lang="vi">Lần cập nhật cuối địa chỉ đặt xem dài hạn này gặp lỗi!<br/><b>Mã lỗi HTTP <xsl:value-of select="httpErrorCode"/>: <xsl:value-of select="httpError"/></b></span>    
+  </div>
+</xsl:if>
+
+<xsl:if test="parseError">
+  <div id='parseError'>
+    <span>There were errors while parsing this feed!</span>
+    <span xml:lang="ar">كانت هناك أخطاء أثناء تحليل هذه التلقيمة!</span>
+    <span xml:lang="ast">Atopáronse fallos al procesar esta canal.</span>
+    <span xml:lang="be@latin">Pry razbory hetaha kanału adbylisia pamyłki!</span>
+    <span xml:lang="bg">Имаше грешки докато се изтегляше тази емисия!</span>
+    <span xml:lang="ca">S'han produït errors en analitzar aquest canal</span>
+    <span xml:lang="cs">Při zpracovávání tohoto kanálu se vyskytly chyby!</span>
+    <span xml:lang="da">Der opstod en fejl under fortolkning af denne nyhedskilde!</span>
+    <span xml:lang="de">Es traten Fehler beim Parsen des Feeds auf!</span>
+    <span xml:lang="el">Εμφανίστηκαν σφάλματα κατά την ανάλυση της ροής!</span>
+    <span xml:lang="es">Se encontraron errores al procesar este canal.</span>
+    <span xml:lang="eu">Erroreak gertatu dira iturri hau aztertzean.</span>
+    <span xml:lang="fi">Tämän syötteen jäsentämisessä oli virheitä!</span>
+    <span xml:lang="fr">Des erreurs sont survenues pendant l'analyse syntaxique de ce flux !</span>
+    <span xml:lang="gl">Atopáronse erros ao procesar esta fonte!</span>
+    <span xml:lang="he"><div style="direction:rtl">ארעו שגיאות במהלך פענוח ערוץ זה!</div></span>
+    <span xml:lang="hu">Hiba történt a hírforrás elemzése közben.</span>
+    <span xml:lang="it">Sono occorsi errori durante l'analisi di questo notiziario.</span>
+    <span xml:lang="ja">この配信元を解析する際にエラーが発生しました！</span>
+    <span xml:lang="ko">이 피드를 해석하던 중 에러가 발생했습니다.</span>
+    <span xml:lang="lt">Analizuojant kanalą įvyko klaidų!</span>
+    <span xml:lang="lv">Radās kļūda, parsējot šo plūsmu!</span>
+    <span xml:lang="mk">Се појавивија грешки при парсирање на вестите!</span>
+    <span xml:lang="nl">Ontleden van deze feed is mislukt!</span>
+    <span xml:lang="pl">Wystąpiły błędy przy przetwarzaniu tej subskrypcji!</span>
+    <span xml:lang="pt">Foram encontrados alguns erros ao processar esta fonte!</span>
+    <span xml:lang="pt_BR">Alguns erros foram encontrados ao processar esta fonte de notícias!</span>
+    <span xml:lang="ro">Au fost erori în timp ce se analiza acest flux!</span>
+    <span xml:lang="ru">Произошли ошибки при анализе этой ленты!</span>
+    <span xml:lang="sk">Počas parsovania tohto kanálu tu boli chyby!</span>
+    <span xml:lang="sq">Pati gabime ndërsa përtypej kjo prurje!</span>
+    <span xml:lang="sv">Fel inträffade under tolkning av denna kanal!</span>
+    <span xml:lang="tr">Bu haberi ayrıştırırken hatalar oluştu!</span>
+    <span xml:lang="uk">Під час спроби обробки цієї подачі сталися помилки.</span>
+    <span xml:lang="vi">Có một số lỗi xảy ra khi phân tích feed này!</span>
+    <span xml:lang="zh_CN">解析此 Feed 时出现错误！</span>
+    <span xml:lang="zh_TW">分析饋流時出現錯誤</span>
+
+    <span id="pdl" class="detaillink">
+      (<span onclick="javascript:document.getElementById('pd').style.visibility='visible';document.getElementById('pd').style.display='block';document.getElementById('pdl').style.visibility='hidden';document.getElementById('pdl').style.display='none';" class="showmore">
+        <span>Parser Error Details</span>
+        <span xml:lang="ar">تفاصيل خطأ المحلِّل</span>
+        <span xml:lang="ast">Detalles del fallu d'analís</span>
+        <span xml:lang="be@latin">Padrabiaznaści ab pamyłcy razboru</span>
+        <span xml:lang="ca">Detalls de l'error de l'analitzador</span>
+        <span xml:lang="cs">Zpracovat podrobnosti chyb</span>
+        <span xml:lang="da">Fejldetaljer for fortolker</span>
+        <span xml:lang="de">detaillierte Parser-Fehler:</span>
+        <span xml:lang="el">Λεπτομέρειες σφάλματος αναλυτή</span>
+        <span xml:lang="es">Detalles del error de procesado</span>
+        <span xml:lang="eu">Aztertu erroreen xehetasunak</span>
+        <span xml:lang="fi">Jäsentimen virheyksityiskohdat</span>
+        <span xml:lang="fr">Détail des erreurs d'analyse syntaxique</span>
+        <span xml:lang="gl">Detalles dos erros do analizador</span>
+        <span xml:lang="he">פרטי שגיאת פענוח</span>
+        <span xml:lang="hu">Értelmezési hiba részletei</span>
+        <span xml:lang="it">Dettagli errori dell'analizzatore</span>
+        <span xml:lang="ja">エラー解析の詳細</span>
+        <span xml:lang="lt">Analizavimo klaida išsamiau</span>
+        <span xml:lang="lv">Parsēt kļūdu informāciju</span>
+        <span xml:lang="nl">Foutinformatie ontleden</span>
+        <span xml:lang="pl">Szczegóły błędów parsera</span>
+        <span xml:lang="pt">Detalhes dos Erros do Analisador</span>
+        <span xml:lang="pt_BR">Detalhes de Erro do Analisador</span>
+        <span xml:lang="ro">Detalii eroare analizare</span>
+        <span xml:lang="ru">Подробная информация о ошибке парсера</span>
+        <span xml:lang="sk">Podrobnosti chyby parsera</span>
+        <span xml:lang="sq">Hollësi Gabimi Përtypjeje</span>
+        <span xml:lang="sv">Detaljer för tolkningsfel</span>
+        <span xml:lang="tr">Ayrıştırıcı Hata Detayları</span>
+        <span xml:lang="uk">Дані щодо помилки обробки</span>
+        <span xml:lang="vi">Chi tiết về lỗi bộ phân tích cú pháp</span>
+        <span xml:lang="zh_CN">解析器错误详情</span>
+      </span>)
+    </span>
+
+    <span id='pd' class="details">
+      <b><span>Details</span>
+      <span xml:lang="ar">التفاصيل</span>
+      <span xml:lang="ast">Detalles</span>
+      <span xml:lang="be@latin">Padrabiaznaści</span>
+      <span xml:lang="ca">Detalls</span>
+      <span xml:lang="cs">Podrobnosti</span>
+      <span xml:lang="da">Detaljer</span>
+      <span xml:lang="de">Details</span>
+      <span xml:lang="el">Λεπτομέρειες</span>
+      <span xml:lang="es">Detalles</span>
+      <span xml:lang="eu">Xehetasunak</span>
+      <span xml:lang="fi">Yksityiskohdat</span>
+      <span xml:lang="fr">Détails</span>
+      <span xml:lang="gl">Detalles</span>
+      <span xml:lang="he">פרטים</span>
+      <span xml:lang="hu">Részletek</span>
+      <span xml:lang="it">Dettagli</span>
+      <span xml:lang="ja">詳細</span>
+      <span xml:lang="lt">Išsamiau</span>
+      <span xml:lang="lv">Sīkāka informācija</span>
+      <span xml:lang="nl">Details</span>
+      <span xml:lang="pl">Szczegóły</span>
+      <span xml:lang="pt">Detalhes</span>
+      <span xml:lang="pt_BR">Detalhes</span>
+      <span xml:lang="ro">Detalii</span>
+      <span xml:lang="ru">Подробности</span>
+      <span xml:lang="sk">Podrobnosti</span>
+      <span xml:lang="sq">Hollësi</span>
+      <span xml:lang="sv">Detaljer</span>
+      <span xml:lang="tr">Detaylar</span>
+      <span xml:lang="uk">Подробиці</span>
+      <span xml:lang="vi">Chi tiết</span>
+      <span xml:lang="zh_CN">详细信息</span></b><br/>
+      <xsl:value-of select="parseError" disable-output-escaping='yes'/>
+      <script type="text/javascript" language="javascript">document.getElementById('pdl').style.visibility='visible';document.getElementById('pdl').style.display='inline';</script>
+
+       <br/><span>You may want to contact the author/webmaster of the feed about this!</span>
+       <span xml:lang="de">Bitte kontaktieren Sie den Autor/Webmaster dieses Feeds!</span>
+       <span xml:lang="he">ייתכן שברצונך ליצור קשר עם מחבר/מנהל אתר הערוץ בנוגע לעניין זה!</span>
+    </span>
+  </div>
+</xsl:if>
+
+<xsl:if test="filterError">
+  <div id='filterError'>
+    <span>There were errors while filtering this feed!</span>
+    <span xml:lang="ar">كانت هناك أخطاء أثناء ترشيح هذه التلقيمة!</span>
+    <span xml:lang="ast">Atopáronse fallos al peñerar esta canal.</span>
+    <span xml:lang="be@latin">Pry filtravańni hetaha kanału adbylisia pamyłki!</span>
+    <span xml:lang="bg">Имаше грешки при изтеглянето на тази емисия!</span>
+    <span xml:lang="ca">S'han produït errors en filtrar aquest canal</span>
+    <span xml:lang="cs">Při filtrování tohoto kanálu se vyskytly chyby!</span>
+    <span xml:lang="da">Der opstod en fejl under filtrering af denne nyhedskilde!</span>
+    <span xml:lang="de">Es traten Fehler beim Filtern des Feeds auf!</span>
+    <span xml:lang="el">Εμφανίστηκαν σφάλματα κατά το φιλτράρισμα της ροής!</span>
+    <span xml:lang="es">Se encontraron errores al filtrar este canal.</span>
+    <span xml:lang="eu">Erroreak gertatu dira iturri hau iragaztean.</span>
+    <span xml:lang="fi">Tämän syötteen suodattamisessa oli virheitä!</span>
+    <span xml:lang="fr">Des erreurs sont survenues pendant le filtrage de ce flux !</span>
+    <span xml:lang="gl">Atopáronse erros ao filtrar esta fonte!</span>
+    <span xml:lang="he"><div style="direction:rtl">ארעו שגיאות במהלך סינון ערוץ זה!</div></span>
+    <span xml:lang="hu">Hiba történt a hírforrás szűrésekor.</span>
+    <span xml:lang="it">Sono occorsi errori durante il filtraggio di questo notiziario.</span>
+    <span xml:lang="ja">この配信元をフィルタリングする際にエラーが発生しました！</span>
+    <span xml:lang="ko">이 피드를 거르던 중 에러가 발생했습니다!</span>
+    <span xml:lang="lt">Filtruojant kanalą įvyko klaidų!</span>
+    <span xml:lang="lv">Radās kļūda, filtrējot šo plūsmu!</span>
+    <span xml:lang="nl">Filteren van deze feed is mislukt!</span>
+    <span xml:lang="pl">Wystąpiły błędy przy filtrowaniu tej subskrypcji!</span>
+    <span xml:lang="pt">Foram encontrados alguns erros ao filtrar esta fonte!</span>
+    <span xml:lang="pt_BR">Alguns erros foram encontrados ao filtrar esta fonte de notícias!</span>
+    <span xml:lang="ro">Au fost erori în timp ce se filtra acest flux!</span>
+    <span xml:lang="ru">Произошли ошибки при фильтрации этой ленты!</span>
+    <span xml:lang="sk">Počas filtrovania tohto kanálu tu boli chyby!</span>
+    <span xml:lang="sq">Pati gabime ndërsa filtrohej kjo prurje!</span>
+    <span xml:lang="sv">Det inträffade fel under filtreringen av denna kanal!</span>
+    <span xml:lang="tr">Bu haberi filtrelerken hatalar oluştu!</span>
+    <span xml:lang="uk">Під час фільтрування цієї подачі сталися помилки.</span>
+    <span xml:lang="vi">Có một số lỗi xảy ra khi lọc feed này!</span>
+    <span xml:lang="zh_CN">过滤此 Feed 时出现错误！</span>
+    <span xml:lang="zh_TW">過濾該饋流時出現錯誤</span>
+
+    <span id="fdl" class="detaillink">
+      (<span onclick="javascript:document.getElementById('fd').style.visibility='visible';document.getElementById('fd').style.display='block';document.getElementById('fdl').style.visibility='hidden';document.getElementById('fdl').style.display='none';" class="showmore">
+        <span>Filter Error Details</span>
+        <span xml:lang="ar">تفاصيل خطأ المرشَّح</span>
+        <span xml:lang="ast">Peñerar los detalles de fallos</span>
+        <span xml:lang="be@latin">Padrabiaznaści ab pamyłcy ŭ filtry</span>
+        <span xml:lang="ca">Detalls de l'error del filtre</span>
+        <span xml:lang="cs">Filtrovat podrobnosti chyb</span>
+        <span xml:lang="da">Filtrer fejldetaljer</span>
+        <span xml:lang="de">detaillierte Filter-Fehler:</span>
+        <span xml:lang="el">Λεπτομέρειες σφάλματος φίλτρου</span>
+        <span xml:lang="es">Detalles del error de filtrado</span>
+        <span xml:lang="eu">Iragazi erroreen xehetasunak</span>
+        <span xml:lang="fi">Suodata virheyksityiskohdat</span>
+        <span xml:lang="fr">Détail des erreurs de filtrage</span>
+        <span xml:lang="gl">Detalles dos erros do filtro</span>
+        <span xml:lang="he">פרטי שגיאת מסנן</span>
+        <span xml:lang="hu">Szűrési hiba  részletei</span>
+        <span xml:lang="it">Dettagli errori del filtro</span>
+        <span xml:lang="ja">フィルタ・エラーの詳細</span>
+        <span xml:lang="lt">Filtro klaida išsamiau</span>
+        <span xml:lang="lv">Filtrēt kļūdu informāciju</span>
+        <span xml:lang="nl">Foutinformatie filteren</span>
+        <span xml:lang="pl">Filtruj szczegóły błędów</span>
+        <span xml:lang="pt">Detalhes dos Erros do Filtro</span>
+        <span xml:lang="pt_BR">Detalhes de Erros do Filtro</span>
+        <span xml:lang="ro">Detalii eroare filtru</span>
+        <span xml:lang="ru">Подробная информация о ошибке фильтра</span>
+        <span xml:lang="sk">Podrobnosti chyby filtru</span>
+        <span xml:lang="sq">Hollësi Gabimi Filtri</span>
+        <span xml:lang="sv">Detaljer för filterfel</span>
+        <span xml:lang="tr">Filtre Hata Detayları</span>
+        <span xml:lang="uk">Дані щодо помилки фільтрування</span>
+        <span xml:lang="vi">Chi tiết về lỗi bộ lọc</span>
+        <span xml:lang="zh_CN">过滤器错误详情</span>
+      </span>)
+    </span>
+
+    <span id='fd' class="details">
+      <b><span>Details</span>
+      <span xml:lang="ar">التفاصيل</span>
+      <span xml:lang="ast">Detalles</span>
+      <span xml:lang="be@latin">Padrabiaznaści</span>
+      <span xml:lang="ca">Detalls</span>
+      <span xml:lang="cs">Podrobnosti</span>
+      <span xml:lang="da">Detaljer</span>
+      <span xml:lang="de">Details</span>
+      <span xml:lang="el">Λεπτομέρειες</span>
+      <span xml:lang="es">Detalles</span>
+      <span xml:lang="eu">Xehetasunak</span>
+      <span xml:lang="fi">Yksityiskohdat</span>
+      <span xml:lang="fr">Détails</span>
+      <span xml:lang="gl">Detalles</span>
+      <span xml:lang="he">פרטים</span>
+      <span xml:lang="hu">Részletek</span>
+      <span xml:lang="it">Dettagli</span>
+      <span xml:lang="ja">詳細</span>
+      <span xml:lang="lt">Išsamiau</span>
+      <span xml:lang="lv">Sīkāka informācija</span>
+      <span xml:lang="nl">Details</span>
+      <span xml:lang="pl">Szczegóły</span>
+      <span xml:lang="pt">Detalhes</span>
+      <span xml:lang="pt_BR">Detalhes</span>
+      <span xml:lang="ro">Detalii</span>
+      <span xml:lang="ru">Подробности</span>
+      <span xml:lang="sk">Podrobnosti</span>
+      <span xml:lang="sq">Hollësi</span>
+      <span xml:lang="sv">Detaljer</span>
+      <span xml:lang="tr">Detaylar</span>
+      <span xml:lang="uk">Подробиці</span>
+      <span xml:lang="vi">Chi tiết</span>
+      <span xml:lang="zh_CN">详细信息</span></b><br/>
+      <xsl:value-of select="filterError" disable-output-escaping='yes'/>
+      <script type="text/javascript" language="javascript">document.getElementById('fdl').style.visibility='visible';document.getElementById('fdl').style.display='inline';</script>
+    </span>
+  </div>
+</xsl:if>
+
+</div>
+</xsl:if>
+
+
+<table dir="{$appDirection}" class="feedhead" cellspacing="0">
+<tr>
+  <td valign="middle" class="headleft">
+    <b><span>Feed:</span>
+    <span xml:lang="ar">تلقيمة:</span>
+    <span xml:lang="ast">Canal:</span>
+    <span xml:lang="be@latin">Kanał:</span>
+    <span xml:lang="bg">Емисия:</span>
+    <span xml:lang="ca">Canal:</span>
+    <span xml:lang="cs">Kanál:</span>
+    <span xml:lang="da">Nyhedskilde:</span>
+    <span xml:lang="de">Feed:</span>
+    <span xml:lang="el">Ροή:</span>
+    <span xml:lang="es">Canal:</span>
+    <span xml:lang="eu">Iturria:</span>
+    <span xml:lang="fi">Syöte:</span>
+    <span xml:lang="fr">Flux :</span>
+    <span xml:lang="gl">Fonte:</span>
+    <span xml:lang="he">ערוץ:</span>
+    <span xml:lang="hu">Hírforrás:</span>
+    <span xml:lang="it">Notiziario:</span>
+    <span xml:lang="ja">配信元:</span>
+    <span xml:lang="ko">피드:</span>
+    <span xml:lang="lt">Naujienų kanalas:</span>
+    <span xml:lang="lv">Plūsma:</span>
+    <span xml:lang="mk">Вест:</span>
+    <span xml:lang="nl">Feed:</span>
+    <span xml:lang="pl">Subskrypcja:</span>
+    <span xml:lang="pt">Fonte:</span>
+    <span xml:lang="pt_BR">Fontes de Notícias:</span>
+    <span xml:lang="ro">Flux:</span>
+    <span xml:lang="ru">Лента:</span>
+    <span xml:lang="sk">Kanál:</span>
+    <span xml:lang="sq">Prurje:</span>
+    <span xml:lang="sv">Kanal:</span>
+    <span xml:lang="tr">Haber:</span>
+    <span xml:lang="uk">Подача:</span>
+    <span xml:lang="vi">Feed:</span>
+    <span xml:lang="zh_CN">Feed：</span>
+    <span xml:lang="zh_TW">饋流:</span></b>
+  </td>
+  <td width="100%" valign="middle" class="headright">
+     <a href="{attributes/attribute[ @name = 'homepage' ]}">
+        <xsl:value-of select="feedTitle"/>
+     </a>
+  </td>
+</tr>
+<tr>
+  <td valign="middle" class="headleft">
+    <b><span>Source:</span>
+    <span xml:lang="ar">المصدر:</span>
+    <span xml:lang="ast">Orixe:</span>
+    <span xml:lang="be@latin">Krynica:</span>
+    <span xml:lang="bg">Изходен код:</span>
+    <span xml:lang="ca">Font:</span>
+    <span xml:lang="cs">Zdroj:</span>
+    <span xml:lang="da">Kilde:</span>
+    <span xml:lang="de">Quelle:</span>
+    <span xml:lang="el">Πηγή:</span>
+    <span xml:lang="es">Origen:</span>
+    <span xml:lang="eu">Iturburua:</span>
+    <span xml:lang="fi">Lähde:</span>
+    <span xml:lang="fr">Source :</span>
+    <span xml:lang="gl">Orixe:</span>
+    <span xml:lang="he">מקור:</span>
+    <span xml:lang="hu">Forrás:</span>
+    <span xml:lang="it">Fonte:</span>
+    <span xml:lang="ja">ソース:</span>
+    <span xml:lang="ko">소스:</span>
+    <span xml:lang="lt">Šaltinis:</span>
+    <span xml:lang="lv">Avots:</span>
+    <span xml:lang="mk">Извор:</span>
+    <span xml:lang="nl">Bron:</span>
+    <span xml:lang="pl">Źródło:</span>
+    <span xml:lang="pt">Fontes:</span>
+    <span xml:lang="pt_BR">Fontes:</span>
+    <span xml:lang="ro">Sursă:</span>
+    <span xml:lang="ru">Источник:</span>
+    <span xml:lang="sk">Zdroj:</span>
+    <span xml:lang="sq">Burim:</span>
+    <span xml:lang="sv">Källa:</span>
+    <span xml:lang="tr">Kaynak:</span>
+    <span xml:lang="uk">Джерело:</span>
+    <span xml:lang="vi">Nguồn:</span>
+    <span xml:lang="zh_CN">来源：</span>
+    <span xml:lang="zh_TW">來源:</span></b>
+  </td>
+  <td width="100%" valign="middle" class="headright">
+     <xsl:variable name="href">
+        <xsl:call-template name="strippwd">
+           <xsl:with-param select="feedSource" name="string"/>
+        </xsl:call-template>
+     </xsl:variable>
+     <a href="{$href}">
+        <xsl:call-template name="strippwd">
+           <xsl:with-param select="feedSource" name="string"/>
+        </xsl:call-template>
+     </a>
+  </td>
+</tr>
+</table>
+
+
+<table class='headmeta' cellspacing="0" cellpadding="0">
+<xsl:if test="attributes/attribute[ @name = 'publisher' ]">
+<tr>
+ <td valign="top" class='publisher'>
+     <b><span>Publisher</span>
+     <span xml:lang="ar">الناشر</span>
+     <span xml:lang="ast">Editor</span>
+     <span xml:lang="be@latin">Apublikavaŭ</span>
+     <span xml:lang="ca">Editor</span>
+     <span xml:lang="cs">Vydavatel</span>
+     <span xml:lang="da">Udgiver</span>
+     <span xml:lang="de">Herausgeber</span>
+     <span xml:lang="el">Εκδότης</span>
+     <span xml:lang="es">Editorial</span>
+     <span xml:lang="eu">Argitaratzailea</span>
+     <span xml:lang="fi">Julkaisija</span>
+     <span xml:lang="fr">Éditeur (publisher)</span>
+     <span xml:lang="gl">Editor</span>
+     <span xml:lang="he"><p dir="rtl">מוציא לאור</p></span>
+     <span xml:lang="hu">Kiadó</span>
+     <span xml:lang="it">Editore</span>
+     <span xml:lang="ja">公開者</span>
+     <span xml:lang="lt">Paskelbė</span>
+     <span xml:lang="lv">Izdevējs</span>
+     <span xml:lang="nl">Uitgever</span>
+     <span xml:lang="pl">Wydawca</span>
+     <span xml:lang="pt">Editores</span>
+     <span xml:lang="pt_BR">Editores</span>
+     <span xml:lang="ro">Publicat de</span>
+     <span xml:lang="ru">Издатель</span>
+     <span xml:lang="sk">Vydavateľ</span>
+     <span xml:lang="sq">Botues</span>
+     <span xml:lang="sv">Publicerare</span>
+     <span xml:lang="tr">Yayımcı</span>
+     <span xml:lang="uk">Поширювач</span>
+     <span xml:lang="vi">Nơi xuất bản</span>
+     <span xml:lang="zh_CN">发布者</span></b>
+     <span class='publisher'>
+       <xsl:value-of select="attributes/attribute[ @name = 'publisher' ]" disable-output-escaping='yes'/>
+     </span>
+ </td>
+</tr>
+</xsl:if>
+<xsl:if test="attributes/attribute[ @name = 'copyright' ]">
+<tr>
+ <td valign="top" class='copyright'>
+     <b><span>Copyright</span>
+     <span xml:lang="ar">حقوق النشر</span>
+     <span xml:lang="ast">Copyright</span>
+     <span xml:lang="be@latin">Aŭtarskija pravy</span>
+     <span xml:lang="ca">Copyright</span>
+     <span xml:lang="cs">Autorská práva</span>
+     <span xml:lang="da">Ophavsret</span>
+     <span xml:lang="de">Copyright</span>
+     <span xml:lang="el">Copyright</span>
+     <span xml:lang="es">Copyright</span>
+     <span xml:lang="eu">Copyright-a</span>
+     <span xml:lang="fi">Copyright</span>
+     <span xml:lang="fr">Copyright</span>
+     <span xml:lang="gl">Dereitos de autor</span>
+     <span xml:lang="hu">Copyright</span>
+     <span xml:lang="it">Copyright</span>
+     <span xml:lang="ja">著作権</span>
+     <span xml:lang="lt">Autorinės teisės</span>
+     <span xml:lang="lv">Autortiesības</span>
+     <span xml:lang="nl">Copyright</span>
+     <span xml:lang="pl">Copyright</span>
+     <span xml:lang="pt">Copyright</span>
+     <span xml:lang="pt_BR">Copyright</span>
+     <span xml:lang="ro">Drepturi de autor</span>
+     <span xml:lang="ru">Авторские права</span>
+     <span xml:lang="sk">Autorské právo</span>
+     <span xml:lang="sq">Të drejta kopjimi</span>
+     <span xml:lang="sv">Copyright</span>
+     <span xml:lang="tr">Telif Hakkı</span>
+     <span xml:lang="uk">Авторські права</span>
+     <span xml:lang="vi">Tác quyền</span>
+     <span xml:lang="zh_CN">版权</span></b>
+     <span class='copyright'>
+       <xsl:value-of select="attributes/attribute[ @name = 'copyright' ]" disable-output-escaping='yes'/>
+     </span>
+ </td>
+</tr>
+</xsl:if>
+</table> 
+
+<div dir="{$txtDirection}" class='content'>
+
+<xsl:if test="attributes/attribute[ @name = 'imageUrl' ]">
+<p>
+<img src="{attributes/attribute[ @name = 'imageUrl' ]}" class="feed"/>
+</p>
+</xsl:if>
+
+   <xsl:value-of select="attributes/attribute[@name = 'description']" disable-output-escaping='yes'/>
+
+   <xsl:value-of select="attributes/attribute[@name = 'textInput']" disable-output-escaping='yes'/>
+</div>
+
+</body>
+</html>
+</xsl:template>
+
+<xsl:template name="strippwd">
+   <xsl:param name="string"/>
+   <xsl:choose>
+       <xsl:when test="contains($string, '@')"><xsl:value-of select="substring-before($string, '://')"/>://<xsl:value-of select="substring-after($string, '@')"/></xsl:when>
+       <xsl:otherwise><xsl:value-of select="$string"/></xsl:otherwise>
+   </xsl:choose>
+</xsl:template>
+</xsl:stylesheet>
