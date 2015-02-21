@@ -1,0 +1,94 @@
+2010-11-04   Tomasz Sałaciński <tommy@alarm-clock.pl>
+	* src/alarm-thread.c: Fixed memory leaks
+	* src/alarm-thread.c, src/modify_alarm.c: Fixed GTK threading issues
+	* src/templates.c, src/status_icon.c: Fixed birthday support
+	* src/templates.c: Enabled focus on entry widget on birthday dialog
+	* src/interface/interface.ui: Renamed "Add alarm" dialog to "Alarm properties"
+
+2010-11-02   Tomasz Sałaciński <tommy@alarm-clock.pl>
+	* src/main.c: Fixed "Stop the sound" button being visible after launching alarm clock
+	* src/alarm-runner.c: Fixed missing notification when using appindicator
+	* src/gfx/*.svg: Replaced indicator icons
+	* po/es.po, po/pl.po: Updated Spanish and Polish translations
+	* src/main_window.c: Fixed empty priority drop down list
+	* src/interface/alarm-clock.ui: Fixed some bad dialog widget alignmnents
+	* src/translate.h: Fixed some non-translatable strings
+
+2010-05-30   Tomasz Sałaciński <tsalacinski@gmail.com>
+	* configure.ac: added support for libunique
+	* src/main.c: added support for libunique
+	* src/alarm_thread.c: fixed missed alarms feature
+	* src/preferences.c, main_list.c, modify_alarm.c: added 12-hour clock
+	* src/modify_alarm.c: fixed "Today" and "Tomorrow" button state when applying template (works only with new templates)
+	* po/POTFILES.in: fixed UI file translation issue
+	* src/modify_alarm.c: fixed terminal preferences dialog
+
+2009-12-15   Tomasz Sałaciński  <tsalacinski@gmail.com>
+	* src/Makefile.am: Changed binary name to alarm-clock to keep consistency. Fixes bug #493177
+	* alarm-clock.desktop: Removed mimetype text/plain, so alarm-clock won't open text files anymore.
+	* configure.ac: Changed package name and version to keep alarm-clock name.
+	* alarm-clock.ui: Modified the interface file to properly display under glade editor (vbox alignments)
+	* alarm-clock.ui: Added drop-down menu to "Add" button on the toolbar
+	* alarm-clock.ui: Fixed mispelled "tempaltes" message
+	* alarm_thread.c, schedule.c, modify_alarm.c: Changed the way Alarm Clock uses time internally to fix bug #442362 on Launchpad
+	* preferences.c: Added option to add ~/.config/Autostart directory if it's not present. Fixes bug #388809
+
+2009-11-17   Tomasz Sałaciński  <tsalacinski@gmail.com>
+
+	* Makefile.am: Fixed subdirs entry
+	* alarm_thread.c: Fixed daylight saving issue
+
+2009-10-01   Tomasz Sałaciński  <tsalacinski@gmail.com>
+
+	* alarm-clock.ui: Fixed the ui file to work with Ubuntu 9.10
+
+
+2009-08-06  Tomasz Sałaciński  <tsalacinski@gmail.com>
+
+	* alarm_thread.c:
+		Fixed moving old alarms problem.
+
+	* common.c:
+		Replaced old website address with the new one.
+
+	* alarm_runner.c, alarm_thread.c:
+		Changed the way alarm clock manages memory, fixes issue with not playing alarms
+		on some systems.
+
+2009-08-06  Tomasz Sałaciński  <tsalacinski@gmail.com>
+
+	* alarm_thread.c:
+		Fixed schedule alarm problem.
+
+2009-07-25  Tomasz Sałaciński  <tsalacinski@gmail.com>
+
+	* alarm_thread.c:
+		Make sure all alarms on the list will run
+
+2009-07-24  Tomasz Sałaciński  <tsalacinski@alarm-clock.pl>
+
+	* alarm-clock.ui:
+		Extend the maximum counter time to 5000 minutes.
+
+	* Makefile.am:
+		Modified linker options to work correctly on Cygwin and Win32
+		platforms (thanks to Cygwin team)
+
+	* counter.c, alarm_thread.c:
+		Fixed counter not playing issue.
+
+	* alarm_thread.c:
+		Make sure that AC will play all alarms on the list.
+
+	* alarm_runner.c, main_window.c, alarm-clock.ui:
+		Fixed the bug that caused empty combo box in dialog
+		window properties.
+
+	* alarm-clock.ui, main_window.c:
+		Added check for updates button
+
+	* ChangeLog:
+		Changed changelog format.
+
+	* README, INSTALL:
+		Added these files.

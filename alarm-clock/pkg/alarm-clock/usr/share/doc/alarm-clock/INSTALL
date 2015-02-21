@@ -1,0 +1,17 @@
+INSTALLATION
+============
+
+To install the software, simply run:
+
+./configure
+make
+
+and then as root:
+
+make install
+
+from the console.
+
+In case of missing dependencies, you will be informed by the configure
+script. Usually for GTK you need to install gtk-dev (or -devel for Fedora)
+package.

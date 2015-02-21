@@ -1,0 +1,31 @@
+Alarm Clock Readme file
+===========================
+
+Author:
+	Tomasz Sałaciński <tsalacinski@gmail.com>
+
+Contact:
+	Please submit bugs to launchpad account:
+		https://launchpad.net/alarmclock
+
+
+If you want to contact me personally, just write to:
+tsalacinski@gmail.com
+
+
+Description
+===========
+
+Alarm Clock is a GNOME application designed to remind you
+about upcoming events. Alarm Clock is very easy to configue,
+so no one should have problems using it.
+
+Installation
+============
+
+In order to install the application, view the INSTALL file included
+in this package. In order to run Alarm Clock, you need to have the following installed:
+
+To see changes over previous versions, read the ChangeLog file.
+
+(c) 2007-2009 by Tomasz Sałaciński.

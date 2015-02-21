@@ -1,0 +1,21 @@
+[Desktop Entry]
+Version=1.3
+Name=Alarm Clock
+Name[pl]=Budzik
+Name[pt]=Relógio Despertador
+Comment=Schedule your tasks
+Comment[pl]=Budzik dla środowiska GNOME
+Comment[pt]=Agende as suas tarefas
+
+Name[sr]=Будилник
+Name[sr@latin]=Budilnik
+Comment[sr]=Организујте Ваше време
+Comment[sr@latin]=Organizujte Vaše vreme
+
+Exec=alarm-clock
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Utility;
+Icon=alarm-clock
+StartupNotify=true
+OnlyShowIn=GNOME;
