@@ -1,46 +1,29 @@
 # Maintainer: John Jenkins <twodopeshaggy@gmail.com>
-_gitname="drive"
+# Contributor: Timofey Titovets <nefelim4ag@gmail.com>
+
 pkgname=drive-git
-epoch=1
-pkgver=0.122.8671fef
+pkgver=r261.6afbeff
 pkgrel=1
-pkgdesc="Pull or push Google Drive files"
-arch=('x86_64' 'i686')
-url="http://github.com/odeke-em/drive"
-license=('Apache')
-makedepends=('go' 'git')
+pkgdesc="Drive is a tiny program to pull or push Google Drive files. You need go1.2 installed in order to build the program."
+arch=('any')
+url="https://github.com/odeke-em/drive"
+license=('MIT')
+makedepends=('go' 'git' 'mercurial')
 options=('!strip' '!emptydirs')
-source=("git+git://github.com/odeke-em/$_gitname")
-sha256sums=('SKIP')
-
+source=($pkgname::git+https://github.com/odeke-em/drive.git)
+md5sums=('SKIP')
+_gourl=github.com/odeke-em/drive/cmd/drive
 pkgver() {
-  cd "${srcdir}/${_gitname}"
-  echo "0.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+  cd $srcdir/$pkgname
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
-
-prepare() {
- mkdir -p go
- export GOPATH="$srcdir/go"
- go get github.com/odeke-em/drive
- go get github.com/odeke-em/drive/config
- go get github.com/rakyll/command
-}
-
-
 
 build() {
-  export GOPATH="$srcdir/go"
-  cd "$_gitname/cmd/drive"
-
-  msg2 'Building drive'
-  go build -o "$_gitname" main.go
-
+  export GOPATH=$srcdir
+  go get $_gourl
 }
 
 package() {
-  cd "$_gitname/cmd/drive"
-
-  install -Dm755 "$_gitname" "$pkgdir/usr/bin/$_gitname"
-
+  mkdir -p "$pkgdir/usr/bin"
+  install -p -m755 "$srcdir/bin/"* "$pkgdir/usr/bin"
 }
-# vim:set ts=2 sw=2 et:
