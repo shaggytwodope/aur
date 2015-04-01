@@ -155,7 +155,7 @@ const Hints = Module("hints", {
                     case "label":
                         if (elem.id) {
                             // TODO: (possibly) do some guess work for label-like objects
-                            let label = util.evaluateXPath(["label[@for=" + elem.id.quote() + "]"], doc).snapshotItem(0);
+                            let label = util.evaluateXPath(["label[@for=" + JSON.stringify(elem.id) + "]"], doc).snapshotItem(0);
                             if (label)
                                 return [label.textContent.toLowerCase(), true];
                         }
@@ -496,6 +496,10 @@ const Hints = Module("hints", {
             }
         }
 
+        if (firstHint === null) {
+            return false;
+        }
+
         this._tabNavigation[firstHint].prev = lastHint;
         this._tabNavigation[lastHint].next = firstHint;
 
@@ -503,9 +507,9 @@ const Hints = Module("hints", {
             let css = [];
             // FIXME: Broken for imgspans.
             for (let { doc } of this._docs) {
-                for (let elem in util.evaluateXPath(" {//*[@liberator:highlight and @number]", doc)) {
+                for (let elem in util.evaluateXPath("//*[@liberator:highlight and @number]", doc)) {
                     let group = elem.getAttributeNS(NS.uri, "highlight");
-                    css.push(highlight.selector(group) + "[number=" + elem.getAttribute("number").quote() + "] { " + elem.style.cssText + " }");
+                    css.push(highlight.selector(group) + "[number=" + JSON.stringify(elem.getAttribute("number")) + "] { " + elem.style.cssText + " }");
                 }
             }
             styles.addSheet(true, "hint-positions", "*", css.join("\n"));
@@ -829,6 +833,43 @@ const Hints = Module("hints", {
             };
         } //}}}
 
+        /**
+         * Get a hint matcher for hintmatching=fuzzy
+         *
+         * The user input can be anything. The matcher looks for occurances of
+         * the characters in the user input. If all occurances are found in the
+         * link, in order, the link is relevant.
+         *
+         * @param {string} hintString The string typed by the user.
+         * @returns {function(string):boolean} A function that takes the text
+         *      of a hint and returns true if all characters of the input are
+         *      found in the link.
+         */
+        function fuzzyMatcher(hintString) {
+            var expression = '';
+
+            // Build a regex for fuzzy matching with the input.
+            //
+            // If the input is 'abc', the regex will be '[^a]*a[^b]*b[^c]c'.
+            var escapeChar = new Set("()[{?.*+^$|\\");
+            for (var i = 0, j = hintString.length; i < j; i ++) {
+                var char = hintString[i];
+
+                if (escapeChar.has(char))
+                    char = "\\" + char;
+
+                expression += '[^' + char + ']*' + char;
+            }
+
+            var re = new RegExp(expression, 'i');
+
+            return function(linkText) {
+                var found = linkText.search(re) != -1;
+
+                return found;
+            };
+        }
+
         let indexOf = String.indexOf;
         if (options.get("hintmatching").has("transliterated"))
             indexOf = Hints.indexOf;
@@ -837,6 +878,7 @@ const Hints = Module("hints", {
         case "contains"      : return containsMatcher(hintString);
         case "wordstartswith": return wordStartsWithMatcher(hintString, /*allowWordOverleaping=*/ true);
         case "firstletters"  : return wordStartsWithMatcher(hintString, /*allowWordOverleaping=*/ false);
+        case "fuzzy"         : return fuzzyMatcher(hintString);
         case "custom"        : return liberator.plugins.customHintMatcher(hintString);
         default              : liberator.echoerr("Invalid hintmatching type: " + hintMatching);
         }
@@ -1212,7 +1254,7 @@ const Hints = Module("hints", {
     },
     options: function () {
         const DEFAULT_HINTTAGS =
-            util.makeXPath(["input[not(@type='hidden')]", "a", "area", "iframe", "textarea", "button", "select"])
+            util.makeXPath(["input[not(@type='hidden' or @disabled)]", "a", "area", "iframe", "textarea", "button", "select"])
                 + " | //*[@onclick or @onmouseover or @onmousedown or @onmouseup or @oncommand or @role='link'or @role='button' or @role='checkbox' or @role='combobox' or @role='listbox' or @role='listitem' or @role='menuitem' or @role='menuitemcheckbox' or @role='menuitemradio' or @role='option' or @role='radio' or @role='scrollbar' or @role='slider' or @role='spinbutton' or @role='tab' or @role='textbox' or @role='treeitem' or @tabindex]"
                 + (config.name == "Muttator" ?
                     " | //xhtml:div[@class='wrappedsender']/xhtml:div[contains(@class,'link')]" :
@@ -1264,6 +1306,7 @@ const Hints = Module("hints", {
                     ["contains",       "The typed characters are split on whitespace. The resulting groups must all appear in the hint."],
                     ["wordstartswith", "The typed characters are split on whitespace. The resulting groups must all match the beginings of words, in order."],
                     ["firstletters",   "Behaves like wordstartswith, but all groups much match a sequence of words."],
+                    ["fuzzy",          "Hints are matched according to the fuzzy search algorithm."],
                     ["custom",         "Delegate to a custom function: liberator.plugins.customHintMatcher(hintString)"],
                     ["transliterated", "When true, special latin characters are translated to their ascii equivalent (e.g., \u00e9 -> e)"]
                 ]

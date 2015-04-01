@@ -73,8 +73,7 @@
 </code>
 
 <p>
-    Finally, in addition to the help system itself, <ex>:exusage</ex>, <ex>:viusage</ex>
-    and <ex>:optionusage</ex> are useful quick-reference commands.
+    Finally, in addition to the help system itself, <ex>:usage</ex> is a useful quick-reference command.
 </p>
 
 <h2 tag="living-mouseless">Mouseless</h2>
@@ -326,7 +325,7 @@
     &liberator.appname; has an energetic and growing user base. If you've run into a problem
     that you can't seem to solve with &liberator.appname;, or if you think you might have
     found a bug, please let us know! There is support available on the
-    <link topic="http://code.google.com/p/vimperator-labs/w/list?q=label%3Aproject-vimperator">wiki</link>
+    <link topic="https://github.com/vimperator/vimperator-labs/issues">wiki</link>
     or in the <link topic="irc://irc.freenode.net/vimperator">#vimperator</link> IRC
     channel on <link topic="http://freenode.net/">freenode</link>.
 </p>

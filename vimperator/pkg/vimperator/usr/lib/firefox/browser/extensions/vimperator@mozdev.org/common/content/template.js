@@ -33,7 +33,7 @@ const Template = Module("template", {
     },
 
     maybeXML: function maybeXML(val) {
-        if (typeof val == "xml" || val instanceof TemplateSupportsXML)
+        if (val instanceof TemplateSupportsXML)
             return val;
 
         try {
@@ -98,7 +98,7 @@ const Template = Module("template", {
                 return xml`<span highlight="Number">${str}</span>`;
             case "string":
                 if (processStrings)
-                    str = str.quote();
+                    str = JSON.stringify(str);
                 return xml`<span highlight="String">${str}</span>`;
             case "boolean":
                 return xml`<span highlight="Boolean">${str}</span>`;
@@ -120,8 +120,6 @@ const Template = Module("template", {
                 if (processStrings && false)
                     str = template.highlightFilter(str, "\n", function () xml`<span highlight="NonText">^J</span>`);
                 return xml`<span highlight="Object">${str}</span>`;
-            case "xml":
-                return arg;
             default:
                 return `<unknown type>`;
             }
@@ -181,7 +179,7 @@ const Template = Module("template", {
     },
 
     highlightSubstrings: function highlightSubstrings(str, iter, highlight) {
-        if (typeof str == "xml" || str instanceof TemplateSupportsXML)
+        if (str instanceof TemplateSupportsXML)
             return str;
         if (str == "")
             return xml`${str}`;

@@ -19,8 +19,10 @@ const CommandLine = Module("commandline", {
 
         this._callbacks = {};
 
-        storage.newArray("history-search", { store: true, privateData: true });
-        storage.newArray("history-command", { store: true, privateData: true });
+        ["search", "command"].forEach(function (mode) {
+            let isPrivate = liberator.isPrivateWindow();
+            storage.newArray(liberator.storeName(mode, isPrivate), { store: !isPrivate});
+        }, this);
 
         // Really inideal.
         let services = modules.services; // Storage objects are global to all windows, 'modules' isn't.
@@ -28,20 +30,31 @@ const CommandLine = Module("commandline", {
             ({
                 CLEAR: "browser:purge-session-history",
                 QUIT:  "quit-application",
+                PRIVATE_END: "last-pb-context-exited",
+
                 init: function () {
                     services.get("obs").addObserver(this, this.CLEAR, false);
                     services.get("obs").addObserver(this, this.QUIT, false);
+                    services.get("obs").addObserver(this, this.PRIVATE_END, false);
                 },
                 observe: function (subject, topic, data) {
                     switch (topic) {
                     case this.CLEAR:
                         ["search", "command"].forEach(function (mode) {
-                            CommandLine.History(null, mode).sanitize();
-                        });
+                            CommandLine.History(null, mode, liberator.isPrivateWindow()).sanitize();
+                        }, this);
+                        break;
+                    case this.PRIVATE_END:
+                        for (let [key, obj] in Iterator(storage)) {
+                            if (key.match(/^private-[0-9]/)) {
+                                    delete storage[key];
+                                }
+                        }
                         break;
                     case this.QUIT:
                         services.get("obs").removeObserver(this, this.CLEAR);
                         services.get("obs").removeObserver(this, this.QUIT);
+                        services.get("obs").removeObserver(this, this.PRIVATE_END);
                         break;
                     }
                 }
@@ -471,7 +484,9 @@ const CommandLine = Module("commandline", {
 
         this.show();
 
-        this._history = CommandLine.History(this._commandWidget.inputField, (modes.extended == modes.EX) ? "command" : "search");
+        this._history = CommandLine.History(this._commandWidget.inputField,
+                (modes.extended == modes.EX) ? "command" : "search",
+                liberator.isPrivateWindow());
         this._completions = CommandLine.Completions(this._commandWidget.inputField);
 
         // open the completion list automatically if wanted
@@ -609,7 +624,7 @@ const CommandLine = Module("commandline", {
                 action = this._echoMultiline;
             }
 
-            if ((flags & this.FORCE_MULTILINE) || (/\n/.test(str) || typeof str == "xml" || str instanceof TemplateSupportsXML ) && !(flags & this.FORCE_SINGLELINE))
+            if ((flags & this.FORCE_MULTILINE) || (/\n/.test(str) || str instanceof TemplateSupportsXML ) && !(flags & this.FORCE_SINGLELINE))
                 action = this._echoMultiline;
 
             if (single)
@@ -662,7 +677,9 @@ const CommandLine = Module("commandline", {
         this.show();
         this._commandWidget.focus();
 
-        this._history = CommandLine.History(this._commandWidget.inputField, (modes.extended == modes.EX) ? "command" : "search");
+        this._history = CommandLine.History(this._commandWidget.inputField,
+                (modes.extended == modes.EX) ? "command" : "search",
+                liberator.isPrivateWindow());
         this._completions = CommandLine.Completions(this._commandWidget.inputField);
     },
 
@@ -852,6 +869,9 @@ const CommandLine = Module("commandline", {
                     break;
             }
 
+        }
+
+        if (event.type == "click") {
             return;
         }
 
@@ -860,6 +880,7 @@ const CommandLine = Module("commandline", {
         switch (key) {
             // close the window
             case "<Esc>":
+            case "<C-[>":
             case "q":
                 modes.reset();
                 return; // handled globally in events.js:onEscape()
@@ -1028,10 +1049,11 @@ const CommandLine = Module("commandline", {
      * @param {string} mode The mode for which we need history.
      */
     History: Class("History", {
-        init: function (inputField, mode) {
+        init: function (inputField, mode, privateBrowsing) {
             this.mode = mode;
             this.input = inputField;
-            this.store = storage["history-" + mode];
+            this.storeName = liberator.storeName(mode, privateBrowsing);
+            this.store = storage[this.storeName];
             this.reset();
         },
         /**
@@ -1072,10 +1094,9 @@ const CommandLine = Module("commandline", {
             if (liberator.has("sanitizer") && (timespan || options["sanitizetimespan"]))
                 range = sanitizer.getClearRange(timespan || options["sanitizetimespan"]);
 
-            const self = this;
             this.store.mutate("filter", function (item) {
                 let timestamp = (item.timestamp || Date.now()/1000) * 1000;
-                return !line.privateData || timestamp < self.range[0] || timestamp > self.range[1];
+                return !item.privateData || timestamp < range[0] || timestamp > range[1];
             });
         },
         /**
@@ -1556,7 +1577,7 @@ const CommandLine = Module("commandline", {
 
         options.add(["complete", "cpt"],
             "Items which are completed at the :open prompts",
-            "charlist", typeof(config.defaults["complete"]) == "string" ? config.defaults["complete"] : "slf",
+            "charlist", typeof(config.defaults["complete"]) == "string" ? config.defaults["complete"] : "sl",
             {
                 completer: function (context) array(values(completion.urlCompleters))
             });

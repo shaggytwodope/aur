@@ -130,7 +130,7 @@ const Liberator = Module("liberator", {
     forceNewPrivateWindow: false,
 
     /** @property {string} The Liberator version string. */
-    version: "3.8.3 (created: 2014/11/09 13:19:01)", // these VERSION and DATE tokens are replaced by the Makefile
+    version: "3.9 (created: 2015/02/15 15:49:05)", // these VERSION and DATE tokens are replaced by the Makefile
 
     /**
      * @property {Object} The map of command-line options. These are
@@ -254,6 +254,25 @@ const Liberator = Module("liberator", {
         window.dump(msg.replace(/^./gm, ("config" in modules && config.name.toLowerCase()) + ": $&"));
     },
 
+    isPrivateWindow: function () {
+        return window.QueryInterface(Ci.nsIInterfaceRequestor)
+                     .getInterface(Ci.nsIWebNavigation)
+                     .QueryInterface(Ci.nsILoadContext)
+                     .usePrivateBrowsing;
+    },
+
+    windowID: function() {
+        return window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                     .getInterface(Components.interfaces.nsIDOMWindowUtils)
+                     .outerWindowID;
+
+    },
+
+    storeName: function(mode, isPrivate) {
+        let prefix = isPrivate ? "private-" + this.windowID() + "-" : "";
+        return prefix + "history-" + mode ;
+    },
+
     /**
      * Outputs a plain message to the command line.
      *
@@ -332,6 +351,7 @@ const Liberator = Module("liberator", {
      *     should be loaded.
      */
     loadScript: function (uri, context) {
+        // TODO: delete me when minVersion is greater than 34
         if (options.expandtemplate) {
             var prefix = "liberator://template/";
             if (uri.lastIndexOf(prefix, 0) === -1)
@@ -345,6 +365,7 @@ const Liberator = Module("liberator", {
             if (!context)
                 context = userContext;
 
+            // TODO: delete me when minVersion is greater than 34
             if (options.expandtemplate) {
                 var obj = new Object;
                 Cu.import("resource://liberator/template.js", obj);
@@ -644,7 +665,7 @@ const Liberator = Module("liberator", {
             if (helpFile in services.get("liberator:").FILE_MAP)
                 liberator.open("liberator://help/" + helpFile, { from: "help" });
             else
-                liberator.echomsg("Sorry, help file " + helpFile.quote() + " not found");
+                liberator.echomsg("Sorry, help file " + JSON.stringify(helpFile) + " not found");
             return;
         }
 
@@ -1169,10 +1190,7 @@ const Liberator = Module("liberator", {
                         win.setAttribute("titlemodifier_normal", value);
                         win.setAttribute("titlemodifier_privatebrowsing", value + suffix);
 
-                        if (window.QueryInterface(Ci.nsIInterfaceRequestor)
-                                  .getInterface(Ci.nsIWebNavigation)
-                                  .QueryInterface(Ci.nsILoadContext)
-                                  .usePrivateBrowsing) {
+                        if (liberator.isPrivateWindow()) {
                             win.setAttribute("titlemodifier", value + suffix);
                         }
                         else
@@ -1355,7 +1373,7 @@ const Liberator = Module("liberator", {
                     liberator.echoerr("Invalid argument: " + arg);
                 }
                 catch (e) {
-                    liberator.echoerr("Error opening " + arg.quote() + ": " + e);
+                    liberator.echoerr("Error opening " + JSON.stringify(arg) + ": " + e);
                 }
             }, {
                 argCount: "1",

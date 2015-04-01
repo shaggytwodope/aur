@@ -7,6 +7,9 @@
 
 const Config = Module("config", ConfigBase, {
     init: function () {
+        // TODO: delete me when minversion is greater than 34
+        var {isSupport} = Cu.import("resource://liberator/CheckTemplate.jsm", {});
+        if (isSupport) this.features.add("template");
     },
 
     /*** required options, no checks done if they really exist, so be careful ***/
@@ -33,7 +36,7 @@ const Config = Module("config", ConfigBase, {
                    ["VimperatorLeave",    "Triggered before exiting Firefox"]],
 
     defaults: {
-        complete: "slf",
+        complete: "sl",
         titlestring: "Vimperator"
     },
 

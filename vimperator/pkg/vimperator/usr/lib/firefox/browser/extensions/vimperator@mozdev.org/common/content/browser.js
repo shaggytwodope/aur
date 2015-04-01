@@ -43,7 +43,10 @@ const Browser = Module("browser", {
                     // Stolen from browser.jar/content/browser/browser.js, more or less.
                     try {
                         config.browser.docShell.QueryInterface(Ci.nsIDocCharset).charset = val;
-                        PlacesUtils.history.setCharsetForURI(getWebNavigation().currentURI, val);
+                        if (PlacesUtils.history.setCharsetForURI)
+                            PlacesUtils.history.setCharsetForURI(getWebNavigation().currentURI, val);
+                        else
+                            PlacesUtils.setCharsetForURI(getWebNavigation().currentURI, val);
                         getWebNavigation().reload(Ci.nsIWebNavigation.LOAD_FLAGS_CHARSET_CHANGE);
                     }
                     catch (e) { liberator.echoerr(e); }
@@ -51,47 +54,6 @@ const Browser = Module("browser", {
                 },
                 completer: function (context) completion.charset(context)
             });
-
-        // only available in FF 3.5-19
-        // TODO: remove when FF ESR's version is over 20. privateBrowsing will be per-window from FF 20+
-        // XXX: on Fx20, nsIPrivateBrowsingService exists yet but has no properties
-        let pb = services.get("privateBrowsing");
-        if (pb && "privateBrowsingEnabled" in pb) {
-            options.add(["private", "pornmode"],
-                "Set the 'private browsing' option",
-                "boolean", false,
-                {
-                    setter: function (value) services.get("privateBrowsing").privateBrowsingEnabled = value,
-                    getter: function () services.get("privateBrowsing").privateBrowsingEnabled
-                });
-            let services = modules.services; // Storage objects are global to all windows, 'modules' isn't.
-            storage.newObject("private-mode", function () {
-                ({
-                    init: function () {
-                        services.get("obs").addObserver(this, "private-browsing", false);
-                        services.get("obs").addObserver(this, "quit-application", false);
-                        this.private = services.get("privateBrowsing").privateBrowsingEnabled;
-                    },
-                    observe: function (subject, topic, data) {
-                        if (topic == "private-browsing") {
-                            if (data == "enter")
-                                storage.privateMode = true;
-                            else if (data == "exit")
-                                storage.privateMode = false;
-                            storage.fireEvent("private-mode", "change", storage.privateMode);
-                        }
-                        else if (topic == "quit-application") {
-                            services.get("obs").removeObserver(this, "quit-application");
-                            services.get("obs").removeObserver(this, "private-browsing");
-                        }
-                    }
-                }).init();
-            }, { store: false });
-            storage.addObserver("private-mode",
-                function (key, event, value) {
-                    autocommands.trigger("PrivateMode", { state: value });
-                }, window);
-        }
 
         options.add(["urlseparator"],
             "Set the separator regex used to separate multiple URL args",

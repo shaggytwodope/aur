@@ -326,7 +326,7 @@
     <tags>'cpt' 'complete'</tags>
     <spec>'complete' 'cpt'</spec>
     <type>charlist</type>
-    <default>slf</default>
+    <default>sl</default>
     <description>
         <p>Items which are completed at the <ex>:open</ex> prompts. Available items:</p>
 
@@ -596,6 +596,7 @@
             <dt>contains</dt>           <dd>The typed characters are split on whitespace, and these character groups have to match anywhere inside the text of the link.</dd>
             <dt>wordstartswith</dt>     <dd>The typed characters are matched with the beginning of the first word (see <o>wordseparators</o>) in the link as long as possible. If no matches occur in the current word, then the matching is continued at the beginning of the next word. The words are worked through in the order they appear in the link. If the typed characters contain spaces, then the characters are split on whitespace. These character groups are then matched with the beginning of the words, beginning at the first one and continuing with the following words in the order they appear in the link.</dd>
             <dt>firstletters</dt>       <dd>Behaves like wordstartswith, but non-matching words aren't overleaped.</dd>
+            <dt>fuzzy</dt>              <dd>Hints are matched according to the fuzzy search algorithm.</dd>
             <dt>custom</dt>             <dd>Delegate to a custom function: liberator.plugins.customHintMatcher(hintString)</dd>
         </dl>
     </description>
@@ -606,7 +607,7 @@
     <tags>'ht' 'hinttags'</tags>
     <spec>'hinttags' 'ht'</spec>
     <type>string</type>
-    <default>//input[not(@type='hidden')] | //xhtml:input[not(@type='hidden')] | //a | //xhtml:a | //area | //xhtml:area | //iframe | //xhtml:iframe | //textarea | //xhtml:textarea | //button | //xhtml:button | //select | //xhtml:select | //*[@onclick or @onmouseover or @onmousedown or @onmouseup or @oncommand or @role='link'or @role='button' or @role='checkbox' or @role='combobox' or @role='listbox' or @role='listitem' or @role='menuitem' or @role='menuitemcheckbox' or @role='menuitemradio' or @role='option' or @role='radio' or @role='scrollbar' or @role='slider' or @role='spinbutton' or @role='tab' or @role='textbox' or @role='treeitem' or @tabindex]</default>
+    <default>//input[not(@type='hidden' or @disabled)] | //xhtml:input[not(@type='hidden')] | //a | //xhtml:a | //area | //xhtml:area | //iframe | //xhtml:iframe | //textarea | //xhtml:textarea | //button | //xhtml:button | //select | //xhtml:select | //*[@onclick or @onmouseover or @onmousedown or @onmouseup or @oncommand or @role='link'or @role='button' or @role='checkbox' or @role='combobox' or @role='listbox' or @role='listitem' or @role='menuitem' or @role='menuitemcheckbox' or @role='menuitemradio' or @role='option' or @role='radio' or @role='scrollbar' or @role='slider' or @role='spinbutton' or @role='tab' or @role='textbox' or @role='treeitem' or @tabindex]</default>
     <description>
         <p>XPath string of hintable elements activated by <k>f</k> and <k>F</k></p>
     </description>
@@ -635,23 +636,6 @@
     <default>500</default>
     <description>
         <p>Number of Ex commands and search patterns to store in the command-line history.</p>
-    </description>
-</item>
-
-
-<item>
-    <tags>'noprivate' 'private'</tags>
-    <spec>'private'</spec>
-    <type>boolean</type>
-    <default>off</default>
-    <description>
-        <p>
-            Set the <str>private browsing</str> option. In private browsing mode
-            history, cache files, cookies, form data, passwords, download list
-            entries, local and URL marks, command-line history and macros are
-            available only for the duration of the private browsing session and
-            deleted when returning to normal browsing mode.
-        </p>
     </description>
 </item>
 

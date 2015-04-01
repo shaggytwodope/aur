@@ -1,8 +1,6 @@
 # Firefox
 content  vimperator               content/
 skin     vimperator classic/1.0   skin/
-locale   vimperator en-US	  locale/en-US/
-locale   liberator  en-US	  common/locale/en-US/
 
 content  liberator             common/content/
 resource liberator             common/modules/
@@ -27,3 +25,7 @@ component {16dc34f7-6d22-4aa4-a67f-2921fb5dcb69} components/commandline-handler.
 contract @mozilla.org/commandlinehandler/general-startup;1?type=vimperator {16dc34f7-6d22-4aa4-a67f-2921fb5dcb69}
 category command-line-handler m-Vimperator @mozilla.org/commandlinehandler/general-startup;1?type=vimperator
 
+locale vimperator en-US locale/en-US/
+locale liberator en-US common/locale/en-US/
+locale vimperator ja locale/ja/
+locale liberator ja common/locale/ja/

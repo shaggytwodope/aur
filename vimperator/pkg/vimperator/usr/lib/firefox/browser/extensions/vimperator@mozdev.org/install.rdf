@@ -4,7 +4,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>vimperator@mozdev.org</em:id>
         <em:name>Vimperator</em:name>
-        <em:version>3.8.3</em:version>
+        <em:version>3.9</em:version>
         <em:type>2</em:type> <!-- extension -->
         <em:unpack>false</em:unpack>
         <em:description>Vimperator adds an efficient, Vim-inspired user interface on top of Firefox</em:description>

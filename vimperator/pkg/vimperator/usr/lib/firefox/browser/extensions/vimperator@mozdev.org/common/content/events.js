@@ -24,7 +24,7 @@ const Events = Module("events", {
 
         this.sessionListeners = [];
 
-        this._macros = storage.newMap("macros", { store: true, privateData: true });
+        this._macros = storage.newMap("macros", { store: true });
 
         // NOTE: the order of ["Esc", "Escape"] or ["Escape", "Esc"]
         //       matters, so use that string as the first item, that you
@@ -1125,7 +1125,8 @@ const Events = Module("events", {
         return ((elem instanceof HTMLInputElement && !/image/.test(elem.type)) ||
                  elem instanceof HTMLTextAreaElement ||
                  elem instanceof HTMLObjectElement ||
-                 elem instanceof HTMLEmbedElement);
+                 elem instanceof HTMLEmbedElement ||
+                 (elem && elem.contentEditable === "true"));
     }
 }, {
     commands: function () {
