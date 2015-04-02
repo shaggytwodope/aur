@@ -1,0 +1,3 @@
+[console_scripts]
+rtv = rtv.__main__:main
+
