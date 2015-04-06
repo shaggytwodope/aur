@@ -31,9 +31,11 @@ build() {
 }
 
 package() {
-  cd "$pkgname-$pkgver/cmd/drive"
+  cd "$srcdir/$pkgname-$pkgver/cmd/drive"
 
   install -Dm755 "$pkgname" "$pkgdir/usr/bin/$pkgname"
-
+  cd "$srcdir/$pkgname-$pkgver"
+  mkdir -p $pkgdir/usr/share/licenses/$pkgname
+  install -m 0644 LICENSE $pkgdir/usr/share/licenses/$pkgname/
 }
 # vim:set ts=2 sw=2 et:

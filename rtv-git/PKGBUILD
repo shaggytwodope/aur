@@ -1,7 +1,7 @@
 # Maintainer: John Jenkins twodopeshaggy@gmail.com
 
 pkgname=rtv-git
-pkgver=r226.6d1ac5d
+pkgver=r273.6036d90
 pkgrel=1
 pkgdesc="Browse Reddit from your terminal"
 arch=('any')
@@ -19,4 +19,6 @@ pkgver() {
 package() {
    cd "$srcdir/rtv"
    python setup.py install --root="$pkgdir/" --optimize=1
+   mkdir -p $pkgdir/usr/share/licenses/$pkgname
+   install -m 0644 LICENSE $pkgdir/usr/share/licenses/$pkgname/
 }
