@@ -1,0 +1,8 @@
+README
+setup.py
+hidraw/__init__.py
+hidraw_pure.egg-info/PKG-INFO
+hidraw_pure.egg-info/SOURCES.txt
+hidraw_pure.egg-info/dependency_links.txt
+hidraw_pure.egg-info/requires.txt
+hidraw_pure.egg-info/top_level.txt
