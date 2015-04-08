@@ -1,5 +1,5 @@
 c4d97f939fad823f6575a9e812f3dc54fad3ad5b	not-for-merge	branch 'controller' of https://github.com/michael-lazar/rtv
-ecbc624caa8338b768c283ff8e26e61e198edd15	not-for-merge	branch 'master' of https://github.com/michael-lazar/rtv
+9153fdd20f2e05edecebd056c2c9aaaf29f97df3	not-for-merge	branch 'master' of https://github.com/michael-lazar/rtv
 d5f68215cdbc5906c19a64c0bab2e3b737a9bb29	not-for-merge	branch 'pypi' of https://github.com/michael-lazar/rtv
 7c7606d288b0ec306577cb1c79b3ea9cb90e4caf	not-for-merge	'refs/pull/1/head' of https://github.com/michael-lazar/rtv
 98fc02e28e0147509ddfe4e601a97859a0e47cfc	not-for-merge	'refs/pull/11/head' of https://github.com/michael-lazar/rtv
@@ -52,5 +52,8 @@ a294010e27568460f65d556709a1cfb1c5df5dc5	not-for-merge	'refs/pull/73/head' of ht
 4b326cf218292910a98db62a66edc488d71efba0	not-for-merge	'refs/pull/74/head' of https://github.com/michael-lazar/rtv
 b0124560be42f7c4f85ffb7d467dff7b2ac63cf3	not-for-merge	'refs/pull/75/head' of https://github.com/michael-lazar/rtv
 161fe186dd4d83248d7a50513030c747be3a67ba	not-for-merge	'refs/pull/79/head' of https://github.com/michael-lazar/rtv
+f31ad72f921f84d31ab664c4e53366af7eef57fd	not-for-merge	'refs/pull/83/head' of https://github.com/michael-lazar/rtv
+02e82686c977ecceafeed878dce1ca0832d658f8	not-for-merge	'refs/pull/83/merge' of https://github.com/michael-lazar/rtv
 6036d90e127e1f0fe96ecff31957b7c30946d2d7	not-for-merge	tag 'v1.2' of https://github.com/michael-lazar/rtv
 f9f955deb0150cca26250754132f547237811451	not-for-merge	tag 'v1.2.1' of https://github.com/michael-lazar/rtv
+9153fdd20f2e05edecebd056c2c9aaaf29f97df3	not-for-merge	tag 'v1.2.2' of https://github.com/michael-lazar/rtv
