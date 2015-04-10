@@ -1,0 +1,14 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libavdevice
+Description: FFmpeg device handling library
+Version: 56.4.100
+Requires: 
+Requires.private: libavfilter >= 5.11.102, libswscale >= 3.1.101, libpostproc >= 53.3.100, libavresample >= 2.1.0, libavformat >= 56.25.101, libavcodec >= 56.26.100, libswresample >= 1.1.100, libavutil >= 54.20.100
+Conflicts:
+Libs: -L${libdir}  -lavdevice 
+Libs.private: -lXv -lX11 -lXext -lstdc++ -lstdc++ -ldl -ldl -ldl -lva -lva-x11 -lva -lxcb -lxcb-shm -lxcb -lxcb-xfixes -lxcb-render -lxcb-shape -lxcb -lxcb-shape -lxcb -lX11 -lcdio_paranoia -lcdio_cdda -lcdio -ljack -lasound -lSDL -lpthread -ldc1394 -lnettle -lhogweed -lgmp -lssl -lcrypto -lGL -lOpenCL -lopenal -lzvbi -lzmq -lxvidcore -lx265 -lx264 -lwebp -lwavpack -lvpx -lvpx -lvpx -lvpx -lvorbisenc -lvorbis -logg -lvo-amrwbenc -lvo-aacenc -lvidstab -lv4l2 -lutvideo -lstdc++ -ltwolame -ltwolame -ltheoraenc -ltheoradec -logg -lspeex -lssh -lsoxr -lm -lshine -lschroedinger-1.0 -lrtmp -lz -lssl -lcrypto -lpulse -lopus -lopenjpeg -DOPJ_STATIC -lopencv_calib3d -lopencv_contrib -lopencv_core -lopencv_features2d -lopencv_flann -lopencv_gpu -lopencv_highgui -lopencv_imgproc -lopencv_legacy -lopencv_ml -lopencv_nonfree -lopencv_objdetect -lopencv_ocl -lopencv_photo -lopencv_stitching -lopencv_superres -lopencv_ts -lopencv_video -lopencv_videostab -ltbb /lib64/libXext.so /lib64/libX11.so /lib64/libICE.so /lib64/libSM.so /lib64/libGL.so /lib64/libGLU.so -lrt -lpthread -lm -ldl -lopencore-amrwb -lopencore-amrnb -lmp3lame -lmodplug -lgsm -lgme -lstdc++ -lfribidi -lglib-2.0 -lfreetype -lfontconfig -lfreetype -lfdk-aac -lfaac -lcaca -lcelt0 -lcelt0 -lbs2b -lbluray -lass -laacplus -lraw1394 -lavc1394 -lrom1394 -liec61883 -lgnutls -ldl -lm -llzma -lbz2 -lz -pthread
+Cflags: -I${includedir}
