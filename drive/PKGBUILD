@@ -2,7 +2,7 @@
 
 pkgname=drive
 pkgver=0.1.9
-pkgrel=1
+pkgrel=3
 pkgdesc="Pull or push Google Drive files"
 arch=('x86_64' 'i686' 'arm' 'armv6h' 'armv7h')
 url="http://github.com/odeke-em/drive"
@@ -37,5 +37,6 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
   mkdir -p $pkgdir/usr/share/licenses/$pkgname
   install -m 0644 LICENSE $pkgdir/usr/share/licenses/$pkgname/
+  rm -r  "$srcdir/go"
 }
 # vim:set ts=2 sw=2 et:
