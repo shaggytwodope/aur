@@ -10,6 +10,7 @@ license=('Apache')
 makedepends=('go' 'git' 'mercurial')
 conflicts=('drive-git')
 options=('!strip' '!emptydirs')
+install=$pkgname.install
 source=("https://github.com/odeke-em/$pkgname/archive/v$pkgver.tar.gz")
 sha256sums=('d02b2b4b7a054838cdbca3735884b1cd6583ade4b60ecf5ad0331a681c82d99b')
 
@@ -37,6 +38,8 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
   mkdir -p $pkgdir/usr/share/licenses/$pkgname
   install -m 0644 LICENSE $pkgdir/usr/share/licenses/$pkgname/
+  mkdir -p "$pkgdir/usr/share/icons/hicolor/128x128/mimetypes"
+  cp $srcdir/$pkgname-$pkgver/icons/*.png $pkgdir/usr/share/icons/hicolor/128x128/mimetypes
   rm -r  "$srcdir/go"
 }
 # vim:set ts=2 sw=2 et:
