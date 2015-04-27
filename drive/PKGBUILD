@@ -2,12 +2,12 @@
 
 pkgname=drive
 pkgver=0.1.9
-pkgrel=3
+pkgrel=4
 pkgdesc="Pull or push Google Drive files"
 arch=('x86_64' 'i686' 'arm' 'armv6h' 'armv7h')
 url="http://github.com/odeke-em/drive"
 license=('Apache')
-makedepends=('go' 'git' 'mercurial')
+makedepends=('go' 'git' 'mercurial' 'gtk-update-icon-cache')
 conflicts=('drive-git')
 options=('!strip' '!emptydirs')
 install=$pkgname.install
