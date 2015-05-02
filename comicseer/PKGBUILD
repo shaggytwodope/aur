@@ -8,6 +8,7 @@ arch=('i686' 'x86_64')
 url="http://www.xylasoft.com/comicseer/index.php"
 license=('CUSTOM')
 depends=('qt4' 'zlib')
+optdepends=('comictagger: For editing comic metadata')
 if [ "$CARCH" == x86_64 ]; then
 	source=(http://www.xylasoft.com/comicseer/downloads/ComicSeer_Linux_amd64_v${pkgver}-3.zip
 	'comicseer.desktop')
