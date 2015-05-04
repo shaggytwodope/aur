@@ -1,8 +1,12 @@
 fda55c7cb0997e39cc222e659f52a75f92acf785	not-for-merge	branch 'checksum-off-by-default' of https://github.com/odeke-em/drive
+38aa7fab44265030d737114998664b514d4d3312	not-for-merge	branch 'delete-method' of https://github.com/odeke-em/drive
+ffcc48ebe3994ae90a8fe00afa0ed85830ce3f2e	not-for-merge	branch 'exclude-crud-ops' of https://github.com/odeke-em/drive
 dfb410958cb17ffff879869018cfee9dabab9ffc	not-for-merge	branch 'flush-stdin-before-prompt' of https://github.com/odeke-em/drive
-231b3d0673706ebf0e3a7a48ec864d2846aadfca	not-for-merge	branch 'master' of https://github.com/odeke-em/drive
+2b81cf12bba5834103d93e1be8fa63048efe91d4	not-for-merge	branch 'handle-name-clashes' of https://github.com/odeke-em/drive
+6d9751a9333cce78d0ccfe7504a4e47bdcf5f2a6	not-for-merge	branch 'master' of https://github.com/odeke-em/drive
 3b5799f37559941189774333f5a9c62f20faec56	not-for-merge	branch 'oauth2-migration' of https://github.com/odeke-em/drive
-091e079e2724f7837a17b1afe76b7dfc445d4cc9	not-for-merge	branch 'rationed-go-routines' of https://github.com/odeke-em/drive
+17b9eb0c04b5d2e8f7798c0390fd6d7724a908e2	not-for-merge	branch 'rationed-go-routines' of https://github.com/odeke-em/drive
+0683293628a1afcf191c721bdf2d465026235222	not-for-merge	branch 'repl' of https://github.com/odeke-em/drive
 cf4517f91d51939a57a04d22a47d29ff4553944c	not-for-merge	branch 'sorting' of https://github.com/odeke-em/drive
 b80000389b81c36d7bea89c4410d1e384ee9de71	not-for-merge	branch 'static-build' of https://github.com/odeke-em/drive
 16201967d6a52e2ff635e84e6a274f2dd50c5f0b	not-for-merge	'refs/pull/1/head' of https://github.com/odeke-em/drive
@@ -20,7 +24,6 @@ f79228840e94b14a533545bfd4a34e49da627722	not-for-merge	'refs/pull/120/head' of h
 e667aa254efcbcd240c3341e558015ef5ffeb6ad	not-for-merge	'refs/pull/126/head' of https://github.com/odeke-em/drive
 a659f363f37f44aa7015319fe9c82a4431819a99	not-for-merge	'refs/pull/127/head' of https://github.com/odeke-em/drive
 fda55c7cb0997e39cc222e659f52a75f92acf785	not-for-merge	'refs/pull/128/head' of https://github.com/odeke-em/drive
-76532d999d3c5cec7f169d8d149e91725e554d3c	not-for-merge	'refs/pull/128/merge' of https://github.com/odeke-em/drive
 65d690b2f6bd22f014b439f91cfd977d0ea3cd86	not-for-merge	'refs/pull/13/head' of https://github.com/odeke-em/drive
 83e0ac2c8b0b5d828499b6d1678e0de1f7e90734	not-for-merge	'refs/pull/131/head' of https://github.com/odeke-em/drive
 2d59fe66eb6bfa149c56596c485a616cf151daac	not-for-merge	'refs/pull/133/head' of https://github.com/odeke-em/drive
@@ -30,10 +33,13 @@ b2659cfeaf3b689223aee3da1e26d75db7d874f6	not-for-merge	'refs/pull/147/head' of h
 504e26b574ebe1511009a78c640820d510fb7241	not-for-merge	'refs/pull/148/head' of https://github.com/odeke-em/drive
 679694128f59e904757b3d4eca01ff2655d1a28a	not-for-merge	'refs/pull/150/head' of https://github.com/odeke-em/drive
 b80000389b81c36d7bea89c4410d1e384ee9de71	not-for-merge	'refs/pull/151/head' of https://github.com/odeke-em/drive
-256849eb2ef885e04db0c45e5b8a4e237bff2107	not-for-merge	'refs/pull/151/merge' of https://github.com/odeke-em/drive
 5efd2551ec4c7a53fee7aa0c72d3e925eb6d6e81	not-for-merge	'refs/pull/155/head' of https://github.com/odeke-em/drive
 a9538461ae2e746625d9f84e04d7d41a20475205	not-for-merge	'refs/pull/16/head' of https://github.com/odeke-em/drive
+2b81cf12bba5834103d93e1be8fa63048efe91d4	not-for-merge	'refs/pull/166/head' of https://github.com/odeke-em/drive
+2b076a3dc02b5fee728e9eeee8c089a414de5fbc	not-for-merge	'refs/pull/167/head' of https://github.com/odeke-em/drive
 0471cf89b87baa4160bcc27ca2c8f21b10da3f28	not-for-merge	'refs/pull/17/head' of https://github.com/odeke-em/drive
+38aa7fab44265030d737114998664b514d4d3312	not-for-merge	'refs/pull/174/head' of https://github.com/odeke-em/drive
+ffcc48ebe3994ae90a8fe00afa0ed85830ce3f2e	not-for-merge	'refs/pull/175/head' of https://github.com/odeke-em/drive
 a2ba65854ad640e6f95761ac869fd7c2edb288e2	not-for-merge	'refs/pull/21/head' of https://github.com/odeke-em/drive
 d8a7e457f6d666ef369de96598502c0a987ce501	not-for-merge	'refs/pull/36/head' of https://github.com/odeke-em/drive
 8badc64d5652d253fc7b31dac22b7ae21605079b	not-for-merge	'refs/pull/37/head' of https://github.com/odeke-em/drive
@@ -78,3 +84,4 @@ e9c9e47a6a47bcd2524d26d7cd8ac85faab18704	not-for-merge	tag 'v0.1.6' of https://g
 5258514af7429d43e6311f50433e90c39d27c3a4	not-for-merge	tag 'v0.1.7' of https://github.com/odeke-em/drive
 e71a7f9f1f254339b76a1f9f281b30cfa060b91f	not-for-merge	tag 'v0.1.8' of https://github.com/odeke-em/drive
 c1c9a75d6afe2880dc69f974eab0183784b90c7d	not-for-merge	tag 'v0.1.9' of https://github.com/odeke-em/drive
+57a0deb2d3893d9aa3d2edbf02aaed994d6ab2f7	not-for-merge	tag 'v0.2.0' of https://github.com/odeke-em/drive
