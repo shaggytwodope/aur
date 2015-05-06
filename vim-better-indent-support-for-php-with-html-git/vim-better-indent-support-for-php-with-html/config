@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = https://github.com/captbaritone/better-indent-support-for-php-with-html
+	fetch = +refs/*:refs/*
+	mirror = true
