@@ -8,6 +8,7 @@ arch=('any')
 depends=('vim')
 makedepends=('git')
 groups=('vim-plugins')
+conflicts=('vim-php-indent-git')
 url="https://github.com/captbaritone/better-indent-support-for-php-with-html"
 license=('custom:vim')
 source=(${pkgname%-git}::git+https://github.com/captbaritone/better-indent-support-for-php-with-html)

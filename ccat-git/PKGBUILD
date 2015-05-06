@@ -1,7 +1,7 @@
 # Maintainer: John Jenkins <twodopeshaggy@gmail.com>
 
 pkgname=ccat-git
-pkgver=r6.e037c8d
+pkgver=r27.e7385e6
 pkgrel=1
 pkgdesc="Colorizes output for cat."
 arch=('any')
@@ -12,20 +12,20 @@ options=('!strip' '!emptydirs')
 conflicts=('ccat')
 source=($pkgname::git+https://github.com/jingweno/ccat.git)
 md5sums=('SKIP')
-_gourl=github.com/jingweno/ccat
 pkgver() {
   cd $srcdir/$pkgname
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 build() {
-  export GOPATH=$srcdir
-  go get $_gourl
+    cd "$srcdir/$pkgname"
+    msg2 'Building ccat'
+    ./build
 }
 
 package() {
   mkdir -p "$pkgdir/usr/bin"
-  install -p -m755 $srcdir/bin/ccat "$pkgdir/usr/bin"
+  install -p -m755 $srcdir/$pkgname/ccat "$pkgdir/usr/bin"
   
   cd "$srcdir/$pkgname"
   mkdir -p $pkgdir/usr/share/licenses/$pkgname
