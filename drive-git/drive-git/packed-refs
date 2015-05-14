@@ -1,15 +1,10 @@
 # pack-refs with: peeled fully-peeled 
-fda55c7cb0997e39cc222e659f52a75f92acf785 refs/heads/checksum-off-by-default
-38aa7fab44265030d737114998664b514d4d3312 refs/heads/delete-method
-ffcc48ebe3994ae90a8fe00afa0ed85830ce3f2e refs/heads/exclude-crud-ops
 dfb410958cb17ffff879869018cfee9dabab9ffc refs/heads/flush-stdin-before-prompt
-2b81cf12bba5834103d93e1be8fa63048efe91d4 refs/heads/handle-name-clashes
 6d9751a9333cce78d0ccfe7504a4e47bdcf5f2a6 refs/heads/master
 3b5799f37559941189774333f5a9c62f20faec56 refs/heads/oauth2-migration
 17b9eb0c04b5d2e8f7798c0390fd6d7724a908e2 refs/heads/rationed-go-routines
 0683293628a1afcf191c721bdf2d465026235222 refs/heads/repl
 cf4517f91d51939a57a04d22a47d29ff4553944c refs/heads/sorting
-b80000389b81c36d7bea89c4410d1e384ee9de71 refs/heads/static-build
 16201967d6a52e2ff635e84e6a274f2dd50c5f0b refs/pull/1/head
 85bcf23f56f18bfc0613c96166f11b0bb7fbc95e refs/pull/101/head
 eed22f67a2d457ad6fa4592f7637448369c73615 refs/pull/102/head
