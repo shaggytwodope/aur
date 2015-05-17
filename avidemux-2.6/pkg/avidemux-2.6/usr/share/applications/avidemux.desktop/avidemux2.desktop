@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=avidemux
+Comment=Video Editor
+Exec=avidemux3_qt5
+MimeType=video/mpeg;video/quicktime;video/x-msvideo;video/x-anim;audio/x-mp3;audio/x-mp2;
+Icon=avidemux
+Terminal=false
+Type=Application
+Categories=Application;AudioVideo;
+X-Desktop-File-Install-Version=0.22
