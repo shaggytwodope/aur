@@ -1,9 +1,14 @@
 import sys
 import os
-import textwrap
+import curses
+import webbrowser
 import subprocess
 from datetime import datetime
 from tempfile import NamedTemporaryFile
+
+# kitchen solves deficiencies in textwrap's handling of unicode characters
+from kitchen.text.display import wrap, textual_width_chop
+import six
 
 from . import config
 from .exceptions import ProgramError
@@ -11,51 +16,7 @@ from .exceptions import ProgramError
 __all__ = ['open_browser', 'clean', 'wrap_text', 'strip_textpad',
            'strip_subreddit_url', 'humanize_timestamp', 'open_editor']
 
-
-def open_editor(data=''):
-    """
-    Open a temporary file using the system's default editor.
-
-    The data string will be written to the file before opening. This function
-    will block until the editor has closed. At that point the file will be
-    read and and lines starting with '#' will be stripped.
-    """
-
-    with NamedTemporaryFile(prefix='rtv-', suffix='.txt', mode='w') as fp:
-        fp.write(data)
-        fp.flush()
-        editor = os.getenv('RTV_EDITOR') or os.getenv('EDITOR') or 'nano'
-
-        try:
-            subprocess.Popen([editor, fp.name]).wait()
-        except OSError as e:
-            raise ProgramError(editor)
-
-        # Open a second file object to read. This appears to be necessary in
-        # order to read the changes made by some editors (gedit). w+ mode does
-        # not work!
-        with open(fp.name) as fp2:
-            text = ''.join(line for line in fp2 if not line.startswith('#'))
-            text = text.rstrip()
-
-    return text
-
-
-def open_browser(url):
-    """
-    Call webbrowser.open_new_tab(url) and redirect stdout/stderr to devnull.
-
-    This is a workaround to stop firefox from spewing warning messages to the
-    console. See http://bugs.python.org/issue22277 for a better description
-    of the problem.
-    """
-    command = "import webbrowser; webbrowser.open_new_tab('%s')" % url
-    args = [sys.executable, '-c', command]
-    with open(os.devnull, 'ab+', 0) as null:
-        subprocess.check_call(args, stdout=null, stderr=null)
-
-
-def clean(string):
+def clean(string, n_cols=None):
     """
     Required reading!
         http://nedbatchelder.com/text/unipain.html
@@ -74,10 +35,94 @@ def clean(string):
     If utf-8 is passed in, addnstr will treat each 'byte' as a single character.
     """
 
-    encoding = 'utf-8' if config.unicode else 'ascii'
-    string = string.encode(encoding, 'replace')
-    return string
+    if n_cols is not None and n_cols <= 0:
+        return ''
 
+    if not config.unicode:
+        if six.PY3 or isinstance(string, unicode):
+            string = string.encode('ascii', 'replace')
+        return string[:n_cols] if n_cols else string
+    else:
+        if n_cols:
+            string = textual_width_chop(string, n_cols)
+        if six.PY3 or isinstance(string, unicode):
+            string = string.encode('utf-8')
+        return string
+
+def open_editor(data=''):
+    """
+    Open a temporary file using the system's default editor.
+
+    The data string will be written to the file before opening. This function
+    will block until the editor has closed. At that point the file will be
+    read and and lines starting with '#' will be stripped.
+    """
+
+    with NamedTemporaryFile(prefix='rtv-', suffix='.txt', mode='wb') as fp:
+        fp.write(clean(data))
+        fp.flush()
+        editor = os.getenv('RTV_EDITOR') or os.getenv('EDITOR') or 'nano'
+
+        curses.endwin()
+        try:
+            subprocess.Popen([editor, fp.name]).wait()
+        except OSError as e:
+            raise ProgramError(editor)
+        curses.doupdate()
+
+        # Open a second file object to read. This appears to be necessary in
+        # order to read the changes made by some editors (gedit). w+ mode does
+        # not work!
+        with open(fp.name) as fp2:
+            text = ''.join(line for line in fp2 if not line.startswith('#'))
+            text = text.rstrip()
+
+    return text
+
+
+def open_browser(url):
+    """
+    Open the given url using the default webbrowser. The preferred browser can
+    specified with the $BROWSER environment variable. If not specified, python
+    webbrowser will try to determine the default to use based on your system.
+
+    For browsers requiring an X display, we call webbrowser.open_new_tab(url)
+    and redirect stdout/stderr to devnull. This is a workaround to stop firefox
+    from spewing warning messages to the console. See
+    http://bugs.python.org/issue22277 for a better description of the problem.
+
+    For console browsers (e.g. w3m), RTV will suspend and display the browser
+    window within the same terminal. This mode is triggered either when
+    1. $BROWSER is set to a known console browser, or
+    2. $DISPLAY is undefined, indicating that the terminal is running headless
+
+    There may be other cases where console browsers are opened (xdg-open?) but
+    are not detected here.
+    """
+
+    console_browsers = ['www-browser', 'links', 'links2', 'elinks', 'lynx', 'w3m']
+
+    display = bool(os.environ.get("DISPLAY"))
+
+    # Use the convention defined here to parse $BROWSER
+    # https://docs.python.org/2/library/webbrowser.html
+    if "BROWSER" in os.environ:
+        user_browser = os.environ["BROWSER"].split(os.pathsep)[0]
+        if user_browser in console_browsers:
+            display = False
+
+    if webbrowser._tryorder and webbrowser._tryorder[0] in console_browsers:
+        display = False
+
+    if display:
+        command = "import webbrowser; webbrowser.open_new_tab('%s')" % url
+        args = [sys.executable, '-c', command]
+        with open(os.devnull, 'ab+', 0) as null:
+            subprocess.check_call(args, stdout=null, stderr=null)
+    else:
+        curses.endwin()
+        webbrowser.open_new_tab(url)
+        curses.doupdate()
 
 def wrap_text(text, width):
     """
@@ -87,7 +132,7 @@ def wrap_text(text, width):
     for paragraph in text.splitlines():
         # Wrap returns an empty list when paragraph is a newline. In order to
         # preserve newlines we substitute a list containing an empty string.
-        lines = textwrap.wrap(paragraph, width=width) or ['']
+        lines = wrap(paragraph, width=width) or ['']
         out.extend(lines)
     return out
 

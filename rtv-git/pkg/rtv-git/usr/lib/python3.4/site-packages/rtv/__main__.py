@@ -19,7 +19,6 @@ from .__version__ import __version__
 
 __all__ = []
 
-
 def load_config():
     """
     Search for a configuration file at the location ~/.rtv and attempt to load
@@ -45,8 +44,8 @@ def load_config():
     if config.has_section('rtv'):
         defaults = dict(config.items('rtv'))
 
-    if 'unicode' in defaults:
-        defaults['unicode'] = config.getboolean('rtv', 'unicode')
+    if 'ascii' in defaults:
+        defaults['ascii'] = config.getboolean('rtv', 'ascii')
 
     return defaults
 
@@ -60,8 +59,8 @@ def command_line():
 
     parser.add_argument('-s', dest='subreddit', help='subreddit name')
     parser.add_argument('-l', dest='link', help='full link to a submission')
-    parser.add_argument('--unicode', action='store_true',
-                        help='enable unicode (experimental)')
+    parser.add_argument('--ascii', action='store_true',
+                        help='enable ascii-only mode')
     parser.add_argument('--log', metavar='FILE', action='store',
                         help='Log HTTP requests')
 
@@ -96,15 +95,17 @@ def main():
         if getattr(args, key, None) is None:
             setattr(args, key, val)
 
-    config.unicode = args.unicode
+    config.unicode = (not args.ascii)
 
+    # Squelch SSL warnings for Ubuntu
+    logging.captureWarnings(True)
     if args.log:
         logging.basicConfig(level=logging.DEBUG, filename=args.log)
 
     try:
         print('Connecting...')
         reddit = praw.Reddit(user_agent=AGENT)
-        reddit.config.decode_html_entities = True
+        reddit.config.decode_html_entities = False
         if args.username:
             # PRAW will prompt for password if it is None
             reddit.login(args.username, args.password)

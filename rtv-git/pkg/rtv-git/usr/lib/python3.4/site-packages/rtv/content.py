@@ -1,4 +1,4 @@
-import textwrap
+import logging
 
 import praw
 import requests
@@ -8,6 +8,7 @@ from .helpers import humanize_timestamp, wrap_text, strip_subreddit_url
 
 __all__ = ['SubredditContent', 'SubmissionContent']
 
+_logger = logging.getLogger(__name__)
 
 class BaseContent(object):
 
@@ -41,14 +42,22 @@ class BaseContent(object):
         retval = []
         while stack:
             item = stack.pop(0)
-            if isinstance(item, praw.objects.MoreComments) and (
-                    item.count == 0):
-                continue
-            nested = getattr(item, 'replies', None)
-            if nested:
-                for n in nested:
-                    n.nested_level = item.nested_level + 1
-                stack[0:0] = nested
+            if isinstance(item, praw.objects.MoreComments):
+                if item.count == 0:
+                    # MoreComments item count should never be zero, but if it
+                    # is then discard the MoreComment object. Need to look into
+                    # this further.
+                    continue
+            else:
+                if item._replies is None:
+                    # Attach children MoreComment replies to parents
+                    # https://github.com/praw-dev/praw/issues/391
+                    item._replies = [stack.pop(0)]
+                nested = getattr(item, 'replies', None)
+                if nested:
+                    for n in nested:
+                        n.nested_level = item.nested_level + 1
+                    stack[0:0] = nested
             retval.append(item)
         return retval
 
@@ -68,18 +77,24 @@ class BaseContent(object):
             data['count'] = comment.count
             data['body'] = 'More comments'.format(comment.count)
         else:
+            author = getattr(comment, 'author', '[deleted]')
+            name = getattr(author, 'name', '[deleted]')
+            sub = getattr(comment, 'submission', '[deleted]')
+            sub_author = getattr(sub, 'author', '[deleted]')
+            sub_name = getattr(sub_author, 'name', '[deleted]')
+            flair = getattr(comment, 'author_flair_text', '')
+            permalink = getattr(comment, 'permalink', None)
+
             data['type'] = 'Comment'
             data['body'] = comment.body
             data['created'] = humanize_timestamp(comment.created_utc)
             data['score'] = '{} pts'.format(comment.score)
-            author = getattr(comment, 'author')
-            data['author'] = (author.name if author else '[deleted]')
-            sub_author = getattr(comment.submission.author, 'name')
-            data['is_author'] = (data['author'] == sub_author)
-            flair = comment.author_flair_text
-            data['flair'] = (flair if flair else '')
+            data['author'] = name
+            data['is_author'] = (name == sub_name)
+            data['flair'] = flair
             data['likes'] = comment.likes
             data['gold'] = comment.gilded > 0
+            data['permalink'] = permalink
 
         return data
 
@@ -91,6 +106,9 @@ class BaseContent(object):
         """
 
         is_selfpost = lambda s: s.startswith('http://www.reddit.com/r/')
+        author = getattr(sub, 'author', '[deleted]')
+        name = getattr(author, 'name', '[deleted]')
+        flair = getattr(sub, 'link_flair_text', '')
 
         data = {}
         data['object'] = sub
@@ -100,15 +118,15 @@ class BaseContent(object):
         data['created'] = humanize_timestamp(sub.created_utc)
         data['comments'] = '{} comments'.format(sub.num_comments)
         data['score'] = '{} pts'.format(sub.score)
-        author = getattr(sub, 'author')
-        data['author'] = (author.name if author else '[deleted]')
+        data['author'] = name
         data['permalink'] = sub.permalink
         data['subreddit'] = strip_subreddit_url(sub.permalink)
-        data['flair'] = (sub.link_flair_text if sub.link_flair_text else '')
+        data['flair'] = flair
         data['url_full'] = sub.url
         data['url'] = ('selfpost' if is_selfpost(sub.url) else sub.url)
         data['likes'] = sub.likes
         data['gold'] = sub.gilded > 0
+        data['nsfw'] = sub.over_18
 
         return data
 
@@ -119,7 +137,7 @@ class SubmissionContent(BaseContent):
     list for repeat access.
     """
 
-    def __init__(self, submission, loader, indent_size=2, max_indent_level=4):
+    def __init__(self, submission, loader, indent_size=2, max_indent_level=8):
 
         self.indent_size = indent_size
         self.max_indent_level = max_indent_level
@@ -132,7 +150,7 @@ class SubmissionContent(BaseContent):
         self._comment_data = [self.strip_praw_comment(c) for c in comments]
 
     @classmethod
-    def from_url(cls, reddit, url, loader, indent_size=2, max_indent_level=4):
+    def from_url(cls, reddit, url, loader, indent_size=2, max_indent_level=8):
 
         try:
             with loader():
@@ -153,8 +171,8 @@ class SubmissionContent(BaseContent):
 
         elif index == -1:
             data = self._submission_data
-            data['split_title'] = textwrap.wrap(data['title'], width=n_cols -2)
-            data['split_text'] = wrap_text(data['text'], width=n_cols - 2)
+            data['split_title'] = wrap_text(data['title'], width=n_cols-2)
+            data['split_text'] = wrap_text(data['text'], width=n_cols-2)
             data['n_rows'] = len(data['split_title'] + data['split_text']) + 5
             data['offset'] = 0
 
@@ -209,7 +227,7 @@ class SubmissionContent(BaseContent):
 
         elif data['type'] == 'MoreComments':
             with self._loader():
-                comments = data['object'].comments(update=False)
+                comments = data['object'].comments(update=True)
                 comments = self.flatten_comments(comments,
                                                  root_level=data['level'])
                 comment_data = [self.strip_praw_comment(c) for c in comments]
@@ -315,7 +333,7 @@ class SubredditContent(BaseContent):
 
         # Modifies the original dict, faster than copying
         data = self._submission_data[index]
-        data['split_title'] = textwrap.wrap(data['title'], width=n_cols)
+        data['split_title'] = wrap_text(data['title'], width=n_cols)
         data['n_rows'] = len(data['split_title']) + 3
         data['offset'] = 0
 
