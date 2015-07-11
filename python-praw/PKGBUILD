@@ -1,0 +1,23 @@
+# Maintainer: dnuux <dnuuxx@gmail.com>
+
+pkgname=python-praw
+_pkgname=praw
+pkgver=3.1.0
+pkgrel=1
+pkgdesc="Python Reddit API Wrapper"
+url="https://praw.readthedocs.org/"
+arch=('any')
+license=('GPL3')
+depends=('python-requests' 'python-six' 'python-update_checker')
+source=("https://pypi.python.org/packages/source/p/${_pkgname}/${_pkgname}-${pkgver}.zip")
+md5sums=('dc80623aafb9ab54ad1e84aaa02fc0ec')
+
+build() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python setup.py build
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python setup.py install --root="${pkgdir}" --optimize=1
+}

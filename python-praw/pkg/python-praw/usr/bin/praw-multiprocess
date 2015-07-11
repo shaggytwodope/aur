@@ -1,0 +1,10 @@
+#!/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'praw==3.1.0','console_scripts','praw-multiprocess'
+__requires__ = 'praw==3.1.0'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('praw==3.1.0', 'console_scripts', 'praw-multiprocess')()
+    )

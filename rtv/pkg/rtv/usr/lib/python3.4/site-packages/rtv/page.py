@@ -3,20 +3,19 @@ import time
 import six
 import sys
 import logging
-from contextlib import contextmanager
 
 import praw.errors
 import requests
 from kitchen.text.display import textual_width
 
 from .helpers import open_editor
-from .curses_helpers import (Color, show_notification, show_help, text_input,
-                             prompt_input, add_line)
+from .curses_helpers import (Color, show_notification, show_help, prompt_input,
+                             add_line)
 from .docs import COMMENT_EDIT_FILE, SUBMISSION_FILE
 
 __all__ = ['Navigator', 'BaseController', 'BasePage']
-
 _logger = logging.getLogger(__name__)
+
 
 class Navigator(object):
     """
@@ -155,6 +154,7 @@ class Navigator(object):
         else:
             return True
 
+
 class SafeCaller(object):
 
     def __init__(self, window):
@@ -185,6 +185,7 @@ class SafeCaller(object):
                 show_notification(self.window, ['Unexpected Error'])
                 _logger.exception(e)
                 return True
+
 
 class BaseController(object):
     """
@@ -310,12 +311,13 @@ class BasePage(object):
         try:
             if 'likes' not in data:
                 pass
-            if data['likes'] is False:
-                data['object'].clear_vote()
-                data['likes'] = None
-            else:
+            elif data['likes'] or data['likes'] is None:
                 data['object'].downvote()
                 data['likes'] = False
+            else:
+                data['object'].clear_vote()
+                data['likes'] = None
+
         except praw.errors.LoginOrScopeRequired:
             show_notification(self.stdscr, ['Not logged in'])
 
@@ -410,8 +412,24 @@ class BasePage(object):
             s.catch = False
             self.refresh_content()
 
+    @BaseController.register('i')
+    def get_inbox(self):
+        """
+        Checks the inbox for unread messages and displays a notification.
+        """
+        inbox = len(list(self.reddit.get_unread(limit=1)))
+        try:
+            if inbox > 0:
+                show_notification(self.stdscr, ['New Messages'])
+            elif inbox == 0:
+                show_notification(self.stdscr, ['No New Messages'])
+        except praw.errors.LoginOrScopeRequired:
+            show_notification(self.stdscr, ['Not Logged In'])
+
     def clear_input_queue(self):
-        "Clear excessive input caused by the scroll wheel or holding down a key"
+        """
+        Clear excessive input caused by the scroll wheel or holding down a key
+        """
 
         self.stdscr.nodelay(1)
         while self.stdscr.getch() != -1:
@@ -419,7 +437,9 @@ class BasePage(object):
         self.stdscr.nodelay(0)
 
     def logout(self):
-        "Prompt to log out of the user's account."
+        """
+        Prompt to log out of the user's account.
+        """
 
         ch = prompt_input(self.stdscr, "Log out? (y/n):")
         if ch == 'y':

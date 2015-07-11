@@ -1,13 +1,16 @@
 fa63247f5fc1ff5e7a291e85a8e7959c8d8a1027	not-for-merge	branch 'Brobin-edit_delete' of https://github.com/michael-lazar/rtv
 c4d97f939fad823f6575a9e812f3dc54fad3ad5b	not-for-merge	branch 'controller' of https://github.com/michael-lazar/rtv
-2a935922bf9b97cc2358a35963c0b4dada7a9f6c	not-for-merge	branch 'master' of https://github.com/michael-lazar/rtv
+a34f91d4da264c5e06100074aed93d477ba88a32	not-for-merge	branch 'master' of https://github.com/michael-lazar/rtv
 5146244c26a979e38c59adc42ce89834d45512cd	not-for-merge	branch 'morecomment-speed' of https://github.com/michael-lazar/rtv
 d5f68215cdbc5906c19a64c0bab2e3b737a9bb29	not-for-merge	branch 'pypi' of https://github.com/michael-lazar/rtv
 bf2d464081f64412a90ec67439b055c51499baed	not-for-merge	branch 'unicode_kitchen' of https://github.com/michael-lazar/rtv
 7c7606d288b0ec306577cb1c79b3ea9cb90e4caf	not-for-merge	'refs/pull/1/head' of https://github.com/michael-lazar/rtv
 2842a829a1881e55ee58134480bca46df799eda3	not-for-merge	'refs/pull/106/head' of https://github.com/michael-lazar/rtv
-dbd9fd44fe9938bd823f9a53441c96559af54ed8	not-for-merge	'refs/pull/106/merge' of https://github.com/michael-lazar/rtv
 98fc02e28e0147509ddfe4e601a97859a0e47cfc	not-for-merge	'refs/pull/11/head' of https://github.com/michael-lazar/rtv
+764684eb536f891bba388ede4e4549e97e859f99	not-for-merge	'refs/pull/110/head' of https://github.com/michael-lazar/rtv
+3c83d388ccedd110cf9ca71c380e334a5d2be215	not-for-merge	'refs/pull/111/head' of https://github.com/michael-lazar/rtv
+802ba669c13af08317a5e838605f1abd7631f314	not-for-merge	'refs/pull/115/head' of https://github.com/michael-lazar/rtv
+31fa125251c09ffd7a597168734125f46a03243e	not-for-merge	'refs/pull/116/head' of https://github.com/michael-lazar/rtv
 6a5da9f1ec1305ce2fdf4a1e3ec3f90afc6772cb	not-for-merge	'refs/pull/13/head' of https://github.com/michael-lazar/rtv
 9fcb16b3e48467566140db4a37817cbe82116eb9	not-for-merge	'refs/pull/14/head' of https://github.com/michael-lazar/rtv
 b5bfd40b1a0e1119cdbd7e6d5b13b11fcb260fc5	not-for-merge	'refs/pull/16/head' of https://github.com/michael-lazar/rtv
@@ -69,3 +72,4 @@ f9f955deb0150cca26250754132f547237811451	not-for-merge	tag 'v1.2.1' of https://g
 9153fdd20f2e05edecebd056c2c9aaaf29f97df3	not-for-merge	tag 'v1.2.2' of https://github.com/michael-lazar/rtv
 ff0e9bc6770d59cab830084ca142b0e26e32dbdc	not-for-merge	tag 'v1.3' of https://github.com/michael-lazar/rtv
 2a935922bf9b97cc2358a35963c0b4dada7a9f6c	not-for-merge	tag 'v1.4' of https://github.com/michael-lazar/rtv
+a34f91d4da264c5e06100074aed93d477ba88a32	not-for-merge	tag 'v1.4.1' of https://github.com/michael-lazar/rtv

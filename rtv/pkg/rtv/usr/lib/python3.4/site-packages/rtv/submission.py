@@ -3,18 +3,16 @@ import sys
 import time
 import logging
 
-import praw.errors
-
 from .content import SubmissionContent
 from .page import BasePage, Navigator, BaseController
 from .helpers import open_browser, open_editor
 from .curses_helpers import (Color, LoadScreen, get_arrow, get_gold, add_line,
-                             show_notification, text_input)
+                             show_notification)
 from .docs import COMMENT_FILE
 
 __all__ = ['SubmissionController', 'SubmissionPage']
-
 _logger = logging.getLogger(__name__)
+
 
 class SubmissionController(BaseController):
     character_map = {}
@@ -175,7 +173,6 @@ class SubmissionPage(BasePage):
                 text, attr = get_gold()
                 add_line(win, text, attr=attr)
 
-        n_body = len(data['split_body'])
         for row, text in enumerate(data['split_body'], start=offset + 1):
             if row in valid_rows:
                 add_line(win, text, row, 1)
@@ -222,7 +219,8 @@ class SubmissionPage(BasePage):
         attr = curses.A_BOLD | Color.GREEN
         add_line(win, u'{author}'.format(**data), row, 1, attr)
         attr = curses.A_BOLD | Color.YELLOW
-        add_line(win, u' {flair}'.format(**data), attr=attr)
+        if data['flair']:
+            add_line(win, u' {flair}'.format(**data), attr=attr)
         add_line(win, u' {created} {subreddit}'.format(**data))
 
         row = len(data['split_title']) + 2

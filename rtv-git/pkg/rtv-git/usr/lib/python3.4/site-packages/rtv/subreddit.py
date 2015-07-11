@@ -4,7 +4,6 @@ import logging
 import atexit
 
 import requests
-import praw
 
 from .exceptions import SubredditError, AccountError
 from .page import BasePage, Navigator, BaseController
@@ -17,10 +16,9 @@ from .curses_helpers import (Color, LoadScreen, add_line, get_arrow, get_gold,
                              show_notification, prompt_input)
 
 __all__ = ['history', 'SubredditController', 'SubredditPage']
-
 _logger = logging.getLogger(__name__)
-
 history = load_history()
+
 
 @atexit.register
 def save_links():
@@ -80,7 +78,7 @@ class SubredditPage(BasePage):
         try:
             self.content = SubredditContent.from_name(
                 self.reddit, name, self.loader, query=query)
-        except IndexError: # if there are no submissions
+        except IndexError:  # if there are no submissions
             show_notification(self.stdscr, ['No results found'])
         else:
             self.nav = Navigator(self.content.get)
@@ -197,4 +195,5 @@ class SubredditPage(BasePage):
         if row in valid_rows:
             add_line(win, u'{author}'.format(**data), row, 1, curses.A_BOLD)
             add_line(win, u' {subreddit}'.format(**data), attr=Color.YELLOW)
-            add_line(win, u' {flair}'.format(**data), attr=Color.RED)
+            if data['flair']:
+                add_line(win, u' {flair}'.format(**data), attr=Color.RED)
